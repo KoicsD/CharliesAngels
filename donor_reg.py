@@ -64,9 +64,49 @@ def input_weight():
 #                 6digit + 2letter (123456AB) is identity card
 #                 6letter + 2digit (ASDFGH12) is passport
 #                 ID is not expired.
+ID_expired=""
+def get_ID_expired():
+    ID_expired=input ("When will ID be expired?(YYYY/MM/DD")
 
-#-------------------------------------------------------------------------------
-#
+def check_ID_expiration(date):
+    return ID_expired > today
+
+
+
+identifier = ""
+
+def check_identifier(identifier):
+    if len(identifier) != 8:
+        print ("It isn't an correct form for identifier, should be 8 character long.")
+        return False
+    elif identifier[0:6].isdigit():
+        if identifier[6:].isalpha():
+            return True
+        else:
+            print("An identity card's last two character should be letter!")
+            return False
+    elif identifier[0:6].isalpha():
+        if identifier[6:].isdigit():
+            return True
+        else:
+            print("A passport's last two character should be number!")
+            return False
+    else:
+        print ("Please write again your unique ID!")
+        return False
+
+
+def validate_identifier(identifier):
+
+    while identifier == '':
+        identifier = input("Please write your unique ID(identity card/passport)!")
+
+        if identifier == "":
+            print("Unique identifier cannot be empty")
+        elif not check_identifier(identifier):
+            identifier = ""
+
+
 #     Blood type
 #
 
