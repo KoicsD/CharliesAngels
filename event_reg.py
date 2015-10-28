@@ -103,6 +103,3 @@ class Donation:
                 print("Wrong format for time!")
         self.end_time = pendtime
         self.duration = duration
-
-
-
