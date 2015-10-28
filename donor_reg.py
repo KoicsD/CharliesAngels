@@ -11,6 +11,24 @@ __author__ = 'KoicsD'
 #
 #     Name,
 #                 Parse name, store it in a separated object
+
+def validate_name(name_string: str):
+    splitted_name = name_string.split(" ")
+    return name_string.replace(" ", "").isalpha() and len(splitted_name) > 1
+
+def input_name():
+    valid_name = False
+    fullname = ""
+    while not valid_name:
+        fullname = input("Kerem adja meg a teljes nevet szokozzel elvalasztva!: ")
+        if validate_name(fullname):
+            valid_name = True
+        else:
+            print("A megadott nev csak betuket es szokozt tartalmazhat!")
+
+    return fullname
+
+
 #
 #     Weight,
 #                 weight > 50
