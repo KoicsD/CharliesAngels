@@ -9,7 +9,7 @@ __author__ = 'KoicsD'
 #                 How old is the donor in years based on date of birth?
 #                 ID is not expired.
 
-
+#-------------------------------------------------------------------------------
 #
 #     Name,
 #                 Parse name, store it in a separated object
@@ -31,7 +31,7 @@ def input_name():
 
     return data_name
 
-
+#-------------------------------------------------------------------------------
 #
 #     Weight,
 #                 weight > 50
@@ -47,7 +47,7 @@ def input_weight():
 
     return data_weight
 
-#
+#-------------------------------------------------------------------------------
 #
 #
 #     Gender,
@@ -64,7 +64,28 @@ def input_weight():
 #                 6digit + 2letter (123456AB) is identity card
 #                 6letter + 2digit (ASDFGH12) is passport
 #                 ID is not expired.
+
+#-------------------------------------------------------------------------------
+#
 #     Blood type
+#
+
+def input_blood_type():
+    valid_blood_type = False
+    data_blood_type = ""
+    blood_types = ["A+", "0+", "B+", "AB+", "A-", "0-", "B-", "AB-"]
+
+    while not valid_blood_type:
+        data_blood_type = input("Adja meg a vercsoportjat!: ")
+        if str(data_blood_type).lower() not in str(blood_types).lower():
+            print("Kerem helyes vercsoportot adjon meg! (A+, 0+, B+, AB+, A-, 0-, B-, AB-)")
+        else:
+            valid_blood_type = True
+
+    return data_blood_type
+
+
+#-------------------------------------------------------------------------------
 #     email address
 #                 Email address validation (contains @-ot and ending with .hu/.com)
 #     Mobil number
