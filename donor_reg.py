@@ -1,4 +1,4 @@
-__author__ = 'KoicsD'
+
 
 
 # Task:
@@ -37,7 +37,7 @@ __author__ = 'KoicsD'
 #
 #     __repr__
 #                 Write out data in a table form pl.:
-#                 Attila, Molnár
+#                 Attila, Molnar
 #                 90kg [using of str function]
 #                 1989.05.06 - 26 years old
 #                 asd@test.hu,
@@ -57,8 +57,41 @@ __author__ = 'KoicsD'
 # Email address validation (contains @-ot and ending with .hu/.com)         used
 # Mobil number validation (starts with +36/06 + 2 digit(provider identifier - 20/30/70) ending with 7 digits)   used
 # Write out data in a table form pl.:
-# Attila, Molnár
+# Attila, Molnar
 # 90kg [using of str function]
 # 1989.05.06 - 26 years old
 # asd@test.hu,
 # Generate random number: Hemogblobin level between 80-200, write out is the donor suitable or not (value is greather than 110)?
+def gender_is_valid(string):
+    if string.lower() == "n" or string.lower() == "f":
+        print("OK!")
+        return True
+    else:
+        print("Nem megfelelo!")
+    return False
+
+
+
+
+def get_gender():
+    data_gender = ""
+    valid_gender = False
+    if not valid_gender:
+        data_gender = input("Adja meg a nemet!(N/F): ")
+        if gender_is_valid(data_gender):
+            valid_gender = True
+        else:
+            print("Adja meg a nemet!(N/F): ")
+            data_gender = ""
+    return data_gender
+
+
+get_gender()
+
+
+
+
+
+
+
+
