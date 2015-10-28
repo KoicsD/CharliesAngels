@@ -45,13 +45,22 @@ from datetime import datetime, time, timedelta
 
 class Donation:
     preparation_time = 30
+    citylist = ["Miskolc", "Kazincbarcika", "Szerencs", "Sarospatak"]
 
     def __init__(self):
-        self.date = datetime(0).date()
+        self.date = datetime(1,1,1).time()
         self.start_time = time()
         self.end_time = time()
         self.duration_time = 0
         self.valid = False
+        self.duration = 0
+        self.zipcode = ""
+        self.streetname = ""
+        self.city = ""
+
+        self.input_date()
+        self.input_start_time()
+        self.input_end_time()
 
     def input_date(self):
         sdate = ""
@@ -89,7 +98,7 @@ class Donation:
         while True:
             endtime = input("Please enter the end time of event (HH:MM): ")
             try:
-                pendtime = datetime.strptime(endtime, "%H:%M")
+                pendtime = datetime.combine(self.date, datetime.strptime(endtime, "%H:%M").time())
                 pstarttime = datetime.combine(self.date, self.start_time)
                 duration = (pendtime - pstarttime).total_seconds() // 60
                 msg = "OK"
@@ -101,5 +110,21 @@ class Donation:
                     print(msg)
             except ValueError:
                 print("Wrong format for time!")
-        self.end_time = pendtime
+        self.end_time = pendtime.time()
         self.duration = duration
+
+
+    def input_zipcode(self):
+        zipcode = ""
+        while True:
+            zipcode = input("Please enter the zipcode (ex:1234): ")
+            try:
+                if not zipcode.isdigit() and len(zipcode) == 4:
+                    msg = "Your zipcode not valid!"
+                msg = "OK"
+                if msg == "OK":
+                    break
+            except:
+                print("Your zipcode not valid!")
+
+
