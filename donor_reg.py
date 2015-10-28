@@ -1,5 +1,6 @@
 __author__ = 'KoicsD'
 
+from datetime import datetime, time, timedelta
 
 # Task:
 #     warn_user:# weight > 50
@@ -53,6 +54,30 @@ def get_ID_expired():
 
 def check_ID_expiration(date):
     return ID_expired > today
+
+ID_expiration = ""
+def get_ID_expired(ID_expiration):
+        ID_expirations = ""
+        while True:
+            ID_expirations = input("Please enter date of ID expiration (YYYY.MM.DD): ")
+            try:
+                ID_expirations = datetime.strptime(ID_expiration, "%Y.%m.%d").date()
+                time_until_event = ID_expiration - datetime.now().date()
+                msg = "OK"
+                if time_until_event.days <= 0:
+                    msg = "The ID expiration should be later then today!"
+
+                if msg == "OK":
+                    break
+                else:
+                    print(msg)
+            except ValueError:
+                print("Wrong date format!")
+        ID_expiration = ID_expirations
+        return ID_expiration
+
+get_ID_expired(ID_expiration)
+print (ID_expiration)
 
 
 
