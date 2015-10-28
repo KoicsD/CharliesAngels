@@ -73,7 +73,7 @@ def input_weight():
 def input_blood_type():
     valid_blood_type = False
     data_blood_type = ""
-    blood_types = ["A+", "0+", "B+", "AB+", "A-", "0-", "B-", "AB-"]
+    blood_types = ("A+", "0+", "B+", "AB+", "A-", "0-", "B-", "AB-")
 
     while not valid_blood_type:
         data_blood_type = input("Adja meg a vercsoportjat!: ")
