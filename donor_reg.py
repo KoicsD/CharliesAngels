@@ -62,6 +62,8 @@
 # 1989.05.06 - 26 years old
 # asd@test.hu,
 # Generate random number: Hemogblobin level between 80-200, write out is the donor suitable or not (value is greather than 110)?
+
+
 def gender_is_valid(string):
     if string.lower() == "n" or string.lower() == "f":
         print("OK!")
@@ -76,22 +78,36 @@ def gender_is_valid(string):
 def get_gender():
     data_gender = ""
     valid_gender = False
-    if not valid_gender:
-        data_gender = input("Adja meg a nemet!(N/F): ")
-        if gender_is_valid(data_gender):
-            valid_gender = True
-        else:
-            print("Adja meg a nemet!(N/F): ")
-            data_gender = ""
+    while not valid_gender:
+        data_gender = input("Kerem adja meg a nemet: ")
+
+        if not valid_gender:
+            data_gender = input("Adja meg a nemet!(N/F): ")
+            if gender_is_valid(data_gender):
+                valid_gender = True
+            else:
+                print("Adja meg a nemet!(N/F): ")
+                data_gender = ("")
     return data_gender
 
 
 get_gender()
 
+def email_is_valid(email_string):
+    return "@" in email_string and \
+           email_string.index("@") > 0 and \
+           (email_string.endswith(".hu") or email_string.endswith(".com"))
 
 
+def get_email():
+    data_email= False
+    email_string = " "
+    while not data_email:
+        email_string = input("Kerem irja be az email cimet:  ")
+        if email_is_valid(email_string):
+            data_email = True
+        else:
+            print("Az email cimnek tartalmaznia kell  '@'-t  es .hu-ra vagy .com-ra kell vegzodnie")
+    return email_string
 
-
-
-
-
+get_email()
