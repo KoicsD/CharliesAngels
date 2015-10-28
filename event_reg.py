@@ -1,4 +1,4 @@
-__author__ = 'KoicsD'
+
 
 
 # Date of event and start and end time
