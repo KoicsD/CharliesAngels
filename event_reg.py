@@ -61,6 +61,7 @@ class Donation:
         self.input_date()
         self.input_start_time()
         self.input_end_time()
+        self.input_zipcode()
 
     def input_date(self):
         sdate = ""
@@ -113,18 +114,21 @@ class Donation:
         self.end_time = pendtime.time()
         self.duration = duration
 
-
     def input_zipcode(self):
         zipcode = ""
         while True:
             zipcode = input("Please enter the zipcode (ex:1234): ")
             try:
+                msg = "OK"
                 if not zipcode.isdigit() and len(zipcode) == 4:
                     msg = "Your zipcode not valid!"
-                msg = "OK"
+                elif not zipcode.statswith("0"):
+                    msg = "Your zipcode not valid!"
                 if msg == "OK":
                     break
-            except:
+                else:
+                    print(msg)
+            except ValueError:
                 print("Your zipcode not valid!")
 
 
