@@ -8,12 +8,12 @@ from datetime import datetime, time, timedelta
                 # Start time of donation
                 # End time of donation
                 # (You can use datetime.strptime to convert the string into datetime type.)
-# Address
+        # Address
                 # Zip code (only 4 digit positive integers allowed)
-        # City (See below)
+                # City (See below)
                 # ZIP is valid only when it contains exactly 4 digit and the first one is not 0,
-        # Streetname maximum length is 25,
-        # City is in this list: Miskolc, Kazincbarcika, Szerencs, Sarospatak
+                # Streetname maximum length is 25,
+                # City is in this list: Miskolc, Kazincbarcika, Szerencs, Sarospatak
 # Planning
         # How many bed will be available? (Only positive integers allowed)
         # Planned donor number (Only positive integers allowed)
@@ -29,10 +29,10 @@ from datetime import datetime, time, timedelta
 #           Registration should occur before the event at least 10 days
 #           Datetime can be only on weekdays
 #           you can use datetime.isoweekday() function to determine it
-# Address validation
+#           Address validation
 #           ZIP is valid only when it contains exactly 4 digit and the first one is not 0,
-# Streetname maximum length is 25,
-# City is in this list: Miskolc, Kazincbarcika, Szerencs, Sarospatak
+#           Streetname maximum length is 25,
+#           City is in this list: Miskolc, Kazincbarcika, Szerencs, Sarospatak
 # Calculate duration in minutes based on start and endtime
 # You can use datetime.strptime and  timedelta.total_seconds functions
 # max_donor_number =
@@ -45,23 +45,34 @@ from datetime import datetime, time, timedelta
 
 class Donation:
     preparation_time = 30
+    donation_time = 30
     citylist = ["Miskolc", "Kazincbarcika", "Szerencs", "Sarospatak"]
 
+    @staticmethod
+    def calc_max_n_donors(duration, n_beds):
+        return ((duration - Donation.preparation_time) / Donation.donation_time) * n_beds
+
     def __init__(self):
-        self.date = datetime(1, 1, 1).time()
+        self.date = datetime(1, 1, 1).date()
         self.start_time = time()
         self.end_time = time()
-        self.duration_time = 0
         self.valid = False
         self.duration = 0
         self.zipcode = ""
-        self.streetname = ""
+        self.address = ""
         self.city = ""
+        self.n_beds = 0
+        self.max_n_donors = 0
+        self.planned_n_donors = 0
+        self.successful_donation = 0
 
         self.input_date()
         self.input_start_time()
         self.input_end_time()
         self.input_zipcode()
+        self.input_n_beds()
+        self.input_planned_n_donors()
+        self.input_successful_donation()
 
     def input_date(self):
         sdate = ""
@@ -85,6 +96,7 @@ class Donation:
 
     def input_start_time(self):
         starttime = ""
+        pstarttime = time()
         while True:
             starttime = input("Please enter the start time of event (HH:MM): ")
             try:
@@ -96,6 +108,8 @@ class Donation:
 
     def input_end_time(self):
         endtime = ""
+        pendtime = 0
+        duration = 0
         while True:
             endtime = input("Please enter the end time of event (HH:MM): ")
             try:
@@ -117,7 +131,6 @@ class Donation:
     def input_zipcode(self):
         zipcode = ""
         while True:
-
             zipcode = input("Please enter the zipcode (ex:1234): ")
             try:
                 msg = "OK"
@@ -136,3 +149,87 @@ class Donation:
                 print("Your zipcode not valid!")
         self.zipcode = zipcode
 
+    def input_city(self):
+        city = ""
+        while True:
+            city = input("Please enter the city: ")
+            msg = "OK"
+            if city.lower() not in Donation.citylist:
+                msg = "You can not make a donation in " + city
+                print("You must choose between:", Donation.citylist)
+            if msg == "OK":
+                break
+            else:
+                print(msg)
+        self.city = city
+
+    def input_address(self):
+        address = ""
+        while True:
+            address = input("Please enter the address: ")
+            msg = "OK"
+            if len(address) > 25:
+                msg = "Address is too long! Can not be longer than 25 character!"
+            if msg == "OK":
+                break
+            else:
+                print(msg)
+        self.address = address
+
+    def input_successful_donation(self):
+        successful_donation = 0
+        while True:
+            try:
+                successful_donation = input("Please enter successful donation number: ")
+                int_successful_donation = int(successful_donation)
+                msg = "OK"
+                if int_successful_donation <= 0:
+                    msg = "Successful donation must be integer!"
+                if msg == "OK":
+                    break
+                else:
+                    print(msg)
+            except ValueError:
+                print("Successful donation must be integer!")
+        self.successful_donation = int_successful_donation
+
+
+
+    def input_n_beds(self):
+        s_n_beds = ""
+        p_n_beds = 0
+        while True:
+            s_n_beds = input("Please, enter the Number of Beds Available: ")
+            try:
+                p_n_beds = int(s_n_beds)
+                msg = "OK"
+                if p_n_beds <= 0:
+                    msg = "Number of Beds must be a positive integer!"
+                if msg == "OK":
+                    break
+                else:
+                    print(msg)
+            except ValueError:
+                print("Input cannot be parsed as an integer!")
+        self.n_beds = p_n_beds
+        self.max_n_donors = Donation.calc_max_n_donors(self.duration, p_n_beds)
+
+    def input_planned_n_donors(self):
+        s_planned_n_donors = ""
+        p_planned_n_donors = 0
+        while True:
+            s_planned_n_donors = input("Please, enter the Planned Number of Donors: ")
+            try:
+                p_planned_n_donors = int(s_planned_n_donors)
+                msg = "OK"
+                if p_planned_n_donors <= 0:
+                    msg = "Planned Number of Donors must be a positive integer!"
+                elif p_planned_n_donors > self.max_n_donors:
+                    msg = "Planned Number of Donors exceeds Maximum Number of Donors!"
+                if msg == "OK":
+                    break
+                else:
+                    print(msg)
+            except ValueError:
+                print("Input cannot be parsed as an integer!")
+        self.planned_n_donors = p_planned_n_donors
