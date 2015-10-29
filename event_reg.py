@@ -126,5 +126,3 @@ class Donation:
                     break
             except:
                 print("Your zipcode not valid!")
-
-
