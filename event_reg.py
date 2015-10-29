@@ -55,13 +55,14 @@ class Donation:
         self.valid = False
         self.duration = 0
         self.zipcode = ""
-        self.streetname = ""
+        self.address = ""
         self.city = ""
 
         self.input_date()
         self.input_start_time()
         self.input_end_time()
         self.input_zipcode()
+        self.input_city()
 
     def input_date(self):
         sdate = ""
@@ -117,7 +118,6 @@ class Donation:
     def input_zipcode(self):
         zipcode = ""
         while True:
-
             zipcode = input("Please enter the zipcode (ex:1234): ")
             try:
                 msg = "OK"
@@ -135,4 +135,19 @@ class Donation:
             except ValueError:
                 print("Your zipcode not valid!")
         self.zipcode = zipcode
+
+    def input_city(self):
+        city = ""
+        while True:
+            city = input("Please enter the city: ")
+            msg = "OK"
+            if city.lower() not in Donation.citylist:
+                print("You can not make a donation in " + city)
+                print("You must choose between:", Donation.citylist)
+            if msg == "OK":
+                break
+        self.city = city
+
+
+
 
