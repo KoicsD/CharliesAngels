@@ -58,11 +58,11 @@ class Donation:
         self.address = ""
         self.city = ""
 
-        #self.input_date()
-        #self.input_start_time()
-        #self.input_end_time()
-        #self.input_zipcode()
-        #self.input_city()
+        self.input_date()
+        self.input_start_time()
+        self.input_end_time()
+        self.input_zipcode()
+        self.input_city()
         self.input_address()
 
     def input_date(self):
