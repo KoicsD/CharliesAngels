@@ -198,7 +198,7 @@ def check_mobil_number(mobile_number):
         return True
 
 
-def validate_mobile_number():
+def get_mobile_number():
     mobile_number = ""
     while mobile_number == "":
         mobile_number = input("Please write your mobile number(like this:06201234567 or +36301234567):")
