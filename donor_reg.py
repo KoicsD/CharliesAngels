@@ -80,13 +80,21 @@ def calculate_age_in_year(birth_date: datetime):
 def age_is_valid():
     return calculate_age_in_year() > 18
 
+def get_birth_date():
+    birth_date = ""
+    while not birth_date:
+
+        birth_date = input("Kerem adja meg a szuletesi datumat (YYYY.MM.DD) formatumban!: ")
+        bdate = datetime.strptime(birth_date, "%Y.%m.%d").date()
+
+    return  bdate
 
 #
 #     Last donation date,
 #                 last donation was more than 3 months ago
 #                 never is also possible
 
-def last_donation_time(date_of_donation: datetime):
+def last_donation_time_is_valid(date_of_donation: datetime):
     return (datetime.now() - date_of_donation).days > 90
 
 
@@ -145,7 +153,7 @@ def check_identifier(identifier):
         return False
 
 
-def validate_identifier(identifier):
+def validate_identifier():
     identifier = ""
     while identifier == '':
         identifier = input("Please write your unique ID(identity card/passport)!")
@@ -279,20 +287,24 @@ def get_email():
             print("Az email cimnek tartalmaznia kell  '@'-t  es .hu-ra vagy .com-ra kell vegzodnie")
     return email_string
 
-#
-# def main():
-#     identifier = ""
-#     ID_expiration = ""
-#
-#     input_name()
-#     input_weight()
-#     get_gender()
-#     date_of_birth = input("Adja meg szuletesi evet!: ")
-#     calculate_age_in_year(date_of_birth)
-#     last_time = input("Legutobbi veradas idopontja?: ")
-#     last_donation_time(last_time)
-#     id_exp = input("Igazolvany lejarati datuma?: ")
-#     input_date(id_exp)
-#     input_blood_type()
-#     get_email()
-#     validate_mobile_number()
+
+def main():
+    identifier = ""
+    ID_expiration = ""
+
+    input_name()
+    input_weight()
+    get_gender()
+    date_of_birth = input("Adja meg szuletesi evet!: ")
+    # calculate_age_in_year(date_of_birth)
+    last_time = input("Legutobbi veradas idopontja?: ")
+    last_donation_time(last_time)
+    input_blood_type()
+    input_blood_type()
+    id_exp = input("Igazolvany lejarati datuma?: ")
+    input_date(id_exp)
+    get_email()
+    get_mobile_number()
+
+
+main()
