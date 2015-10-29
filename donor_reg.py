@@ -15,7 +15,7 @@ def random_hemoglobin():
     return random.randint(80,200)
 
 
-def donor_is_valid():
+def donor_is_valid(weight: int, hemoglobin: int, last_donation: bool, ):
     return input_weight() > 50 and \
            random_hemoglobin() > 110 and \
            last_donation_time() == True and \
@@ -102,8 +102,6 @@ def last_donation_time(date_of_donation: datetime):
 # def check_ID_expiration(date):
 #     return ID_expired > today
 
-ID_expiration = ""
-
 
 def input_date(ID_expiration):
     ID_expiration = ""
@@ -124,9 +122,6 @@ def input_date(ID_expiration):
             print("Wrong date format!")
 
     return pdate
-
-
-identifier = ""
 
 
 def check_identifier(identifier):
@@ -203,9 +198,6 @@ def check_mobil_number(mobile_number):
         return True
 
 
-mobile_number = "20"
-
-
 def validate_mobile_number(mobile_number):
     mobile_number = ""
     while mobile_number == "":
@@ -270,9 +262,6 @@ def get_gender():
     return data_gender
 
 
-get_gender()
-
-
 def email_is_valid(email_string):
     return "@" in email_string and \
            email_string.index("@") > 0 and \
@@ -291,4 +280,19 @@ def get_email():
     return email_string
 
 
+def main():
+    identifier = ""
+    ID_expiration = ""
 
+    input_name()
+    input_weight()
+    get_gender()
+    date_of_birth = input("Adja meg szuletesi evet!: ")
+    calculate_age_in_year(date_of_birth)
+    last_time = input("Legutobbi veradas idopontja?: ")
+    last_donation_time(last_time)
+    id_exp = input("Igazolvany lejarati datuma?: ")
+    input_date(id_exp)
+    input_blood_type()
+    get_email()
+    validate_mobile_number()
