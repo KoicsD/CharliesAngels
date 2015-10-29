@@ -10,10 +10,10 @@ from datetime import datetime, time, timedelta
                 # (You can use datetime.strptime to convert the string into datetime type.)
 # Address
                 # Zip code (only 4 digit positive integers allowed)
-        # City (See below)
+                # City (See below)
                 # ZIP is valid only when it contains exactly 4 digit and the first one is not 0,
         # Streetname maximum length is 25,
-        # City is in this list: Miskolc, Kazincbarcika, Szerencs, Sarospatak
+                # City is in this list: Miskolc, Kazincbarcika, Szerencs, Sarospatak
 # Planning
         # How many bed will be available? (Only positive integers allowed)
         # Planned donor number (Only positive integers allowed)
@@ -58,11 +58,12 @@ class Donation:
         self.address = ""
         self.city = ""
 
-        self.input_date()
-        self.input_start_time()
-        self.input_end_time()
-        self.input_zipcode()
-        self.input_city()
+        #self.input_date()
+        #self.input_start_time()
+        #self.input_end_time()
+        #self.input_zipcode()
+        #self.input_city()
+        self.input_address()
 
     def input_date(self):
         sdate = ""
@@ -142,12 +143,26 @@ class Donation:
             city = input("Please enter the city: ")
             msg = "OK"
             if city.lower() not in Donation.citylist:
-                print("You can not make a donation in " + city)
+                msg = "You can not make a donation in " + city
                 print("You must choose between:", Donation.citylist)
             if msg == "OK":
                 break
+            else:
+                print(msg)
         self.city = city
 
+    def input_address(self):
+        address = ""
+        while True:
+            address = input("Please enter the address: ")
+            msg = "OK"
+            if len(address) > 25:
+                msg = "Address is too long! Can not be longer than 25 character!"
+            if msg == "OK":
+                break
+            else:
+                print(msg)
+        self.address = address
 
 
 
