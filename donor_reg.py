@@ -1,5 +1,7 @@
 
 
+from datetime import datetime, time, timedelta
+
 # Task:
 #     warn_user:# weight > 50
 #                 Generate random number: Hemogblobin level between 80-200, write out is the donor suitable or not (value is greather than 110)?
@@ -58,17 +60,44 @@ def input_weight():
 #     Last donation date,
 #                 last donation was more than 3 months ago
 #                 never is also possible
+
+def last_donation_time(date_of_donation: datetime):
+    return (datetime.now() - date_of_donation).days > 90
+
+
 #
 #     Unique identifier  &     Expiration of ID
 #                 6digit + 2letter (123456AB) is identity card
 #                 6letter + 2digit (ASDFGH12) is passport
 #                 ID is not expired.
-ID_expired=""
-def get_ID_expired():
-    ID_expired=input ("When will ID be expired?(YYYY/MM/DD")
+# ID_expired=""
+# def get_ID_expired():
+#     ID_expired=input ("When will ID be expired?(YYYY/MM/DD")
+#
+# def check_ID_expiration(date):
+#     return ID_expired > today
 
-def check_ID_expiration(date):
-    return ID_expired > today
+ID_expiration = ""
+def input_date(ID_expiration):
+    ID_expiration = ""
+    while True:
+        sdate = input("Please enter date of ID expiration (YYYY.MM.DD): ")
+        try:
+            pdate = datetime.strptime(sdate, "%Y.%m.%d").date()
+            time_until_expiration = pdate - datetime.now().date()
+            msg = "OK"
+            if time_until_expiration.days < 1:
+                msg = "ID expiration should be later than today!"
+
+            if msg == "OK":
+                break
+            else:
+                print(msg)
+        except ValueError:
+            print("Wrong date format!")
+
+    return pdate
+
 
 
 
@@ -96,7 +125,7 @@ def check_identifier(identifier):
 
 
 def validate_identifier(identifier):
-
+    identifier = ""
     while identifier == '':
         identifier = input("Please write your unique ID(identity card/passport)!")
 
@@ -129,7 +158,38 @@ def input_blood_type():
 #                 Email address validation (contains @-ot and ending with .hu/.com)
 #     Mobil number
 #                 Mobil number validation (starts with +36/06 + 2 digit(provider identifier - 20/30/70) ending with 7 digits)
-#
+
+def check_mobil_number(mobile_number):
+    if mobile_number[0:2] !='06'and mobile_number[0:3]!="+36":
+        print("Please play attention the correct form. First charecters should be 06 or +36")
+        return False
+    if mobile_number[0:2] == '06' and len(mobile_number)!=11 or mobile_number[0:3] == '+36' and len(mobile_number) != 12:
+        print("It is not a correct form, because number length should be 11 or 12")
+        return False
+    if not mobile_number[-11:].isdigit():
+        print('Phone number should be just digit')
+        return False
+    if mobile_number[-9:-7] != '20' and mobile_number[-9:-7] != "30" and mobile_number[-9:-7] != "70":
+        print("Your telephone partner's number is not correct(Choose:20/30/70")
+        return False
+    else:
+        return True
+
+
+mobile_number = "20"
+def validate_mobile_number(mobile_number):
+    mobile_number = ""
+    while mobile_number == "":
+        mobile_number= input("Please write your mobile number(like this:06201234567 or +36301234567):")
+
+        if mobile_number == "":
+            print("Phone number is empty:")
+
+        elif not check_mobil_number(mobile_number):
+            mobile_number = ""
+    return mobile_number
+
+
 #     __repr__
 #                 Write out data in a table form pl.:
 #                 Attila, Molnar
@@ -206,4 +266,3 @@ def get_email():
     return email_string
 
 get_email()
-
