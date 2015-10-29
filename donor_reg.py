@@ -256,7 +256,7 @@ def get_gender():
     return data_gender
 
 
-get_gender()
+
 
 
 def email_is_valid(email_string):
@@ -277,4 +277,4 @@ def get_email():
     return email_string
 
 
-get_email()
+
