@@ -8,11 +8,11 @@ from datetime import datetime, time, timedelta
                 # Start time of donation
                 # End time of donation
                 # (You can use datetime.strptime to convert the string into datetime type.)
-# Address
+        # Address
                 # Zip code (only 4 digit positive integers allowed)
                 # City (See below)
                 # ZIP is valid only when it contains exactly 4 digit and the first one is not 0,
-        # Streetname maximum length is 25,
+                # Streetname maximum length is 25,
                 # City is in this list: Miskolc, Kazincbarcika, Szerencs, Sarospatak
 # Planning
         # How many bed will be available? (Only positive integers allowed)
@@ -29,10 +29,10 @@ from datetime import datetime, time, timedelta
 #           Registration should occur before the event at least 10 days
 #           Datetime can be only on weekdays
 #           you can use datetime.isoweekday() function to determine it
-# Address validation
+#           Address validation
 #           ZIP is valid only when it contains exactly 4 digit and the first one is not 0,
-# Streetname maximum length is 25,
-# City is in this list: Miskolc, Kazincbarcika, Szerencs, Sarospatak
+#           Streetname maximum length is 25,
+#           City is in this list: Miskolc, Kazincbarcika, Szerencs, Sarospatak
 # Calculate duration in minutes based on start and endtime
 # You can use datetime.strptime and  timedelta.total_seconds functions
 # max_donor_number =
@@ -51,12 +51,12 @@ class Donation:
         self.date = datetime(1, 1, 1).time()
         self.start_time = time()
         self.end_time = time()
-        self.duration_time = 0
         self.valid = False
         self.duration = 0
         self.zipcode = ""
         self.address = ""
         self.city = ""
+        self.successful_donation = 0
 
         self.input_date()
         self.input_start_time()
@@ -64,6 +64,7 @@ class Donation:
         self.input_zipcode()
         self.input_city()
         self.input_address()
+        self.input_successful_donation()
 
     def input_date(self):
         sdate = ""
@@ -163,6 +164,22 @@ class Donation:
             else:
                 print(msg)
         self.address = address
+
+    def input_successful_donation(self):
+        successful_donation = 0
+        while True:
+            try:
+                int_successful_donation = int(successful_donation)
+                msg = "OK"
+                if int_successful_donation <= 0:
+                    msg = "Successful donation must be integer!"
+                if msg == "OK":
+                    break
+                else:
+                    print(msg)
+            except ValueError:
+                print("Successful donation must be integer!")
+        self.successful_donation = int_successful_donation
 
 
 
