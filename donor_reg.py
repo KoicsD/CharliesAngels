@@ -1,6 +1,7 @@
 from datetime import datetime, time, timedelta
 import random
 
+
 # Task:
 #     warn_user:# weight > 50
 #                 Generate random number: Hemogblobin level between 80-200, write out is the donor suitable or not (value is greather than 110)?
@@ -259,18 +260,17 @@ def gender_is_valid(string):
 def get_gender():
     data_gender = ""
     valid_gender = False
-    while not valid_gender:
-        data_gender = input("Kerem adja meg a nemet: ")
-
-        if not valid_gender:
-            data_gender = input("Adja meg a nemet!(N/F): ")
-            if gender_is_valid(data_gender):
-                valid_gender = True
-            else:
-                print("Adja meg a nemet!(N/F): ")
-                data_gender = ("")
+    if not valid_gender:
+        data_gender = input("Adja meg a nemet!(N/F): ")
+        if gender_is_valid(data_gender):
+            valid_gender = True
+        else:
+            print("Adja meg a nemet!(N/F): ")
+            data_gender = ("")
     return data_gender
 
+
+get_gender()
 
 
 def email_is_valid(email_string):
@@ -289,4 +289,6 @@ def get_email():
         else:
             print("Az email cimnek tartalmaznia kell  '@'-t  es .hu-ra vagy .com-ra kell vegzodnie")
     return email_string
+
+
 
