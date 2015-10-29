@@ -73,6 +73,7 @@ class Donation:
         self.input_n_beds()
         self.input_planned_n_donors()
         self.input_successful_donation()
+        self.calc_succession_of_event()
 
     def input_date(self):
         sdate = ""
@@ -193,8 +194,6 @@ class Donation:
                 print("Successful donation must be integer!")
         self.successful_donation = int_successful_donation
 
-
-
     def input_n_beds(self):
         s_n_beds = ""
         p_n_beds = 0
@@ -233,3 +232,13 @@ class Donation:
             except ValueError:
                 print("Input cannot be parsed as an integer!")
         self.planned_n_donors = p_planned_n_donors
+
+    def calc_succession_of_event(self):
+            if self.successful_donation < self.planned_n_donors * 0.2:
+                print("Unsuccessful, not worths to organise there again")
+            elif self.successful_donation < self.planned_n_donors * 0.75:
+                print("Normal event")
+            elif self.successful_donation < self.planned_n_donors * 1.1:
+                print("Successful")
+            else:
+                print("Outstanding")
