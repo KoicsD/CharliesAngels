@@ -1,4 +1,4 @@
-from datetime import datetime, time, timedelta
+from datetime import datetime
 import random
 
 
@@ -13,15 +13,6 @@ import random
 
 def random_hemoglobin():
     return random.randint(80,200)
-
-
-def donor_is_valid(weight: int, hemoglobin: int, last_donation: bool, ):
-    return input_weight() > 50 and \
-           random_hemoglobin() > 110 and \
-           last_donation_time() == True and \
-           age_is_valid() == True and \
-           input_date() > datetime.now()
-
 
 # -------------------------------------------------------------------------------
 #
@@ -73,12 +64,6 @@ def input_weight():
 #                 age > 18 years
 #                 How old is the donor in years based on date of birth?
 
-def calculate_age_in_year(birth_date: datetime):
-    return (datetime.now() - birth_date).days // 365
-
-
-def age_is_valid():
-    return calculate_age_in_year() > 18
 
 def get_birth_date():
     birth_date = ""
@@ -89,13 +74,15 @@ def get_birth_date():
 
     return  bdate
 
+
+def calculate_age_in_year(birth_date: datetime):
+    return (datetime.now() - birth_date).days // 365
+
 #
 #     Last donation date,
 #                 last donation was more than 3 months ago
 #                 never is also possible
 
-def last_donation_time_is_valid(date_of_donation: datetime):
-    return (datetime.now() - date_of_donation).days > 90
 
 def get_last_donation_time():
     last_time = ""
@@ -106,6 +93,8 @@ def get_last_donation_time():
 
     return  ltime
 
+def last_donation_time_is_valid(date_of_donation: datetime):
+    return (datetime.now() - date_of_donation).days > 90
 #
 #     Unique identifier  &     Expiration of ID
 #                 6digit + 2letter (123456AB) is identity card
@@ -119,7 +108,7 @@ def get_last_donation_time():
 #     return ID_expired > today
 
 
-def input_date(ID_expiration):
+def input_date():
     ID_expiration = ""
     while True:
         sdate = input("Please enter date of ID expiration (YYYY.MM.DD): ")
@@ -295,22 +284,34 @@ def get_email():
             print("Az email cimnek tartalmaznia kell  '@'-t  es .hu-ra vagy .com-ra kell vegzodnie")
     return email_string
 
+# def donor_is_valid():
+#     if weight > 50 and \
+#            random_hemoglobin() > 110 and \
+#            last_donation_time_is_valid() and \
+#            age_is_valid() and \
+#            input_date() > datetime.now():
+#         print("A donor megfelelo veradasra!")
+#     else:
+#         print("A donor NEM megfelelo veradsra!")
 
 def main():
-    identifier = ""
-    ID_expiration = ""
-
     input_name()
-    input_weight()
+    weight = input_weight()
     get_gender()
-    get_birth_date()
-    last_time = input("Legutobbi veradas idopontja?: ")
-    last_donation_time_is_valid(last_time)
+    birth_date = get_birth_date()
+    date_of_donation = get_last_donation_time()
     input_blood_type()
-    id_exp = input("Igazolvany lejarati datuma?: ")
-    input_date(id_exp)
+    input_date()
     get_email()
     get_mobile_number()
+
+    if int(weight) > 50 and \
+        last_donation_time_is_valid(date_of_donation) and \
+        calculate_age_in_year(birth_date):
+        print("A donor veradasra alkalmas!")
+    else:
+        print("A donor veradasra NEM alkalmas!")
+
 
 
 main()
