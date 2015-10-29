@@ -1,17 +1,17 @@
 __author__ = 'KoicsD'
 from datetime import datetime, time, timedelta
 
-# Date of event and start and end time
-        # Registration should occur before the event at least 10 days
-        # Datetime can be only on weekdays
-        # you can use datetime.isoweekday() function to determine it
-        # Start time of donation
-        # End time of donation
-        # (You can use datetime.strptime to convert the string into datetime type.)
+        # Date of event and start and end time
+                # Registration should occur before the event at least 10 days
+                # Datetime can be only on weekdays
+                # you can use datetime.isoweekday() function to determine it
+                # Start time of donation
+                # End time of donation
+                # (You can use datetime.strptime to convert the string into datetime type.)
 # Address
-        # Zip code (only 4 digit positive integers allowed)
+                # Zip code (only 4 digit positive integers allowed)
         # City (See below)
-        # ZIP is valid only when it contains exactly 4 digit and the first one is not 0,
+                # ZIP is valid only when it contains exactly 4 digit and the first one is not 0,
         # Streetname maximum length is 25,
         # City is in this list: Miskolc, Kazincbarcika, Szerencs, Sarospatak
 # Planning
@@ -26,11 +26,11 @@ from datetime import datetime, time, timedelta
 #
 #
 # Functions:
-# Registration should occur before the event at least 10 days
-# Datetime can be only on weekdays
-# you can use datetime.isoweekday() function to determine it
+#           Registration should occur before the event at least 10 days
+#           Datetime can be only on weekdays
+#           you can use datetime.isoweekday() function to determine it
 # Address validation
-# ZIP is valid only when it contains exactly 4 digit and the first one is not 0,
+#           ZIP is valid only when it contains exactly 4 digit and the first one is not 0,
 # Streetname maximum length is 25,
 # City is in this list: Miskolc, Kazincbarcika, Szerencs, Sarospatak
 # Calculate duration in minutes based on start and endtime
@@ -48,7 +48,7 @@ class Donation:
     citylist = ["Miskolc", "Kazincbarcika", "Szerencs", "Sarospatak"]
 
     def __init__(self):
-        self.date = datetime(1,1,1).time()
+        self.date = datetime(1, 1, 1).time()
         self.start_time = time()
         self.end_time = time()
         self.duration_time = 0
@@ -117,18 +117,22 @@ class Donation:
     def input_zipcode(self):
         zipcode = ""
         while True:
+
             zipcode = input("Please enter the zipcode (ex:1234): ")
             try:
                 msg = "OK"
-                if not zipcode.isdigit() and len(zipcode) == 4:
-                    msg = "Your zipcode not valid!"
-                elif not zipcode.statswith("0"):
-                    msg = "Your zipcode not valid!"
+                zero = "0"
+                if not zipcode.isdigit():
+                    msg = "Your zipcode must be numbers!"
+                elif not len(zipcode) == 4:
+                    msg = "Your zipcode too long!"
+                elif zipcode.startswith(zero):
+                    msg = "Your zipcode can not starts with zero!"
                 if msg == "OK":
                     break
                 else:
                     print(msg)
             except ValueError:
                 print("Your zipcode not valid!")
-
+        self.zipcode = zipcode
 
