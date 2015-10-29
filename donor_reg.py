@@ -48,36 +48,34 @@ def input_name():
 #                 6digit + 2letter (123456AB) is identity card
 #                 6letter + 2digit (ASDFGH12) is passport
 #                 ID is not expired.
-ID_expired=""
-def get_ID_expired():
-    ID_expired=input ("When will ID be expired?(YYYY/MM/DD")
-
-def check_ID_expiration(date):
-    return ID_expired > today
+# ID_expired=""
+# def get_ID_expired():
+#     ID_expired=input ("When will ID be expired?(YYYY/MM/DD")
+#
+# def check_ID_expiration(date):
+#     return ID_expired > today
 
 ID_expiration = ""
-def get_ID_expired(ID_expiration):
-        ID_expirations = ""
-        while True:
-            ID_expirations = input("Please enter date of ID expiration (YYYY.MM.DD): ")
-            try:
-                ID_expirations = datetime.strptime(ID_expiration, "%Y.%m.%d").date()
-                time_until_event = ID_expiration - datetime.now().date()
-                msg = "OK"
-                if time_until_event.days <= 0:
-                    msg = "The ID expiration should be later then today!"
+def input_date(ID_expiration):
+    ID_expiration = ""
+    while True:
+        sdate = input("Please enter date of ID expiration (YYYY.MM.DD): ")
+        try:
+            pdate = datetime.strptime(sdate, "%Y.%m.%d").date()
+            time_until_expiration = pdate - datetime.now().date()
+            msg = "OK"
+            if time_until_expiration.days < 1:
+                msg = "ID expiration should be later than today!"
 
-                if msg == "OK":
-                    break
-                else:
-                    print(msg)
-            except ValueError:
-                print("Wrong date format!")
-        ID_expiration = ID_expirations
-        return ID_expiration
+            if msg == "OK":
+                break
+            else:
+                print(msg)
+        except ValueError:
+            print("Wrong date format!")
 
-get_ID_expired(ID_expiration)
-print (ID_expiration)
+    return pdate
+
 
 
 
@@ -105,7 +103,7 @@ def check_identifier(identifier):
 
 
 def validate_identifier(identifier):
-
+    identifier = ""
     while identifier == '':
         identifier = input("Please write your unique ID(identity card/passport)!")
 
@@ -120,7 +118,38 @@ def validate_identifier(identifier):
 #                 Email address validation (contains @-ot and ending with .hu/.com)
 #     Mobil number
 #                 Mobil number validation (starts with +36/06 + 2 digit(provider identifier - 20/30/70) ending with 7 digits)
-#
+
+def check_mobil_number(mobile_number):
+    if mobile_number[0:2] !='06'and mobile_number[0:3]!="+36":
+        print("Please play attention the correct form. First charecters should be 06 or +36")
+        return False
+    if mobile_number[0:2] == '06' and len(mobile_number)!=11 or mobile_number[0:3] == '+36' and len(mobile_number) != 12:
+        print("It is not a correct form, because number length should be 11 or 12")
+        return False
+    if not mobile_number[-11:].isdigit():
+        print('Phone number should be just digit')
+        return False
+    if mobile_number[-9:-7] != '20' and mobile_number[-9:-7] != "30" and mobile_number[-9:-7] != "70":
+        print("Your telephone partner's number is not correct(Choose:20/30/70")
+        return False
+    else:
+        return True
+
+
+mobile_number = "20"
+def validate_mobile_number(mobile_number):
+    mobile_number = ""
+    while mobile_number == "":
+        mobile_number= input("Please write your mobile number(like this:06201234567 or +36301234567):")
+
+        if mobile_number == "":
+            print("Phone number is empty:")
+
+        elif not check_mobil_number(mobile_number):
+            mobile_number = ""
+    return mobile_number
+
+
 #     __repr__
 #                 Write out data in a table form pl.:
 #                 Attila, Molnar
