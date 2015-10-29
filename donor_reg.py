@@ -198,7 +198,7 @@ def check_mobil_number(mobile_number):
         return True
 
 
-def validate_mobile_number(mobile_number):
+def validate_mobile_number():
     mobile_number = ""
     while mobile_number == "":
         mobile_number = input("Please write your mobile number(like this:06201234567 or +36301234567):")
@@ -279,20 +279,20 @@ def get_email():
             print("Az email cimnek tartalmaznia kell  '@'-t  es .hu-ra vagy .com-ra kell vegzodnie")
     return email_string
 
-
-def main():
-    identifier = ""
-    ID_expiration = ""
-
-    input_name()
-    input_weight()
-    get_gender()
-    date_of_birth = input("Adja meg szuletesi evet!: ")
-    calculate_age_in_year(date_of_birth)
-    last_time = input("Legutobbi veradas idopontja?: ")
-    last_donation_time(last_time)
-    id_exp = input("Igazolvany lejarati datuma?: ")
-    input_date(id_exp)
-    input_blood_type()
-    get_email()
-    validate_mobile_number()
+#
+# def main():
+#     identifier = ""
+#     ID_expiration = ""
+#
+#     input_name()
+#     input_weight()
+#     get_gender()
+#     date_of_birth = input("Adja meg szuletesi evet!: ")
+#     calculate_age_in_year(date_of_birth)
+#     last_time = input("Legutobbi veradas idopontja?: ")
+#     last_donation_time(last_time)
+#     id_exp = input("Igazolvany lejarati datuma?: ")
+#     input_date(id_exp)
+#     input_blood_type()
+#     get_email()
+#     validate_mobile_number()
