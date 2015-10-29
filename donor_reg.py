@@ -1,6 +1,5 @@
-
-
 from datetime import datetime, time, timedelta
+
 
 # Task:
 #     warn_user:# weight > 50
@@ -10,7 +9,7 @@ from datetime import datetime, time, timedelta
 #                 How old is the donor in years based on date of birth?
 #                 ID is not expired.
 
-#-------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------
 #
 #     Name,
 #                 Parse name, store it in a separated object
@@ -19,6 +18,7 @@ from datetime import datetime, time, timedelta
 def validate_name(name_string: str):
     splitted_name = name_string.split(" ")
     return name_string.replace(" ", "").isalpha() and len(splitted_name) > 1
+
 
 def input_name():
     valid_name = False
@@ -32,7 +32,8 @@ def input_name():
 
     return data_name
 
-#-------------------------------------------------------------------------------
+
+# -------------------------------------------------------------------------------
 #
 #     Weight,
 #                 weight > 50
@@ -48,7 +49,8 @@ def input_weight():
 
     return data_weight
 
-#-------------------------------------------------------------------------------
+
+# -------------------------------------------------------------------------------
 #
 #
 #     Gender,
@@ -56,6 +58,15 @@ def input_weight():
 #     Date of Birth,
 #                 age > 18 years
 #                 How old is the donor in years based on date of birth?
+
+def calculate_age_in_year(birth_date: datetime):
+    return (datetime.now() - birth_date).days // 365
+
+
+def age_is_valid():
+    return calculate_age_in_year() > 18
+
+
 #
 #     Last donation date,
 #                 last donation was more than 3 months ago
@@ -78,6 +89,8 @@ def last_donation_time(date_of_donation: datetime):
 #     return ID_expired > today
 
 ID_expiration = ""
+
+
 def input_date(ID_expiration):
     ID_expiration = ""
     while True:
@@ -99,13 +112,12 @@ def input_date(ID_expiration):
     return pdate
 
 
-
-
 identifier = ""
+
 
 def check_identifier(identifier):
     if len(identifier) != 8:
-        print ("It isn't an correct form for identifier, should be 8 character long.")
+        print("It isn't an correct form for identifier, should be 8 character long.")
         return False
     elif identifier[0:6].isdigit():
         if identifier[6:].isalpha():
@@ -120,7 +132,7 @@ def check_identifier(identifier):
             print("A passport's last two character should be number!")
             return False
     else:
-        print ("Please write again your unique ID!")
+        print("Please write again your unique ID!")
         return False
 
 
@@ -135,7 +147,7 @@ def validate_identifier(identifier):
             identifier = ""
 
 
-#     Blood type
+# Blood type
 #
 
 def input_blood_type():
@@ -153,17 +165,18 @@ def input_blood_type():
     return data_blood_type
 
 
-#-------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------
 #     email address
 #                 Email address validation (contains @-ot and ending with .hu/.com)
 #     Mobil number
 #                 Mobil number validation (starts with +36/06 + 2 digit(provider identifier - 20/30/70) ending with 7 digits)
 
 def check_mobil_number(mobile_number):
-    if mobile_number[0:2] !='06'and mobile_number[0:3]!="+36":
+    if mobile_number[0:2] != '06' and mobile_number[0:3] != "+36":
         print("Please play attention the correct form. First charecters should be 06 or +36")
         return False
-    if mobile_number[0:2] == '06' and len(mobile_number)!=11 or mobile_number[0:3] == '+36' and len(mobile_number) != 12:
+    if mobile_number[0:2] == '06' and len(mobile_number) != 11 or mobile_number[0:3] == '+36' and len(
+            mobile_number) != 12:
         print("It is not a correct form, because number length should be 11 or 12")
         return False
     if not mobile_number[-11:].isdigit():
@@ -177,10 +190,12 @@ def check_mobil_number(mobile_number):
 
 
 mobile_number = "20"
+
+
 def validate_mobile_number(mobile_number):
     mobile_number = ""
     while mobile_number == "":
-        mobile_number= input("Please write your mobile number(like this:06201234567 or +36301234567):")
+        mobile_number = input("Please write your mobile number(like this:06201234567 or +36301234567):")
 
         if mobile_number == "":
             print("Phone number is empty:")
@@ -228,8 +243,6 @@ def gender_is_valid(string):
     return False
 
 
-
-
 def get_gender():
     data_gender = ""
     valid_gender = False
@@ -248,6 +261,7 @@ def get_gender():
 
 get_gender()
 
+
 def email_is_valid(email_string):
     return "@" in email_string and \
            email_string.index("@") > 0 and \
@@ -255,7 +269,7 @@ def email_is_valid(email_string):
 
 
 def get_email():
-    data_email= False
+    data_email = False
     email_string = " "
     while not data_email:
         email_string = input("Kerem irja be az email cimet:  ")
@@ -264,5 +278,6 @@ def get_email():
         else:
             print("Az email cimnek tartalmaznia kell  '@'-t  es .hu-ra vagy .com-ra kell vegzodnie")
     return email_string
+
 
 get_email()

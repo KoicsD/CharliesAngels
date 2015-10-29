@@ -45,10 +45,15 @@ from datetime import datetime, time, timedelta
 
 class Donation:
     preparation_time = 30
+    donation_time = 30
     citylist = ["Miskolc", "Kazincbarcika", "Szerencs", "Sarospatak"]
 
+    @staticmethod
+    def calc_max_n_donors(duration, n_beds):
+        return ((duration - Donation.preparation_time) / Donation.donation_time) * n_beds
+
     def __init__(self):
-        self.date = datetime(1, 1, 1).time()
+        self.date = datetime(1, 1, 1).date()
         self.start_time = time()
         self.end_time = time()
         self.valid = False
@@ -56,14 +61,17 @@ class Donation:
         self.zipcode = ""
         self.address = ""
         self.city = ""
+        self.n_beds = 0
+        self.max_n_donors = 0
+        self.planned_n_donors = 0
         self.successful_donation = 0
 
-        #self.input_date()
-        #self.input_start_time()
-        #self.input_end_time()
-        #self.input_zipcode()
-        #self.input_city()
-        #self.input_address()
+        self.input_date()
+        self.input_start_time()
+        self.input_end_time()
+        self.input_zipcode()
+        self.input_n_beds()
+        self.input_planned_n_donors()
         self.input_successful_donation()
 
     def input_date(self):
@@ -88,6 +96,7 @@ class Donation:
 
     def input_start_time(self):
         starttime = ""
+        pstarttime = time()
         while True:
             starttime = input("Please enter the start time of event (HH:MM): ")
             try:
@@ -99,6 +108,8 @@ class Donation:
 
     def input_end_time(self):
         endtime = ""
+        pendtime = 0
+        duration = 0
         while True:
             endtime = input("Please enter the end time of event (HH:MM): ")
             try:
@@ -184,3 +195,41 @@ class Donation:
 
 
 
+    def input_n_beds(self):
+        s_n_beds = ""
+        p_n_beds = 0
+        while True:
+            s_n_beds = input("Please, enter the Number of Beds Available: ")
+            try:
+                p_n_beds = int(s_n_beds)
+                msg = "OK"
+                if p_n_beds <= 0:
+                    msg = "Number of Beds must be a positive integer!"
+                if msg == "OK":
+                    break
+                else:
+                    print(msg)
+            except ValueError:
+                print("Input cannot be parsed as an integer!")
+        self.n_beds = p_n_beds
+        self.max_n_donors = Donation.calc_max_n_donors(self.duration, p_n_beds)
+
+    def input_planned_n_donors(self):
+        s_planned_n_donors = ""
+        p_planned_n_donors = 0
+        while True:
+            s_planned_n_donors = input("Please, enter the Planned Number of Donors: ")
+            try:
+                p_planned_n_donors = int(s_planned_n_donors)
+                msg = "OK"
+                if p_planned_n_donors <= 0:
+                    msg = "Planned Number of Donors must be a positive integer!"
+                elif p_planned_n_donors > self.max_n_donors:
+                    msg = "Planned Number of Donors exceeds Maximum Number of Donors!"
+                if msg == "OK":
+                    break
+                else:
+                    print(msg)
+            except ValueError:
+                print("Input cannot be parsed as an integer!")
+        self.planned_n_donors = p_planned_n_donors
