@@ -1,5 +1,5 @@
 from datetime import datetime, time, timedelta
-
+import random
 
 # Task:
 #     warn_user:# weight > 50
@@ -8,6 +8,19 @@ from datetime import datetime, time, timedelta
 #                 age > 18 years
 #                 How old is the donor in years based on date of birth?
 #                 ID is not expired.
+
+
+def random_hemoglobin():
+    return random.randint(80,200)
+
+
+def donor_is_valid():
+    return input_weight() > 50 and \
+           random_hemoglobin() > 110 and \
+           last_donation_time() == True and \
+           age_is_valid() == True and \
+           input_date() > datetime.now()
+
 
 # -------------------------------------------------------------------------------
 #
