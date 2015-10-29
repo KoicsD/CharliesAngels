@@ -1,6 +1,5 @@
 
 
-
 # Task:
 #     warn_user:# weight > 50
 #                 Generate random number: Hemogblobin level between 80-200, write out is the donor suitable or not (value is greather than 110)?
@@ -207,3 +206,4 @@ def get_email():
     return email_string
 
 get_email()
+
