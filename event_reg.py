@@ -222,8 +222,6 @@ class Donation:
                 print("Successful donation must be integer!")
         self.successful_donation = int_successful_donation
 
-
-
     def input_n_beds(self):
         s_n_beds = ""
         p_n_beds = 0
@@ -265,10 +263,10 @@ class Donation:
 
     def calc_succession_of_event(self):
             if self.successful_donation < self.planned_n_donors * 0.2:
-                print("Unsuccessfull, not worths to organise there again")
+                print("Unsuccessful, not worths to organise there again")
             elif self.successful_donation < self.planned_n_donors * 0.75:
                 print("Normal event")
             elif self.successful_donation < self.planned_n_donors * 1.1:
-                print("Successfull")
+                print("Successful")
             else:
                 print("Outstanding")
