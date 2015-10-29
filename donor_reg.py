@@ -1,4 +1,6 @@
 __author__ = 'KoicsD'
+from datetime import datetime
+
 
 
 # Task:
@@ -59,6 +61,11 @@ def input_weight():
 #     Last donation date,
 #                 last donation was more than 3 months ago
 #                 never is also possible
+
+def last_donation_time(date_of_donation: datetime):
+    return (datetime.now() - date_of_donation).days > 90
+
+
 #
 #     Unique identifier  &     Expiration of ID
 #                 6digit + 2letter (123456AB) is identity card
