@@ -97,6 +97,14 @@ def get_birth_date():
 def last_donation_time_is_valid(date_of_donation: datetime):
     return (datetime.now() - date_of_donation).days > 90
 
+def get_last_donation_time():
+    last_time = ""
+    while not last_time:
+
+        last_time = input("Kerem adja meg a legutobbi veradas datumat (YYYY.MM.DD) formatumban!: ")
+        ltime = datetime.strptime(last_time, "%Y.%m.%d").date()
+
+    return  ltime
 
 #
 #     Unique identifier  &     Expiration of ID
@@ -295,11 +303,9 @@ def main():
     input_name()
     input_weight()
     get_gender()
-    date_of_birth = input("Adja meg szuletesi evet!: ")
-    # calculate_age_in_year(date_of_birth)
+    get_birth_date()
     last_time = input("Legutobbi veradas idopontja?: ")
-    last_donation_time(last_time)
-    input_blood_type()
+    last_donation_time_is_valid(last_time)
     input_blood_type()
     id_exp = input("Igazolvany lejarati datuma?: ")
     input_date(id_exp)
