@@ -58,12 +58,12 @@ class Donation:
         self.city = ""
         self.successful_donation = 0
 
-        self.input_date()
-        self.input_start_time()
-        self.input_end_time()
-        self.input_zipcode()
-        self.input_city()
-        self.input_address()
+        #self.input_date()
+        #self.input_start_time()
+        #self.input_end_time()
+        #self.input_zipcode()
+        #self.input_city()
+        #self.input_address()
         self.input_successful_donation()
 
     def input_date(self):
@@ -169,6 +169,7 @@ class Donation:
         successful_donation = 0
         while True:
             try:
+                successful_donation = input("Please enter successful donation number: ")
                 int_successful_donation = int(successful_donation)
                 msg = "OK"
                 if int_successful_donation <= 0:
