@@ -246,16 +246,13 @@ def gender_is_valid(string):
 def get_gender():
     data_gender = ""
     valid_gender = False
-    while not valid_gender:
-        data_gender = input("Kerem adja meg a nemet: ")
-
-        if not valid_gender:
-            data_gender = input("Adja meg a nemet!(N/F): ")
-            if gender_is_valid(data_gender):
-                valid_gender = True
-            else:
-                print("Adja meg a nemet!(N/F): ")
-                data_gender = ("")
+    if not valid_gender:
+        data_gender = input("Adja meg a nemet!(N/F): ")
+        if gender_is_valid(data_gender):
+            valid_gender = True
+        else:
+            print("Adja meg a nemet!(N/F): ")
+            data_gender = ("")
     return data_gender
 
 
