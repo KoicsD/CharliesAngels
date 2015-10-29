@@ -259,8 +259,6 @@ def get_gender():
     return data_gender
 
 
-get_gender()
-
 
 def email_is_valid(email_string):
     return "@" in email_string and \
@@ -279,5 +277,3 @@ def get_email():
             print("Az email cimnek tartalmaznia kell  '@'-t  es .hu-ra vagy .com-ra kell vegzodnie")
     return email_string
 
-
-get_email()
