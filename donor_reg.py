@@ -1,4 +1,4 @@
-__author__ = 'KoicsD'
+
 
 
 # Task:
@@ -8,9 +8,12 @@ __author__ = 'KoicsD'
 #                 age > 18 years
 #                 How old is the donor in years based on date of birth?
 #                 ID is not expired.
+
+#-------------------------------------------------------------------------------
 #
 #     Name,
 #                 Parse name, store it in a separated object
+#
 
 def validate_name(name_string: str):
     splitted_name = name_string.split(" ")
@@ -18,20 +21,34 @@ def validate_name(name_string: str):
 
 def input_name():
     valid_name = False
-    fullname = ""
+    data_name = ""
     while not valid_name:
-        fullname = input("Kerem adja meg a teljes nevet szokozzel elvalasztva!: ")
-        if validate_name(fullname):
+        data_name = input("Kerem adja meg a teljes nevet szokozzel elvalasztva!(Keresztnev Vezeteknev): ")
+        if validate_name(data_name):
             valid_name = True
         else:
             print("A megadott nev csak betuket es szokozt tartalmazhat!")
 
-    return fullname
+    return data_name
 
-
+#-------------------------------------------------------------------------------
 #
 #     Weight,
 #                 weight > 50
+#
+
+def input_weight():
+    data_weight = ""
+    while not data_weight:
+        data_weight = input("Adja meg a testsulyat!(kg): ")
+        if not (str(data_weight).isdigit() and int(data_weight) > 0):
+            print("A testsulynak 0tol nagyobb pozitiv szamnak kell lennie!")
+            data_weight = ""
+
+    return data_weight
+
+#-------------------------------------------------------------------------------
+#
 #
 #     Gender,
 #
@@ -91,6 +108,24 @@ def validate_identifier(identifier):
 
 
 #     Blood type
+#
+
+def input_blood_type():
+    valid_blood_type = False
+    data_blood_type = ""
+    blood_types = ("A+", "0+", "B+", "AB+", "A-", "0-", "B-", "AB-")
+
+    while not valid_blood_type:
+        data_blood_type = input("Adja meg a vercsoportjat!: ")
+        if str(data_blood_type).lower() not in str(blood_types).lower():
+            print("Kerem helyes vercsoportot adjon meg! (A+, 0+, B+, AB+, A-, 0-, B-, AB-)")
+        else:
+            valid_blood_type = True
+
+    return data_blood_type
+
+
+#-------------------------------------------------------------------------------
 #     email address
 #                 Email address validation (contains @-ot and ending with .hu/.com)
 #     Mobil number
@@ -123,3 +158,52 @@ def validate_identifier(identifier):
 # 1989.05.06 - 26 years old
 # asd@test.hu,
 # Generate random number: Hemogblobin level between 80-200, write out is the donor suitable or not (value is greather than 110)?
+
+
+def gender_is_valid(string):
+    if string.lower() == "n" or string.lower() == "f":
+        print("OK!")
+        return True
+    else:
+        print("Nem megfelelo!")
+    return False
+
+
+
+
+def get_gender():
+    data_gender = ""
+    valid_gender = False
+    while not valid_gender:
+        data_gender = input("Kerem adja meg a nemet: ")
+
+        if not valid_gender:
+            data_gender = input("Adja meg a nemet!(N/F): ")
+            if gender_is_valid(data_gender):
+                valid_gender = True
+            else:
+                print("Adja meg a nemet!(N/F): ")
+                data_gender = ("")
+    return data_gender
+
+
+get_gender()
+
+def email_is_valid(email_string):
+    return "@" in email_string and \
+           email_string.index("@") > 0 and \
+           (email_string.endswith(".hu") or email_string.endswith(".com"))
+
+
+def get_email():
+    data_email= False
+    email_string = " "
+    while not data_email:
+        email_string = input("Kerem irja be az email cimet:  ")
+        if email_is_valid(email_string):
+            data_email = True
+        else:
+            print("Az email cimnek tartalmaznia kell  '@'-t  es .hu-ra vagy .com-ra kell vegzodnie")
+    return email_string
+
+get_email()
