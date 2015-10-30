@@ -303,6 +303,7 @@ def main():
     birth_date = get_birth_date()
     date_of_donation = get_last_donation_time()
     input_blood_type()
+    validate_identifier()
     exp_date = input_date()
     get_email()
     get_mobile_number()
