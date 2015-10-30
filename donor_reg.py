@@ -314,7 +314,3 @@ def main():
         valid = True
 
     return valid
-
-
-
-print(main())

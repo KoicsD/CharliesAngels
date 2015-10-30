@@ -1,6 +1,5 @@
-from event_reg import Donation
-import sys
-
+import event_reg
+import donor_reg
 
 
 def print_separator_line():
@@ -22,9 +21,10 @@ Donor register press: 1
 Location register press: 2
 Press 3 to exit \n >>>""")
             if choice == "1":
+                donor_reg.main()
                 break
             elif choice == "2":
-                my_object = Donation()
+                my_object = event_reg.Donation()
                 break
             elif choice == "3":
-                sys.exit()
+                break
