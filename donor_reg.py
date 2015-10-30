@@ -76,7 +76,7 @@ def get_birth_date():
 
 
 def calculate_age_in_year(birth_date: datetime):
-    return (datetime.now() - birth_date).days // 365
+    return (datetime.now().date() - birth_date).days // 365
 
 #
 #     Last donation date,
@@ -94,7 +94,7 @@ def get_last_donation_time():
     return  ltime
 
 def last_donation_time_is_valid(date_of_donation: datetime):
-    return (datetime.now() - date_of_donation).days > 90
+    return (datetime.now().date() - date_of_donation).days > 90
 #
 #     Unique identifier  &     Expiration of ID
 #                 6digit + 2letter (123456AB) is identity card
@@ -293,6 +293,9 @@ def get_email():
 #         print("A donor megfelelo veradasra!")
 #     else:
 #         print("A donor NEM megfelelo veradsra!")
+def donor_is_valid():
+
+
 
 def main():
     input_name()
@@ -301,13 +304,14 @@ def main():
     birth_date = get_birth_date()
     date_of_donation = get_last_donation_time()
     input_blood_type()
-    input_date()
+    exp_date = input_date()
     get_email()
     get_mobile_number()
 
     if int(weight) > 50 and \
         last_donation_time_is_valid(date_of_donation) and \
-        calculate_age_in_year(birth_date):
+        calculate_age_in_year(birth_date) and \
+        exp_date > datetime.now().date():
         print("A donor veradasra alkalmas!")
     else:
         print("A donor veradasra NEM alkalmas!")
