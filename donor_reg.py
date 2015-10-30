@@ -293,8 +293,6 @@ def get_email():
 #         print("A donor megfelelo veradasra!")
 #     else:
 #         print("A donor NEM megfelelo veradsra!")
-def donor_is_valid():
-
 
 
 def main():
