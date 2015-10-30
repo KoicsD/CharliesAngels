@@ -1,4 +1,5 @@
-from datetime import datetime, time, timedelta
+__author__ = ['KoicsD', 'BodiZs']
+from datetime import datetime, date, time, timedelta
 
 
 class Donation:
@@ -10,12 +11,14 @@ class Donation:
     def calc_max_n_donors(duration, n_beds):
         return ((duration - Donation.preparation_time) / Donation.donation_time) * n_beds
 
-    def __init__(self):
+    def __init__(self, test_mode=False):
+        self.valid = False
+        self.test_mode = test_mode
+
         print("You can escape any time by typing '\quit'.")
-        self.date = datetime(1, 1, 1).date()
+        self.date = date(1, 1, 1)
         self.start_time = time()
         self.end_time = time()
-        self.valid = False
         self.duration = 0
         self.zipcode = ""
         self.address = ""
@@ -33,6 +36,10 @@ class Donation:
             return
         if self.input_zipcode():
             return
+        if self.input_city():
+            return
+        if self.input_address():
+            return
         if self.input_n_beds():
             return
         if self.input_planned_n_donors():
@@ -42,8 +49,32 @@ class Donation:
         if self.calc_succession_of_event():
             return
 
+        self.valid = True
+
+    def __repr__(self):
+        text = ""
+        if self.test_mode:
+            text += "valid: " + str(self.valid) + "\n"
+        elif not self.valid:
+            return "<Invalid Donation Object.>"
+        text += "Date of Donation: " + self.date.strftime("%Y.%m.%d") + "\n"
+        text += "Start-Time: " + self.start_time.strftime("%H:%M") + "\n"
+        text += "End-Time: " + self.end_time.strftime("%H:%M") + "\n"
+        if self.test_mode:
+            text += "Duration: " + str(self.duration) + "\n"
+        text += "Zip-code: " + self.zipcode + "\n"
+        text += "City: " + self.city + "\n"
+        text += "Address: " + self.address + "\n"
+        text += "Number of Beds Available: " + str(self.n_beds) + "\n"
+        if self.test_mode:
+            text += "Maximum Number of Donors: " + str(self.max_n_donors) + "\n"
+        text += "Planned Number of Donors: " + str(self.planned_n_donors) + "\n"
+        text += "Number of Successful Donation: " + str(self.successful_donation) + "\n"
+        return text
+
     def input_date(self):
         sdate = ""
+        pdate = date(1, 1, 1)
         while True:
             sdate = input("Please enter date of event (YYYY.MM.DD): ")
             if sdate == "\\quit":
@@ -136,7 +167,7 @@ class Donation:
             if city == "\\quit":
                 return True
             msg = "OK"
-            if city.lower() not in Donation.citylist:
+            if city.capitalize() not in Donation.citylist:
                 msg = "You can not make a donation in " + city
                 print("You must choose between:", Donation.citylist)
             if msg == "OK":
