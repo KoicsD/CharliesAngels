@@ -1,4 +1,4 @@
-from datetime import datetime, time, timedelta
+from datetime import datetime
 import random
 
 
@@ -13,15 +13,6 @@ import random
 
 def random_hemoglobin():
     return random.randint(80,200)
-
-
-def donor_is_valid(weight: int, hemoglobin: int, last_donation: bool, ):
-    return input_weight() > 50 and \
-           random_hemoglobin() > 110 and \
-           last_donation_time() == True and \
-           age_is_valid() == True and \
-           input_date() > datetime.now()
-
 
 # -------------------------------------------------------------------------------
 #
@@ -73,23 +64,37 @@ def input_weight():
 #                 age > 18 years
 #                 How old is the donor in years based on date of birth?
 
+
+def get_birth_date():
+    birth_date = ""
+    while not birth_date:
+
+        birth_date = input("Kerem adja meg a szuletesi datumat (YYYY.MM.DD) formatumban!: ")
+        bdate = datetime.strptime(birth_date, "%Y.%m.%d").date()
+
+    return  bdate
+
+
 def calculate_age_in_year(birth_date: datetime):
     return (datetime.now() - birth_date).days // 365
-
-
-def age_is_valid():
-    return calculate_age_in_year() > 18
-
 
 #
 #     Last donation date,
 #                 last donation was more than 3 months ago
 #                 never is also possible
 
-def last_donation_time(date_of_donation: datetime):
+
+def get_last_donation_time():
+    last_time = ""
+    while not last_time:
+
+        last_time = input("Kerem adja meg a legutobbi veradas datumat (YYYY.MM.DD) formatumban!: ")
+        ltime = datetime.strptime(last_time, "%Y.%m.%d").date()
+
+    return  ltime
+
+def last_donation_time_is_valid(date_of_donation: datetime):
     return (datetime.now() - date_of_donation).days > 90
-
-
 #
 #     Unique identifier  &     Expiration of ID
 #                 6digit + 2letter (123456AB) is identity card
@@ -103,7 +108,7 @@ def last_donation_time(date_of_donation: datetime):
 #     return ID_expired > today
 
 
-def input_date(ID_expiration):
+def input_date():
     ID_expiration = ""
     while True:
         sdate = input("Please enter date of ID expiration (YYYY.MM.DD): ")
@@ -145,7 +150,7 @@ def check_identifier(identifier):
         return False
 
 
-def validate_identifier(identifier):
+def validate_identifier():
     identifier = ""
     while identifier == '':
         identifier = input("Please write your unique ID(identity card/passport)!")
@@ -198,7 +203,7 @@ def check_mobil_number(mobile_number):
         return True
 
 
-def validate_mobile_number(mobile_number):
+def get_mobile_number():
     mobile_number = ""
     while mobile_number == "":
         mobile_number = input("Please write your mobile number(like this:06201234567 or +36301234567):")
@@ -279,20 +284,34 @@ def get_email():
             print("Az email cimnek tartalmaznia kell  '@'-t  es .hu-ra vagy .com-ra kell vegzodnie")
     return email_string
 
+# def donor_is_valid():
+#     if weight > 50 and \
+#            random_hemoglobin() > 110 and \
+#            last_donation_time_is_valid() and \
+#            age_is_valid() and \
+#            input_date() > datetime.now():
+#         print("A donor megfelelo veradasra!")
+#     else:
+#         print("A donor NEM megfelelo veradsra!")
 
 def main():
-    identifier = ""
-    ID_expiration = ""
-
     input_name()
-    input_weight()
+    weight = input_weight()
     get_gender()
-    date_of_birth = input("Adja meg szuletesi evet!: ")
-    calculate_age_in_year(date_of_birth)
-    last_time = input("Legutobbi veradas idopontja?: ")
-    last_donation_time(last_time)
-    id_exp = input("Igazolvany lejarati datuma?: ")
-    input_date(id_exp)
+    birth_date = get_birth_date()
+    date_of_donation = get_last_donation_time()
     input_blood_type()
+    input_date()
     get_email()
-    validate_mobile_number()
+    get_mobile_number()
+
+    if int(weight) > 50 and \
+        last_donation_time_is_valid(date_of_donation) and \
+        calculate_age_in_year(birth_date):
+        print("A donor veradasra alkalmas!")
+    else:
+        print("A donor veradasra NEM alkalmas!")
+
+
+
+main()
