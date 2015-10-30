@@ -293,11 +293,10 @@ def get_email():
 #         print("A donor megfelelo veradasra!")
 #     else:
 #         print("A donor NEM megfelelo veradsra!")
-def donor_is_valid():
-
 
 
 def main():
+    valid = False
     input_name()
     weight = input_weight()
     get_gender()
@@ -312,10 +311,10 @@ def main():
         last_donation_time_is_valid(date_of_donation) and \
         calculate_age_in_year(birth_date) and \
         exp_date > datetime.now().date():
-        print("A donor veradasra alkalmas!")
-    else:
-        print("A donor veradasra NEM alkalmas!")
+        valid = True
+
+    return valid
 
 
 
-main()
+print(main())
