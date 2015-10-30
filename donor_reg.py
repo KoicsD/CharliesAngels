@@ -296,7 +296,6 @@ def get_email():
 
 
 def main():
-    valid = False
     input_name()
     weight = input_weight()
     get_gender()
