@@ -296,15 +296,16 @@ def get_email():
 
 
 def main():
-    input_name()
+    name = input_name()
     weight = input_weight()
     get_gender()
     birth_date = get_birth_date()
+    age = calculate_age_in_year(birth_date)
     date_of_donation = get_last_donation_time()
     input_blood_type()
     validate_identifier()
     exp_date = input_date()
-    get_email()
+    email = get_email()
     get_mobile_number()
 
     if int(weight) > 50 and \
@@ -312,5 +313,6 @@ def main():
         calculate_age_in_year(birth_date) and \
         exp_date > datetime.now().date():
         print("A donor ALKALMAS veradasra!")
+        print("A donor adatai:\n %s \n %s kg \n %s - %s eves \n %s" % (name, weight, birth_date, age, email))
     else:
         print("A donor NEM ALKALMAS veradasra!")
