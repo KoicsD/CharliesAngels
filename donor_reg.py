@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, date
 import random
 
 
@@ -52,7 +52,7 @@ def input_weight():
             print("A testsulynak 0tol nagyobb pozitiv szamnak kell lennie!")
             data_weight = ""
 
-    return data_weight
+    return int(data_weight)
 
 
 # -------------------------------------------------------------------------------
@@ -70,12 +70,16 @@ def get_birth_date():
     while not birth_date:
 
         birth_date = input("Kerem adja meg a szuletesi datumat (YYYY.MM.DD) formatumban!: ")
-        bdate = datetime.strptime(birth_date, "%Y.%m.%d").date()
+        try:
+            bdate = datetime.strptime(birth_date, "%Y.%m.%d").date()
+        except ValueError:
+            print("Hibas datumformatum!")
+            birth_date = ""
 
     return  bdate
 
 
-def calculate_age_in_year(birth_date: datetime):
+def calculate_age_in_year(birth_date: date):
     return (datetime.now().date() - birth_date).days // 365
 
 #
@@ -89,11 +93,15 @@ def get_last_donation_time():
     while not last_time:
 
         last_time = input("Kerem adja meg a legutobbi veradas datumat (YYYY.MM.DD) formatumban!: ")
-        ltime = datetime.strptime(last_time, "%Y.%m.%d").date()
+        try:
+            ltime = datetime.strptime(last_time, "%Y.%m.%d").date()
+        except ValueError:
+            print("Hibas datumformatum!")
+            last_time = ""
 
     return  ltime
 
-def last_donation_time_is_valid(date_of_donation: datetime):
+def last_donation_time_is_valid(date_of_donation: date):
     return (datetime.now().date() - date_of_donation).days > 90
 #
 #     Unique identifier  &     Expiration of ID
@@ -108,7 +116,7 @@ def last_donation_time_is_valid(date_of_donation: datetime):
 #     return ID_expired > today
 
 
-def input_date():
+def input_id_expiration():
     ID_expiration = ""
     while True:
         sdate = input("Please enter date of ID expiration (YYYY.MM.DD): ")
@@ -159,6 +167,7 @@ def validate_identifier():
             print("Unique identifier cannot be empty")
         elif not check_identifier(identifier):
             identifier = ""
+    return identifier
 
 
 # Blood type
@@ -171,7 +180,7 @@ def input_blood_type():
 
     while not valid_blood_type:
         data_blood_type = input("Adja meg a vercsoportjat!: ")
-        if str(data_blood_type).lower() not in str(blood_types).lower():
+        if str(data_blood_type).upper() not in blood_types:
             print("Kerem helyes vercsoportot adjon meg! (A+, 0+, B+, AB+, A-, 0-, B-, AB-)")
         else:
             valid_blood_type = True
@@ -246,24 +255,15 @@ def get_mobile_number():
 
 
 def gender_is_valid(string):
-    if string.lower() == "n" or string.lower() == "f":
-        print("OK!")
-        return True
-    else:
-        print("Nem megfelelo!")
-    return False
+    return string.lower() == "n" or string.lower() == "f"
 
 
 def get_gender():
     data_gender = ""
     valid_gender = False
-    if not valid_gender:
+    while not valid_gender:
         data_gender = input("Adja meg a nemet!(N/F): ")
-        if gender_is_valid(data_gender):
-            valid_gender = True
-        else:
-            print("Adja meg a nemet!(N/F): ")
-            data_gender = ("")
+        valid_gender = gender_is_valid(data_gender)
     return data_gender
 
 
@@ -284,35 +284,58 @@ def get_email():
             print("Az email cimnek tartalmaznia kell  '@'-t  es .hu-ra vagy .com-ra kell vegzodnie")
     return email_string
 
-# def donor_is_valid():
-#     if weight > 50 and \
-#            random_hemoglobin() > 110 and \
-#            last_donation_time_is_valid() and \
-#            age_is_valid() and \
-#            input_date() > datetime.now():
-#         print("A donor megfelelo veradasra!")
-#     else:
-#         print("A donor NEM megfelelo veradsra!")
+
+def donor_is_valid(age, weight, last_don, hemo, id_exp):
+    return weight > 50 and \
+           hemo > 110 and \
+           last_donation_time_is_valid(last_don) and \
+           age > 18 and \
+           id_exp > datetime.now().date()
+
+
+def print_donor(name, age, gender, birth_date, id, id_expiration,
+                weight, blood_type, last_donation,
+                mobile, email, suitable):
+    print("Name: %s" % name)
+    print("Age: %d" % age)
+    if gender.lower() == 'n':
+        print("Gender: female")
+    else:
+        print("Gender: male")
+    print("Date of Birth: %s" % birth_date.strftime("%Y.%m.%d"))
+    print("Identifier: %s" + id)
+    print("Expiration Date of ID: %s" % id_expiration.strftime("%Y.%m.%d"))
+    print("Weight: %d" % weight)
+    print("Type of Blood: %s" % blood_type)
+    print("Date of Last Donation: %s" % last_donation.strftime("%Y.%m.%d"))
+    print("Mobile: %s" % mobile)
+    print("Email: %s" % email)
+    if suitable:
+        print("The Donor is SUITABLE for donation.")
+    else:
+        print("The Donor is NOT SUITABLE for donation")
 
 
 def main():
     name = input_name()
     weight = input_weight()
-    get_gender()
+    gender = get_gender()
     birth_date = get_birth_date()
     age = calculate_age_in_year(birth_date)
-    date_of_donation = get_last_donation_time()
-    input_blood_type()
-    validate_identifier()
-    exp_date = input_date()
+    last_donation = get_last_donation_time()
+    blood_type = input_blood_type()
+    id = validate_identifier()
+    exp_date = input_id_expiration()
     email = get_email()
-    get_mobile_number()
+    mobile = get_mobile_number()
+    hemoglobin = random_hemoglobin()
 
-    if int(weight) > 50 and \
-        last_donation_time_is_valid(date_of_donation) and \
-        calculate_age_in_year(birth_date) and \
-        exp_date > datetime.now().date():
-        print("A donor ALKALMAS veradasra!")
-        print("A donor adatai:\n %s \n %s kg \n %s - %s eves \n %s" % (name, weight, birth_date, age, email))
-    else:
-        print("A donor NEM ALKALMAS veradasra!")
+    suitable = donor_is_valid(age, weight, last_donation, hemoglobin, exp_date)
+    print_donor('-' * 10)
+    print_donor(name, age, gender, birth_date, id, exp_date,
+                weight, blood_type, last_donation,
+                mobile, email, suitable)
+
+
+if __name__ == "__main__":
+    main()
