@@ -1,4 +1,5 @@
 __author__ = ['KoicsD', 'BodiZs']
+from time import sleep
 from datetime import datetime, date, time, timedelta
 from user_input import *
 
@@ -7,6 +8,7 @@ class Donation:
     preparation_time = 30
     donation_time = 30
     citylist = ["Miskolc", "Kazincbarcika", "Szerencs", "Sarospatak"]
+    enum_success = {"unevaluated": 0, "unsuccessful": 1, "normal": 2, "successful": 3, "outstanding": 4}
 
     @staticmethod
     def calc_max_n_donors(duration, n_beds):
@@ -27,7 +29,8 @@ class Donation:
         self.n_beds = 0
         self.max_n_donors = 0
         self.planned_n_donors = 0
-        self.successful_donation = 0
+        self.n_successful_donation = -1
+        self.success = Donation.enum_success["unevaluated"]
 
         self.input_date()
         self.input_start_time()
@@ -58,7 +61,22 @@ class Donation:
         if self.test_mode:
             text += "Maximum Number of Donors: " + str(self.max_n_donors) + "\n"
         text += "Planned Number of Donors: " + str(self.planned_n_donors) + "\n"
-        text += "Number of Successful Donation: " + str(self.successful_donation) + "\n"
+        if self.n_successful_donation != -1:
+            text += "Number of Successful Donation: " + str(self.n_successful_donation) + "\n"
+        else:
+            if self.test_mode:
+                text += "Number of Successful Donation: <not given yet>"
+        if self.success == Donation.enum_success["unevaluated"]:
+            if self.test_mode:
+                text += "Success of Donation: <not evaluated yet>"
+        elif self.success == Donation.enum_success["unsuccessful"]:
+            text += "Success of Donation: UNSUCCESSFUL"
+        elif self.success == Donation.enum_success["normal"]:
+            text += "Success of Donation: NORMAL"
+        elif self.success == Donation.enum_success["successful"]:
+            text += "Success of Donation: SUCCESSFUL"
+        elif self.success == Donation.enum_success["outstanding"]:
+            text += "Success of Donation: OUTSTANDING"
         return text
 
     def input_date(self):
@@ -194,7 +212,7 @@ class Donation:
                     print(msg)
             except ValueError:
                 print("Successful donation must be integer!")
-        self.successful_donation = int_successful_donation
+        self.n_successful_donation = int_successful_donation
 
     def input_n_beds(self):
         s_n_beds = ""
@@ -239,24 +257,38 @@ class Donation:
                 print("Input cannot be parsed as an integer!")
         self.planned_n_donors = p_planned_n_donors
 
-    def calc_succession_of_event(self):
-            if self.successful_donation < self.planned_n_donors * 0.2:
-                print("Unsuccessful, not worths to organise there again")
-            elif self.successful_donation < self.planned_n_donors * 0.75:
-                print("Normal event")
-            elif self.successful_donation < self.planned_n_donors * 1.1:
-                print("Successful")
+    def evaluate_event(self):
+            if self.n_successful_donation < self.planned_n_donors * 0.2:
+                self.success = Donation.enum_success["unsuccessful"]
+                print("UNSUCCESSFUL, it is not worth to organise there again")
+            elif self.n_successful_donation < self.planned_n_donors * 0.75:
+                self.success = Donation.enum_success["normal"]
+                print("NORMAL event")
+            elif self.n_successful_donation < self.planned_n_donors * 1.1:
+                self.success = Donation.enum_success["successful"]
+                print("SUCCESSFUL")
             else:
-                print("Outstanding")
+                self.success = Donation.enum_success["outstanding"]
+                print("OUTSTANDING")
 
 
 def main():
     try:
+        print("Creating Donation object with user_input...\n")
         my_object = Donation()
+        print("\nDone.")
+        print("Asking for Number of Successful Donation\nand evaluating Donation...\n")
         my_object.input_successful_donation()
-        my_object.calc_succession_of_event()
+        my_object.evaluate_event()
+        print("\nDone.\n")
+        sleep(1.5)
+        print('-' * 9)
+        print("\nPrinting data stored in Donation object...\n")
+        print(my_object)
+        print("\nDone.\nDemo terminates.")
     except UserInterrupt as interruption:
         print("User has interrupted data input in function: '%s'" % interruption.args[0])
+        print("\nDemo terminates.")
 
 
 if __name__ == '__main__':
