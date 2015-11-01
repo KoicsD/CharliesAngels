@@ -37,8 +37,6 @@ class Donation:
         self.input_address()
         self.input_n_beds()
         self.input_planned_n_donors()
-        self.input_successful_donation()
-        self.calc_succession_of_event()
 
         self.valid = True
 
@@ -255,6 +253,8 @@ class Donation:
 def main():
     try:
         my_object = Donation()
+        my_object.input_successful_donation()
+        my_object.calc_succession_of_event()
     except UserInterrupt as interruption:
         print("User has interrupted data input in function: '%s'" % interruption.args[0])
 
