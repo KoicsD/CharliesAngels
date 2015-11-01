@@ -2,6 +2,10 @@ __author__ = ['KoicsD', 'BodiZs']
 from datetime import datetime, date, time, timedelta
 
 
+class UserInterrupt(Exception):
+    pass
+
+
 class Donation:
     preparation_time = 30
     donation_time = 30
@@ -28,26 +32,16 @@ class Donation:
         self.planned_n_donors = 0
         self.successful_donation = 0
 
-        if self.input_date():
-            return
-        if self.input_start_time():
-            return
-        if self.input_end_time():
-            return
-        if self.input_zipcode():
-            return
-        if self.input_city():
-            return
-        if self.input_address():
-            return
-        if self.input_n_beds():
-            return
-        if self.input_planned_n_donors():
-            return
-        if self.input_successful_donation():
-            return
-        if self.calc_succession_of_event():
-            return
+        self.input_date()
+        self.input_start_time()
+        self.input_end_time()
+        self.input_zipcode()
+        self.input_city()
+        self.input_address()
+        self.input_n_beds()
+        self.input_planned_n_donors()
+        self.input_successful_donation()
+        self.calc_succession_of_event()
 
         self.valid = True
 
@@ -78,7 +72,7 @@ class Donation:
         while True:
             sdate = input("Please enter date of event (YYYY.MM.DD): ")
             if sdate == "\\quit":
-                return True
+                raise UserInterrupt("input_date")
             try:
                 pdate = datetime.strptime(sdate, "%Y.%m.%d").date()
                 time_until_event = pdate - datetime.now().date()
@@ -94,7 +88,6 @@ class Donation:
             except ValueError:
                 print("Wrong date format!")
         self.date = pdate
-        return False
 
     def input_start_time(self):
         starttime = ""
@@ -102,14 +95,13 @@ class Donation:
         while True:
             starttime = input("Please enter the start time of event (HH:MM): ")
             if starttime == "\\quit":
-                return True
+                raise UserInterrupt("input_start_time")
             try:
                 pstarttime = datetime.strptime(starttime, "%H:%M").time()
                 break
             except ValueError:
                 print("Wrong format for time!")
         self.start_time = pstarttime
-        return False
 
     def input_end_time(self):
         endtime = ""
@@ -118,7 +110,7 @@ class Donation:
         while True:
             endtime = input("Please enter the end time of event (HH:MM): ")
             if endtime == "\\quit":
-                return True
+                raise UserInterrupt("input_end_time")
             try:
                 pendtime = datetime.combine(self.date, datetime.strptime(endtime, "%H:%M").time())
                 pstarttime = datetime.combine(self.date, self.start_time)
@@ -134,14 +126,13 @@ class Donation:
                 print("Wrong format for time!")
         self.end_time = pendtime.time()
         self.duration = duration
-        return False
 
     def input_zipcode(self):
         zipcode = ""
         while True:
             zipcode = input("Please enter the zipcode (ex:1234): ")
             if zipcode == "\\quit":
-                return True
+                raise UserInterrupt("input_zipcode")
             try:
                 msg = "OK"
                 zero = "0"
@@ -158,14 +149,13 @@ class Donation:
             except ValueError:
                 print("Your zipcode not valid!")
         self.zipcode = zipcode
-        return False
 
     def input_city(self):
         city = ""
         while True:
             city = input("Please enter the city: ")
             if city == "\\quit":
-                return True
+                raise UserInterrupt("input_city")
             msg = "OK"
             if city.capitalize() not in Donation.citylist:
                 msg = "You can not make a donation in " + city
@@ -175,14 +165,13 @@ class Donation:
             else:
                 print(msg)
         self.city = city
-        return False
 
     def input_address(self):
         address = ""
         while True:
             address = input("Please enter the address: ")
             if address == "\\quit":
-                return True
+                raise UserInterrupt("input_address")
             msg = "OK"
             if len(address) > 25:
                 msg = "Address is too long! Can not be longer than 25 character!"
@@ -191,15 +180,15 @@ class Donation:
             else:
                 print(msg)
         self.address = address
-        return False
 
     def input_successful_donation(self):
-        successful_donation = 0
+        successful_donation = ""
+        int_successful_donation = 0
         while True:
+            successful_donation = input("Please enter successful donation number: ")
+            if successful_donation == "\\quit":
+                raise UserInterrupt("input_successful_donation")
             try:
-                successful_donation = input("Please enter successful donation number: ")
-                if successful_donation == "\\quit":
-                    return True
                 int_successful_donation = int(successful_donation)
                 msg = "OK"
                 if int_successful_donation <= 0:
@@ -211,7 +200,6 @@ class Donation:
             except ValueError:
                 print("Successful donation must be integer!")
         self.successful_donation = int_successful_donation
-        return False
 
     def input_n_beds(self):
         s_n_beds = ""
@@ -219,7 +207,7 @@ class Donation:
         while True:
             s_n_beds = input("Please, enter the Number of Beds Available: ")
             if s_n_beds == "\\quit":
-                return True
+                raise UserInterrupt("input_n_beds")
             try:
                 p_n_beds = int(s_n_beds)
                 msg = "OK"
@@ -233,7 +221,6 @@ class Donation:
                 print("Input cannot be parsed as an integer!")
         self.n_beds = p_n_beds
         self.max_n_donors = Donation.calc_max_n_donors(self.duration, p_n_beds)
-        return False
 
     def input_planned_n_donors(self):
         s_planned_n_donors = ""
@@ -241,7 +228,7 @@ class Donation:
         while True:
             s_planned_n_donors = input("Please, enter the Planned Number of Donors: ")
             if s_planned_n_donors == "\\quit":
-                return True
+                raise UserInterrupt("input_planned_n_donors")
             try:
                 p_planned_n_donors = int(s_planned_n_donors)
                 msg = "OK"
@@ -256,7 +243,6 @@ class Donation:
             except ValueError:
                 print("Input cannot be parsed as an integer!")
         self.planned_n_donors = p_planned_n_donors
-        return False
 
     def calc_succession_of_event(self):
             if self.successful_donation < self.planned_n_donors * 0.2:
