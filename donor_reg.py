@@ -305,7 +305,7 @@ def print_donor(name, age, gender, birth_date, id, id_expiration,
     print("Date of Birth: %s" % birth_date.strftime("%Y.%m.%d"))
     print("Identifier: %s" + id)
     print("Expiration Date of ID: %s" % id_expiration.strftime("%Y.%m.%d"))
-    print("Weight: %d" % weight)
+    print("Weight: %d kg" % weight)
     print("Type of Blood: %s" % blood_type)
     print("Date of Last Donation: %s" % last_donation.strftime("%Y.%m.%d"))
     print("Mobile: %s" % mobile)
@@ -331,7 +331,7 @@ def main():
     hemoglobin = random_hemoglobin()
 
     suitable = donor_is_valid(age, weight, last_donation, hemoglobin, exp_date)
-    print_donor('-' * 10)
+    print('-' * 10)
     print_donor(name, age, gender, birth_date, id, exp_date,
                 weight, blood_type, last_donation,
                 mobile, email, suitable)
