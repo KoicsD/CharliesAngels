@@ -24,7 +24,7 @@ Press 3 to exit \n >>>""")
                 donor_reg.main()
                 break
             elif choice == "2":
-                my_object = event_reg.Donation()
+                event_reg.main()
                 break
             elif choice == "3":
                 break

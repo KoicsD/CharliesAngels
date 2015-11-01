@@ -1,9 +1,6 @@
 __author__ = ['KoicsD', 'BodiZs']
 from datetime import datetime, date, time, timedelta
-
-
-class UserInterrupt(Exception):
-    pass
+from user_input import *
 
 
 class Donation:
@@ -253,3 +250,14 @@ class Donation:
                 print("Successful")
             else:
                 print("Outstanding")
+
+
+def main():
+    try:
+        my_object = Donation()
+    except UserInterrupt as interruption:
+        print("User has interrupted data input in function: '%s'" % interruption.args[0])
+
+
+if __name__ == '__main__':
+    main()
