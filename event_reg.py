@@ -14,70 +14,70 @@ class Donation:
     def calc_max_n_donors(duration, n_beds):
         return ((duration - Donation.preparation_time) / Donation.donation_time) * n_beds
 
-    def __init__(self, test_mode=False):
-        self.valid = False
-        self.test_mode = test_mode
+    @staticmethod
+    def parse_date(sdate: str):
+        try:
+            pdate = datetime.strptime(sdate, "%Y.%m.%d").date()
+            time_until_event = pdate - datetime.now().date()
+            msg = "OK"
+            if time_until_event.days < 10:
+                msg = "Date must be at least 10 days before the event!"
+            elif not 1 <= pdate.isoweekday() <= 5:
+                msg = "Date must be on weekday!"
+        except ValueError:
+            msg = "Input cannot be parsed as a Date!\nEither it is empty or it has invalid format."
+        if msg != "OK":
+            raise ValueError(msg)
+        return pdate
 
-        print("You can escape any time by typing '\quit'.")
-        self.date = date(1, 1, 1)
-        self.start_time = time()
-        self.end_time = time()
-        self.duration = 0
-        self.zipcode = ""
-        self.address = ""
-        self.city = ""
-        self.n_beds = 0
-        self.max_n_donors = 0
-        self.planned_n_donors = 0
-        self.n_successful_donation = -1
-        self.success = Donation.enum_success["unevaluated"]
+    @staticmethod
+    def parse_start_time(starttime: str):
+        try:
+            pstarttime = datetime.strptime(starttime, "%H:%M").time()
+        except ValueError:
+            raise ValueError("Input cannot be parsed as time!\nEither it is empty or it has invalid format!")
+        return pstarttime
 
-        self.input_date()
-        self.input_start_time()
-        self.input_end_time()
-        self.input_zipcode()
-        self.input_city()
-        self.input_address()
-        self.input_n_beds()
-        self.input_planned_n_donors()
+    @staticmethod
+    def parse_end_time(endtime: str, self_date: date, starttime: time):
+        try:
+            pendtime = datetime.combine(self_date, datetime.strptime(endtime, "%H:%M").time())
+            pstarttime = datetime.combine(self_date, starttime)
+            duration = (pendtime - pstarttime).total_seconds() // 60
+            msg = "OK"
+            if duration < Donation.preparation_time:
+                msg = "Preparation Time exceeds Duration or Duration is negative!"
+        except ValueError:
+            msg = "Input cannot be parsed as time!\nEither it is empty or it has invalid format."
+        if msg != "OK":
+            raise ValueError(msg)
+        return pendtime, duration
 
-        self.valid = True
+    @staticmethod
+    def parse_zipcode():
+        pass
 
-    def __repr__(self):
-        text = ""
-        if self.test_mode:
-            text += "valid: " + str(self.valid) + "\n"
-        elif not self.valid:
-            return "<Invalid Donation Object.>"
-        text += "Date of Donation: " + self.date.strftime("%Y.%m.%d") + "\n"
-        text += "Start-Time: " + self.start_time.strftime("%H:%M") + "\n"
-        text += "End-Time: " + self.end_time.strftime("%H:%M") + "\n"
-        if self.test_mode:
-            text += "Duration: " + str(self.duration) + "\n"
-        text += "Zip-code: " + self.zipcode + "\n"
-        text += "City: " + self.city + "\n"
-        text += "Address: " + self.address + "\n"
-        text += "Number of Beds Available: " + str(self.n_beds) + "\n"
-        if self.test_mode:
-            text += "Maximum Number of Donors: " + str(self.max_n_donors) + "\n"
-        text += "Planned Number of Donors: " + str(self.planned_n_donors) + "\n"
-        if self.n_successful_donation != -1:
-            text += "Number of Successful Donation: " + str(self.n_successful_donation) + "\n"
-        else:
-            if self.test_mode:
-                text += "Number of Successful Donation: <not given yet>"
-        if self.success == Donation.enum_success["unevaluated"]:
-            if self.test_mode:
-                text += "Success of Donation: <not evaluated yet>"
-        elif self.success == Donation.enum_success["unsuccessful"]:
-            text += "Success of Donation: UNSUCCESSFUL"
-        elif self.success == Donation.enum_success["normal"]:
-            text += "Success of Donation: NORMAL"
-        elif self.success == Donation.enum_success["successful"]:
-            text += "Success of Donation: SUCCESSFUL"
-        elif self.success == Donation.enum_success["outstanding"]:
-            text += "Success of Donation: OUTSTANDING"
-        return text
+    @staticmethod
+    def parse_city():
+        pass
+
+    @staticmethod
+    def parse_address():
+        pass
+
+    @staticmethod
+    def parse_n_beds():
+        pass
+
+    @staticmethod
+    def parse_planned_n_donors():
+        pass
+
+    @staticmethod
+    def parse_n_successful_donations():
+        pass
+
+
 
     def input_date(self):
         sdate = ""
@@ -87,19 +87,10 @@ class Donation:
             if sdate == "\\quit":
                 raise UserInterrupt("input_date")
             try:
-                pdate = datetime.strptime(sdate, "%Y.%m.%d").date()
-                time_until_event = pdate - datetime.now().date()
-                msg = "OK"
-                if time_until_event.days < 10:
-                    msg = "Date must be at least 10 days before the event!"
-                elif not 1 <= pdate.isoweekday() <= 5:
-                    msg = "Date must be on weekday!"
-                if msg == "OK":
-                    break
-                else:
-                    print(msg)
-            except ValueError:
-                print("Wrong date format!")
+                pdate = Donation.parse_date(sdate)
+                break
+            except ValueError as err:
+                print(err.args[0])
         self.date = pdate
 
     def input_start_time(self):
@@ -112,8 +103,8 @@ class Donation:
             try:
                 pstarttime = datetime.strptime(starttime, "%H:%M").time()
                 break
-            except ValueError:
-                print("Wrong format for time!")
+            except ValueError as err:
+                print(err.args[0])
         self.start_time = pstarttime
 
     def input_end_time(self):
@@ -125,18 +116,10 @@ class Donation:
             if endtime == "\\quit":
                 raise UserInterrupt("input_end_time")
             try:
-                pendtime = datetime.combine(self.date, datetime.strptime(endtime, "%H:%M").time())
-                pstarttime = datetime.combine(self.date, self.start_time)
-                duration = (pendtime - pstarttime).total_seconds() // 60
-                msg = "OK"
-                if duration < Donation.preparation_time:
-                    msg = "Preparation Time exceeds Duration or Negative Duration!"
-                if msg == "OK":
-                    break
-                else:
-                    print(msg)
-            except ValueError:
-                print("Wrong format for time!")
+                pendtime, duration = Donation.parse_end_time(endtime, self.date, self.start_time)
+                break
+            except ValueError as err:
+                print(err.args[0])
         self.end_time = pendtime.time()
         self.duration = duration
 
@@ -194,26 +177,6 @@ class Donation:
                 print(msg)
         self.address = address
 
-    def input_successful_donation(self):
-        successful_donation = ""
-        int_successful_donation = 0
-        while True:
-            successful_donation = input("Please enter successful donation number: ")
-            if successful_donation == "\\quit":
-                raise UserInterrupt("input_successful_donation")
-            try:
-                int_successful_donation = int(successful_donation)
-                msg = "OK"
-                if int_successful_donation <= 0:
-                    msg = "Successful donation must be integer!"
-                if msg == "OK":
-                    break
-                else:
-                    print(msg)
-            except ValueError:
-                print("Successful donation must be integer!")
-        self.n_successful_donation = int_successful_donation
-
     def input_n_beds(self):
         s_n_beds = ""
         p_n_beds = 0
@@ -257,6 +220,26 @@ class Donation:
                 print("Input cannot be parsed as an integer!")
         self.planned_n_donors = p_planned_n_donors
 
+    def input_n_successful_donation(self):
+        successful_donation = ""
+        int_successful_donation = 0
+        while True:
+            successful_donation = input("Please enter successful donation number: ")
+            if successful_donation == "\\quit":
+                raise UserInterrupt("input_successful_donation")
+            try:
+                int_successful_donation = int(successful_donation)
+                msg = "OK"
+                if int_successful_donation <= 0:
+                    msg = "Successful donation must be integer!"
+                if msg == "OK":
+                    break
+                else:
+                    print(msg)
+            except ValueError:
+                print("Successful donation must be integer!")
+        self.n_successful_donation = int_successful_donation
+
     def evaluate_event(self):
             if self.n_successful_donation < self.planned_n_donors * 0.2:
                 self.success = Donation.enum_success["unsuccessful"]
@@ -271,6 +254,71 @@ class Donation:
                 self.success = Donation.enum_success["outstanding"]
                 print("OUTSTANDING")
 
+    def __init__(self, test_mode=False):
+        self.valid = False
+        self.test_mode = test_mode
+
+        self.date = date(1, 1, 1)
+        self.start_time = time()
+        self.end_time = time()
+        self.duration = 0
+        self.zipcode = ""
+        self.address = ""
+        self.city = ""
+        self.n_beds = 0
+        self.max_n_donors = 0
+        self.planned_n_donors = 0
+        self.n_successful_donation = -1
+        self.success = Donation.enum_success["unevaluated"]
+
+        print("You can escape any time by typing '\quit'.")
+        self.input_date()
+        self.input_start_time()
+        self.input_end_time()
+        self.input_zipcode()
+        self.input_city()
+        self.input_address()
+        self.input_n_beds()
+        self.input_planned_n_donors()
+
+        self.valid = True
+
+    def __repr__(self):
+        text = ""
+        if self.test_mode:
+            text += "valid: " + str(self.valid) + "\n"
+        elif not self.valid:
+            return "<Invalid Donation Object.>"
+        text += "Date of Donation: " + self.date.strftime("%Y.%m.%d") + "\n"
+        text += "Start-Time: " + self.start_time.strftime("%H:%M") + "\n"
+        text += "End-Time: " + self.end_time.strftime("%H:%M") + "\n"
+        if self.test_mode:
+            text += "Duration: " + str(self.duration) + "\n"
+        text += "Zip-code: " + self.zipcode + "\n"
+        text += "City: " + self.city + "\n"
+        text += "Address: " + self.address + "\n"
+        text += "Number of Beds Available: " + str(self.n_beds) + "\n"
+        if self.test_mode:
+            text += "Maximum Number of Donors: " + str(self.max_n_donors) + "\n"
+        text += "Planned Number of Donors: " + str(self.planned_n_donors) + "\n"
+        if self.n_successful_donation != -1:
+            text += "Number of Successful Donation: " + str(self.n_successful_donation) + "\n"
+        else:
+            if self.test_mode:
+                text += "Number of Successful Donation: <not given yet>"
+        if self.success == Donation.enum_success["unevaluated"]:
+            if self.test_mode:
+                text += "Success of Donation: <not evaluated yet>"
+        elif self.success == Donation.enum_success["unsuccessful"]:
+            text += "Success of Donation: UNSUCCESSFUL"
+        elif self.success == Donation.enum_success["normal"]:
+            text += "Success of Donation: NORMAL"
+        elif self.success == Donation.enum_success["successful"]:
+            text += "Success of Donation: SUCCESSFUL"
+        elif self.success == Donation.enum_success["outstanding"]:
+            text += "Success of Donation: OUTSTANDING"
+        return text
+
 
 def main():
     try:
@@ -278,7 +326,7 @@ def main():
         my_object = Donation()
         print("\nDone.")
         print("Asking for Number of Successful Donation\nand evaluating Donation...\n")
-        my_object.input_successful_donation()
+        my_object.input_n_successful_donation()
         my_object.evaluate_event()
         print("\nDone.\n")
         sleep(1.5)
