@@ -1,7 +1,10 @@
 __author__ = ['KoicsD', 'BodiZs']
 from time import sleep
 from datetime import datetime, date, time, timedelta
-from user_input import *
+
+
+class UserInterrupt(Exception):
+    pass
 
 
 class Donation:
