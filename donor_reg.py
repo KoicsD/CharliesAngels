@@ -9,6 +9,51 @@ import random
 #                 age > 18 years
 #                 How old is the donor in years based on date of birth?
 #                 ID is not expired.
+def warn_user():
+    inp = ""
+    l_inp = ""
+    while True:
+        inp = input("Is the new donor at least 18 years old? (y/n) ")
+        l_inp = inp.lower()
+        if l_inp == 'y':
+            break
+        elif l_inp == 'n':
+            print("The New Donor is surely UNSUITABLE for donation.")
+            return True
+    while True:
+        inp = input("Are you sure the New Donor's ID has not expired yet? (y/n) ")
+        l_inp = inp.lower()
+        if l_inp == 'y':
+            break
+        elif l_inp == 'n':
+            print("The New Donor is surely UNSUITABLE for donation.")
+            return True
+    while True:
+        inp = input("Does the New Donor weight at least 50 kg? (y/n) ")
+        l_inp = inp.lower()
+        if l_inp == 'y':
+            break
+        elif l_inp == 'n':
+            print("The New Donor is surely UNSUITABLE for donation.")
+            return True
+    while True:
+        inp = input("Was the New Donor ill in the last 30 days? (y/n) ")
+        l_inp = inp.lower()
+        if l_inp == 'n':
+            break
+        elif l_inp == 'y':
+            print("The New Donor is surely UNSUITABLE for donation.")
+            return True
+    while True:
+        inp = input("Has the New Donor donated blood in the last 90 days? (y/n) ")
+        l_inp = inp.lower()
+        if l_inp == 'n':
+            break
+        elif l_inp == 'y':
+            print("The New Donor is surely UNSUITABLE for donation.")
+            return True
+    print("We can fill the form.")
+    return False
 
 
 def random_hemoglobin():
@@ -317,6 +362,8 @@ def print_donor(name, age, gender, birth_date, id, id_expiration,
 
 
 def main():
+    if warn_user():
+        return
     name = input_name()
     weight = input_weight()
     gender = get_gender()
