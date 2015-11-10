@@ -13,7 +13,7 @@ def warn_user():
     inp = ""
     l_inp = ""
     while True:
-        inp = input("Is the new donor at least 18 years old? (y/n) ")
+        inp = input("Is the New Donor at least 18 years old? (y/n) ")
         l_inp = inp.lower()
         if l_inp == 'y':
             break
@@ -57,7 +57,7 @@ def warn_user():
 
 
 def random_hemoglobin():
-    return random.randint(80,200)
+    return random.randint(80, 200)
 
 # -------------------------------------------------------------------------------
 #
@@ -74,11 +74,11 @@ def input_name():
     valid_name = False
     data_name = ""
     while not valid_name:
-        data_name = input("Kerem adja meg a teljes nevet szokozzel elvalasztva!(Keresztnev Vezeteknev): ")
+        data_name = input("Please enter the New Donor's full name separated with space!(Firstname Surname): ")
         if validate_name(data_name):
             valid_name = True
         else:
-            print("A megadott nev csak betuket es szokozt tartalmazhat!")
+            print("Full name can only contain characters and space and can not be empty!")
 
     return data_name
 
@@ -92,9 +92,9 @@ def input_name():
 def input_weight():
     data_weight = ""
     while not data_weight:
-        data_weight = input("Adja meg a testsulyat!(kg): ")
+        data_weight = input("Please enter the New Donor's weight!(kg): ")
         if not (str(data_weight).isdigit() and int(data_weight) > 0):
-            print("A testsulynak 0tol nagyobb pozitiv szamnak kell lennie!")
+            print("Weight must be integer!")
             data_weight = ""
 
     return int(data_weight)
@@ -113,15 +113,14 @@ def input_weight():
 def get_birth_date():
     birth_date = ""
     while not birth_date:
-
-        birth_date = input("Kerem adja meg a szuletesi datumat (YYYY.MM.DD) formatumban!: ")
+        birth_date = input("Please enter the New Donor's birth date (YYYY.MM.DD)!: ")
         try:
             bdate = datetime.strptime(birth_date, "%Y.%m.%d").date()
         except ValueError:
-            print("Hibas datumformatum!")
+            print("Wrong date format!")
             birth_date = ""
 
-    return  bdate
+    return bdate
 
 
 def calculate_age_in_year(birth_date: date):
@@ -136,18 +135,23 @@ def calculate_age_in_year(birth_date: date):
 def get_last_donation_time():
     last_time = ""
     while not last_time:
-
-        last_time = input("Kerem adja meg a legutobbi veradas datumat (YYYY.MM.DD) formatumban!: ")
+        last_time = input("Please enter the New Donor's last donation date (YYYY.MM.DD) or leave empty!: ")
+        if last_time == "":
+            return datetime.now().date()
         try:
             ltime = datetime.strptime(last_time, "%Y.%m.%d").date()
         except ValueError:
-            print("Hibas datumformatum!")
+            print("Wrong date format!")
             last_time = ""
 
-    return  ltime
+    return ltime
 
-def last_donation_time_is_valid(date_of_donation: date):
-    return (datetime.now().date() - date_of_donation).days > 90
+
+def last_donation_time_is_valid(date_of_donation):
+    if date_of_donation == datetime.now().date():
+        return date_of_donation
+    else:
+        return (datetime.now().date() - date_of_donation).days > 90
 #
 #     Unique identifier  &     Expiration of ID
 #                 6digit + 2letter (123456AB) is identity card
@@ -164,7 +168,7 @@ def last_donation_time_is_valid(date_of_donation: date):
 def input_id_expiration():
     ID_expiration = ""
     while True:
-        sdate = input("Please enter date of ID expiration (YYYY.MM.DD): ")
+        sdate = input("Please enter the New Donor's date of ID expiration (YYYY.MM.DD): ")
         try:
             pdate = datetime.strptime(sdate, "%Y.%m.%d").date()
             time_until_expiration = pdate - datetime.now().date()
@@ -184,7 +188,7 @@ def input_id_expiration():
 
 def check_identifier(identifier):
     if len(identifier) != 8:
-        print("It isn't an correct form for identifier, should be 8 character long.")
+        print("It isn't a correct form for identifier, should be 8 character long.")
         return False
     elif identifier[0:6].isdigit():
         if identifier[6:].isalpha():
@@ -199,14 +203,14 @@ def check_identifier(identifier):
             print("A passport's last two character should be number!")
             return False
     else:
-        print("Please write again your unique ID!")
+        print("Please write again the unique ID!")
         return False
 
 
 def validate_identifier():
     identifier = ""
     while identifier == '':
-        identifier = input("Please write your unique ID(identity card/passport)!")
+        identifier = input("Please enter the New Donor's unique ID(identity card/passport)!")
 
         if identifier == "":
             print("Unique identifier cannot be empty")
@@ -224,9 +228,9 @@ def input_blood_type():
     blood_types = ("A+", "0+", "B+", "AB+", "A-", "0-", "B-", "AB-")
 
     while not valid_blood_type:
-        data_blood_type = input("Adja meg a vercsoportjat!: ")
+        data_blood_type = input("Please enter the New Donor's blood type!: ")
         if str(data_blood_type).upper() not in blood_types:
-            print("Kerem helyes vercsoportot adjon meg! (A+, 0+, B+, AB+, A-, 0-, B-, AB-)")
+            print("Blood type must be: A+, 0+, B+, AB+, A-, 0-, B- or AB-")
         else:
             valid_blood_type = True
 
@@ -241,7 +245,7 @@ def input_blood_type():
 
 def check_mobil_number(mobile_number):
     if mobile_number[0:2] != '06' and mobile_number[0:3] != "+36":
-        print("Please play attention the correct form. First charecters should be 06 or +36")
+        print("Please pay attention the correct form. First characters should be 06 or +36")
         return False
     if mobile_number[0:2] == '06' and len(mobile_number) != 11 or mobile_number[0:3] == '+36' and len(
             mobile_number) != 12:
@@ -251,7 +255,7 @@ def check_mobil_number(mobile_number):
         print('Phone number should be just digit')
         return False
     if mobile_number[-9:-7] != '20' and mobile_number[-9:-7] != "30" and mobile_number[-9:-7] != "70":
-        print("Your telephone partner's number is not correct(Choose:20/30/70")
+        print("Telephone number is not correct(Choose:20/30/70")
         return False
     else:
         return True
@@ -260,7 +264,7 @@ def check_mobil_number(mobile_number):
 def get_mobile_number():
     mobile_number = ""
     while mobile_number == "":
-        mobile_number = input("Please write your mobile number(like this:06201234567 or +36301234567):")
+        mobile_number = input("Please enter the New Donor's mobile number(like this:06201234567 or +36301234567):")
 
         if mobile_number == "":
             print("Phone number is empty:")
@@ -300,14 +304,14 @@ def get_mobile_number():
 
 
 def gender_is_valid(string):
-    return string.lower() == "n" or string.lower() == "f"
+    return string.lower() == "m" or string.lower() == "f"
 
 
 def get_gender():
     data_gender = ""
     valid_gender = False
     while not valid_gender:
-        data_gender = input("Adja meg a nemet!(N/F): ")
+        data_gender = input("Please enter the New Donor's gender!(F/M): ")
         valid_gender = gender_is_valid(data_gender)
     return data_gender
 
@@ -322,11 +326,11 @@ def get_email():
     data_email = False
     email_string = " "
     while not data_email:
-        email_string = input("Kerem irja be az email cimet:  ")
+        email_string = input("Please enter the New Donor's email address:  ")
         if email_is_valid(email_string):
             data_email = True
         else:
-            print("Az email cimnek tartalmaznia kell  '@'-t  es .hu-ra vagy .com-ra kell vegzodnie")
+            print("The email address should contain '@'-t and should end with '.hu' or '.com'")
     return email_string
 
 
@@ -340,25 +344,25 @@ def donor_is_valid(age, weight, last_don, hemo, id_exp):
 
 def print_donor(name, age, gender, birth_date, id, id_expiration,
                 weight, blood_type, last_donation,
-                mobile, email, suitable):
+                mobile, email, hemoglobin, suitable):
     print("Name: %s" % name)
-    print("Age: %d" % age)
-    if gender.lower() == 'n':
+    print("Date of Birth: %s - %d years old." % (birth_date.strftime("%Y.%m.%d"), age))
+    if gender.lower() == 'f':
         print("Gender: female")
     else:
         print("Gender: male")
-    print("Date of Birth: %s" % birth_date.strftime("%Y.%m.%d"))
-    print("Identifier: %s" + id)
+    print("Identifier: %s" % id)
     print("Expiration Date of ID: %s" % id_expiration.strftime("%Y.%m.%d"))
     print("Weight: %d kg" % weight)
     print("Type of Blood: %s" % blood_type)
     print("Date of Last Donation: %s" % last_donation.strftime("%Y.%m.%d"))
     print("Mobile: %s" % mobile)
     print("Email: %s" % email)
+    print("Hemoglobin: %s" % hemoglobin)
     if suitable:
-        print("The Donor is SUITABLE for donation.")
+        print("The New Donor is SUITABLE for donation.")
     else:
-        print("The Donor is NOT SUITABLE for donation")
+        print("The New Donor is NOT SUITABLE for donation")
 
 
 def main():
@@ -381,7 +385,7 @@ def main():
     print('-' * 10)
     print_donor(name, age, gender, birth_date, id, exp_date,
                 weight, blood_type, last_donation,
-                mobile, email, suitable)
+                mobile, email, hemoglobin, suitable,)
 
 
 if __name__ == "__main__":
