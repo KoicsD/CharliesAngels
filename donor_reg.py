@@ -57,7 +57,7 @@ def warn_user():
 
 
 def random_hemoglobin():
-    return random.randint(80,200)
+    return random.randint(80, 200)
 
 # -------------------------------------------------------------------------------
 #
@@ -113,15 +113,14 @@ def input_weight():
 def get_birth_date():
     birth_date = ""
     while not birth_date:
-
-        birth_date = input("Please enter birth date (YYYY.MM.DD)!: ")
+        birth_date = input("Please enter the New Donor's birth date (YYYY.MM.DD)!: ")
         try:
             bdate = datetime.strptime(birth_date, "%Y.%m.%d").date()
         except ValueError:
             print("Wrong date format!")
             birth_date = ""
 
-    return  bdate
+    return bdate
 
 
 def calculate_age_in_year(birth_date: date):
@@ -136,18 +135,23 @@ def calculate_age_in_year(birth_date: date):
 def get_last_donation_time():
     last_time = ""
     while not last_time:
-
-        last_time = input("Please enter last donation date (YYYY.MM.DD)!: ")
+        last_time = input("Please enter the New Donor's last donation date (YYYY.MM.DD) or leave empty!: ")
+        if last_time == "":
+            return datetime.now().date()
         try:
             ltime = datetime.strptime(last_time, "%Y.%m.%d").date()
         except ValueError:
             print("Wrong date format!")
             last_time = ""
 
-    return  ltime
+    return ltime
 
-def last_donation_time_is_valid(date_of_donation: date):
-    return (datetime.now().date() - date_of_donation).days > 90
+
+def last_donation_time_is_valid(date_of_donation):
+    if date_of_donation == datetime.now().date():
+        return date_of_donation
+    else:
+        return (datetime.now().date() - date_of_donation).days > 90
 #
 #     Unique identifier  &     Expiration of ID
 #                 6digit + 2letter (123456AB) is identity card
@@ -340,21 +344,21 @@ def donor_is_valid(age, weight, last_don, hemo, id_exp):
 
 def print_donor(name, age, gender, birth_date, id, id_expiration,
                 weight, blood_type, last_donation,
-                mobile, email, suitable):
+                mobile, email, hemoglobin, suitable):
     print("Name: %s" % name)
-    print("Age: %d" % age)
-    if gender.lower() == 'n':
+    print("Date of Birth: %s - %d years old." % (birth_date.strftime("%Y.%m.%d"), age))
+    if gender.lower() == 'f':
         print("Gender: female")
     else:
         print("Gender: male")
-    print("Date of Birth: %s" % birth_date.strftime("%Y.%m.%d"))
-    print("Identifier: %s" + id)
+    print("Identifier: %s" % id)
     print("Expiration Date of ID: %s" % id_expiration.strftime("%Y.%m.%d"))
     print("Weight: %d kg" % weight)
     print("Type of Blood: %s" % blood_type)
     print("Date of Last Donation: %s" % last_donation.strftime("%Y.%m.%d"))
     print("Mobile: %s" % mobile)
     print("Email: %s" % email)
+    print("Hemoglobin: %s" % hemoglobin)
     if suitable:
         print("The New Donor is SUITABLE for donation.")
     else:
@@ -381,7 +385,7 @@ def main():
     print('-' * 10)
     print_donor(name, age, gender, birth_date, id, exp_date,
                 weight, blood_type, last_donation,
-                mobile, email, suitable)
+                mobile, email, hemoglobin, suitable,)
 
 
 if __name__ == "__main__":
