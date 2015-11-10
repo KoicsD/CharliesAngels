@@ -1,5 +1,6 @@
 from datetime import datetime, date
 import random
+import donor_csv_writer
 
 
 def warn_user():
@@ -279,6 +280,9 @@ def print_donor(name, age, gender, birth_date, id, id_expiration,
     print("Hemoglobin: %s" % hemoglobin)
     if suitable:
         print("The New Donor is SUITABLE for donation.")
+        donor_csv_writer.store_donor(name, age, gender, birth_date, id, id_expiration,
+                weight, blood_type, last_donation,
+                mobile, email)
     else:
         print("The New Donor is NOT SUITABLE for donation")
 
