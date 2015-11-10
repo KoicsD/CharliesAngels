@@ -82,6 +82,45 @@ class Donation:
             text += "Success of Donation: OUTSTANDING"
         return text
 
+    def to_csv(self):
+        if not self.valid:
+            raise ValueError("Invalid donor object.")
+        text = ""
+        text += self.date.strftime("%Y.%m.%d") + ","
+        text += self.start_time.strftime("%H:%M") + ","
+        text += self.end_time.strftime("%H:%M") + ","
+        text += self.zipcode + ","
+        text += self.city + ","
+        text += self.address + ","
+        text += str(self.n_beds) + ","
+        if self.n_successful_donation != -1:
+            text += str(self.n_successful_donation) + ","
+            if self.success == Donation.enum_success["unsuccessful"]:
+                text += "UNSUCCESSFUL"
+            elif self.success == Donation.enum_success["normal"]:
+                text += "NORMAL"
+            elif self.success == Donation.enum_success["successful"]:
+                text += "SUCCESSFUL"
+            elif self.success == Donation.enum_success["outstanding"]:
+                text += "OUTSTANDING"
+        else:
+            text += ","
+        return text
+
+    @staticmethod
+    def csv_header():
+        text = ""
+        text += "Date of Donation,"
+        text += "Start time,"
+        text += "End time,"
+        text += "Zip code,"
+        text += "City,"
+        text += "Address,"
+        text += "Number of Beds Available,"
+        text += "Number of successful donation,"
+        text += "Success"
+        return text
+
     def input_date(self):
         sdate = ""
         pdate = date(1, 1, 1)
