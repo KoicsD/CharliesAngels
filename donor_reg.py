@@ -2,142 +2,25 @@ from datetime import datetime, date
 import random
 
 
-# Task:
-#     warn_user:# weight > 50
-#                 Generate random number: Hemogblobin level between 80-200, write out is the donor suitable or not (value is greather than 110)?
-#                 last donation was more than 3 months ago
-#                 age > 18 years
-#                 How old is the donor in years based on date of birth?
-#                 ID is not expired.
+# PROBLEM: What if the New Donor has never donated blood???!!!
+# Another thought: Why do we let User give unsuitable data if we have asked the most problematic questions in advance?
 
 
-def random_hemoglobin():
-    return random.randint(80,200)
-
-# -------------------------------------------------------------------------------
-#
-#     Name,
-#                 Parse name, store it in a separated object
-#
-
-def validate_name(name_string: str):
+# check-/validating and other assistant functions:                                      # check- and assistants
+def validate_name(name_string: str):                                        # name
     splitted_name = name_string.split(" ")
     return name_string.replace(" ", "").isalpha() and len(splitted_name) > 1
 
 
-def input_name():
-    valid_name = False
-    data_name = ""
-    while not valid_name:
-        data_name = input("Kerem adja meg a teljes nevet szokozzel elvalasztva!(Keresztnev Vezeteknev): ")
-        if validate_name(data_name):
-            valid_name = True
-        else:
-            print("A megadott nev csak betuket es szokozt tartalmazhat!")
-
-    return data_name
-
-
-# -------------------------------------------------------------------------------
-#
-#     Weight,
-#                 weight > 50
-#
-
-def input_weight():
-    data_weight = ""
-    while not data_weight:
-        data_weight = input("Adja meg a testsulyat!(kg): ")
-        if not (str(data_weight).isdigit() and int(data_weight) > 0):
-            print("A testsulynak 0tol nagyobb pozitiv szamnak kell lennie!")
-            data_weight = ""
-
-    return int(data_weight)
-
-
-# -------------------------------------------------------------------------------
-#
-#
-#     Gender,
-#
-#     Date of Birth,
-#                 age > 18 years
-#                 How old is the donor in years based on date of birth?
-
-
-def get_birth_date():
-    birth_date = ""
-    while not birth_date:
-
-        birth_date = input("Kerem adja meg a szuletesi datumat (YYYY.MM.DD) formatumban!: ")
-        try:
-            bdate = datetime.strptime(birth_date, "%Y.%m.%d").date()
-        except ValueError:
-            print("Hibas datumformatum!")
-            birth_date = ""
-
-    return  bdate
-
-
-def calculate_age_in_year(birth_date: date):
+def calculate_age_in_year(birth_date: date):                                # calculate_age_in_year
     return (datetime.now().date() - birth_date).days // 365
 
-#
-#     Last donation date,
-#                 last donation was more than 3 months ago
-#                 never is also possible
 
-
-def get_last_donation_time():
-    last_time = ""
-    while not last_time:
-
-        last_time = input("Kerem adja meg a legutobbi veradas datumat (YYYY.MM.DD) formatumban!: ")
-        try:
-            ltime = datetime.strptime(last_time, "%Y.%m.%d").date()
-        except ValueError:
-            print("Hibas datumformatum!")
-            last_time = ""
-
-    return  ltime
-
-def last_donation_time_is_valid(date_of_donation: date):
+def last_donation_time_is_valid(date_of_donation: date):                    # date of last donation
     return (datetime.now().date() - date_of_donation).days > 90
-#
-#     Unique identifier  &     Expiration of ID
-#                 6digit + 2letter (123456AB) is identity card
-#                 6letter + 2digit (ASDFGH12) is passport
-#                 ID is not expired.
-# ID_expired=""
-# def get_ID_expired():
-#     ID_expired=input ("When will ID be expired?(YYYY/MM/DD")
-#
-# def check_ID_expiration(date):
-#     return ID_expired > today
 
 
-def input_id_expiration():
-    ID_expiration = ""
-    while True:
-        sdate = input("Please enter date of ID expiration (YYYY.MM.DD): ")
-        try:
-            pdate = datetime.strptime(sdate, "%Y.%m.%d").date()
-            time_until_expiration = pdate - datetime.now().date()
-            msg = "OK"
-            if time_until_expiration.days < 1:
-                msg = "ID expiration should be later than today!"
-
-            if msg == "OK":
-                break
-            else:
-                print(msg)
-        except ValueError:
-            print("Wrong date format!")
-
-    return pdate
-
-
-def check_identifier(identifier):
+def check_identifier(identifier):                                           # identifier
     if len(identifier) != 8:
         print("It isn't an correct form for identifier, should be 8 character long.")
         return False
@@ -158,43 +41,7 @@ def check_identifier(identifier):
         return False
 
 
-def validate_identifier():
-    identifier = ""
-    while identifier == '':
-        identifier = input("Please write your unique ID(identity card/passport)!")
-
-        if identifier == "":
-            print("Unique identifier cannot be empty")
-        elif not check_identifier(identifier):
-            identifier = ""
-    return identifier
-
-
-# Blood type
-#
-
-def input_blood_type():
-    valid_blood_type = False
-    data_blood_type = ""
-    blood_types = ("A+", "0+", "B+", "AB+", "A-", "0-", "B-", "AB-")
-
-    while not valid_blood_type:
-        data_blood_type = input("Adja meg a vercsoportjat!: ")
-        if str(data_blood_type).upper() not in blood_types:
-            print("Kerem helyes vercsoportot adjon meg! (A+, 0+, B+, AB+, A-, 0-, B-, AB-)")
-        else:
-            valid_blood_type = True
-
-    return data_blood_type
-
-
-# -------------------------------------------------------------------------------
-#     email address
-#                 Email address validation (contains @-ot and ending with .hu/.com)
-#     Mobil number
-#                 Mobil number validation (starts with +36/06 + 2 digit(provider identifier - 20/30/70) ending with 7 digits)
-
-def check_mobil_number(mobile_number):
+def check_mobil_number(mobile_number):                                      # mobile
     if mobile_number[0:2] != '06' and mobile_number[0:3] != "+36":
         print("Please play attention the correct form. First charecters should be 06 or +36")
         return False
@@ -212,7 +59,174 @@ def check_mobil_number(mobile_number):
         return True
 
 
-def get_mobile_number():
+def gender_is_valid(string):                                                # gender
+    return string.lower() == "n" or string.lower() == "f"
+
+
+def email_is_valid(email_string):                                           # email
+    return "@" in email_string and \
+           email_string.index("@") > 0 and \
+           (email_string.endswith(".hu") or email_string.endswith(".com"))
+# end of check-/validating and other assistant functions                                # \ check- and assistants
+
+
+# warning user before filling the form (checking most neurargic questions):             # warn_user
+def warn_user():
+    inp = ""
+    l_inp = ""
+
+    while True:                                                     # is at least 18?
+        inp = input("Is the new donor at least 18 years old? (y/n) ")
+        l_inp = inp.lower()
+        if l_inp == 'y':
+            break
+        elif l_inp == 'n':
+            print("The New Donor is surely UNSUITABLE for donation.")
+            return True
+
+    while True:                                                     # ID surely still valid?
+        inp = input("Are you sure the New Donor's ID has not expired yet? (y/n) ")
+        l_inp = inp.lower()
+        if l_inp == 'y':
+            break
+        elif l_inp == 'n':
+            print("The New Donor is surely UNSUITABLE for donation.")
+            return True
+
+    while True:                                                     # weights at least 50?
+        inp = input("Does the New Donor weight at least 50 kg? (y/n) ")
+        l_inp = inp.lower()
+        if l_inp == 'y':
+            break
+        elif l_inp == 'n':
+            print("The New Donor is surely UNSUITABLE for donation.")
+            return True
+
+    while True:                                                     # was sick in the last month?
+        inp = input("Was the New Donor ill in the last 30 days? (y/n) ")
+        l_inp = inp.lower()
+        if l_inp == 'n':
+            break
+        elif l_inp == 'y':
+            print("The New Donor is surely UNSUITABLE for donation.")
+            return True
+
+    while True:                                                     # donated in the last 3 months?
+        inp = input("Has the New Donor donated blood in the last 90 days? (y/n) ")
+        l_inp = inp.lower()
+        if l_inp == 'n':
+            break
+        elif l_inp == 'y':
+            print("The New Donor is surely UNSUITABLE for donation.")
+            return True
+
+    print("We can fill the form.")
+    return False
+# end of warning user                                                                   # \ warn_user
+
+
+# form-filling input functions:                                                         # input functions
+def input_name():                                                           # name
+    valid_name = False
+    data_name = ""
+    while not valid_name:
+        data_name = input("Kerem adja meg a teljes nevet szokozzel elvalasztva!(Keresztnev Vezeteknev): ")
+        if validate_name(data_name):
+            valid_name = True
+        else:
+            print("A megadott nev csak betuket es szokozt tartalmazhat!")
+
+    return data_name
+
+
+def input_weight():                                                         # weight
+    data_weight = ""
+    while not data_weight:
+        data_weight = input("Adja meg a testsulyat!(kg): ")
+        if not (str(data_weight).isdigit() and int(data_weight) > 0):
+            print("A testsulynak 0tol nagyobb pozitiv szamnak kell lennie!")
+            data_weight = ""
+
+    return int(data_weight)
+
+
+def get_birth_date():                                                       # birth date
+    birth_date = ""
+    while not birth_date:
+
+        birth_date = input("Kerem adja meg a szuletesi datumat (YYYY.MM.DD) formatumban!: ")
+        try:
+            bdate = datetime.strptime(birth_date, "%Y.%m.%d").date()
+        except ValueError:
+            print("Hibas datumformatum!")
+            birth_date = ""
+
+    return  bdate
+
+
+def get_last_donation_time():                                               # date of last donation
+    last_time = ""
+    while not last_time:
+
+        last_time = input("Kerem adja meg a legutobbi veradas datumat (YYYY.MM.DD) formatumban!: ")
+        try:
+            ltime = datetime.strptime(last_time, "%Y.%m.%d").date()
+        except ValueError:
+            print("Hibas datumformatum!")
+            last_time = ""
+
+    return  ltime
+
+
+def input_id_expiration():                                                  # id expiration
+    ID_expiration = ""
+    while True:
+        sdate = input("Please enter date of ID expiration (YYYY.MM.DD): ")
+        try:
+            pdate = datetime.strptime(sdate, "%Y.%m.%d").date()
+            time_until_expiration = pdate - datetime.now().date()
+            msg = "OK"
+            if time_until_expiration.days < 1:
+                msg = "ID expiration should be later than today!"
+
+            if msg == "OK":
+                break
+            else:
+                print(msg)
+        except ValueError:
+            print("Wrong date format!")
+
+    return pdate
+
+
+def validate_identifier():                                                  # identifier
+    identifier = ""
+    while identifier == '':
+        identifier = input("Please write your unique ID(identity card/passport)!")
+
+        if identifier == "":
+            print("Unique identifier cannot be empty")
+        elif not check_identifier(identifier):
+            identifier = ""
+    return identifier
+
+
+def input_blood_type():                                                     # blood type
+    valid_blood_type = False
+    data_blood_type = ""
+    blood_types = ("A+", "0+", "B+", "AB+", "A-", "0-", "B-", "AB-")
+
+    while not valid_blood_type:
+        data_blood_type = input("Adja meg a vercsoportjat!: ")
+        if str(data_blood_type).upper() not in blood_types:
+            print("Kerem helyes vercsoportot adjon meg! (A+, 0+, B+, AB+, A-, 0-, B-, AB-)")
+        else:
+            valid_blood_type = True
+
+    return data_blood_type
+
+
+def get_mobile_number():                                                    # mobile
     mobile_number = ""
     while mobile_number == "":
         mobile_number = input("Please write your mobile number(like this:06201234567 or +36301234567):")
@@ -225,40 +239,7 @@ def get_mobile_number():
     return mobile_number
 
 
-#     __repr__
-#                 Write out data in a table form pl.:
-#                 Attila, Molnar
-#                 90kg [using of str function]
-#                 1989.05.06 - 26 years old
-#                 asd@test.hu,
-#                 Generate random number: Hemogblobin level between 80-200, write out is the donor suitable or not (value is greather than 110)?
-#
-# Functions:
-# Parse name, store it in a separated object                    used
-# Suitable for donation:                                        used
-# weight > 50
-# last donation was more than 3 months ago
-# age > 18 years
-# How old is the donor in years based on date of birth?
-# ID is not expired.                                            used
-# Define type of personal document based on its identifier:
-# 6digit + 2letter (123456AB) is identity card                  used
-# 6letter + 2digit (ASDFGH12) is passport                       used
-# Email address validation (contains @-ot and ending with .hu/.com)         used
-# Mobil number validation (starts with +36/06 + 2 digit(provider identifier - 20/30/70) ending with 7 digits)   used
-# Write out data in a table form pl.:
-# Attila, Molnar
-# 90kg [using of str function]
-# 1989.05.06 - 26 years old
-# asd@test.hu,
-# Generate random number: Hemogblobin level between 80-200, write out is the donor suitable or not (value is greather than 110)?
-
-
-def gender_is_valid(string):
-    return string.lower() == "n" or string.lower() == "f"
-
-
-def get_gender():
+def get_gender():                                                           # gender
     data_gender = ""
     valid_gender = False
     while not valid_gender:
@@ -267,15 +248,9 @@ def get_gender():
     return data_gender
 
 
-def email_is_valid(email_string):
-    return "@" in email_string and \
-           email_string.index("@") > 0 and \
-           (email_string.endswith(".hu") or email_string.endswith(".com"))
-
-
-def get_email():
+def get_email():                                                            # email
     data_email = False
-    email_string = " "
+    email_string = ""
     while not data_email:
         email_string = input("Kerem irja be az email cimet:  ")
         if email_is_valid(email_string):
@@ -283,8 +258,15 @@ def get_email():
         else:
             print("Az email cimnek tartalmaznia kell  '@'-t  es .hu-ra vagy .com-ra kell vegzodnie")
     return email_string
+# end of input functions                                                                # \ input functions
 
 
+# hemoglobin random-generated instead of input:                                         # hemoglobin random
+def random_hemoglobin():
+    return random.randint(80, 200)
+
+
+# checking if donor is suitable                                                         # is donor suitable?
 def donor_is_valid(age, weight, last_don, hemo, id_exp):
     return weight > 50 and \
            hemo > 110 and \
@@ -293,6 +275,7 @@ def donor_is_valid(age, weight, last_don, hemo, id_exp):
            id_exp > datetime.now().date()
 
 
+# printing as table                                                                     # print_donor
 def print_donor(name, age, gender, birth_date, id, id_expiration,
                 weight, blood_type, last_donation,
                 mobile, email, suitable):
@@ -316,7 +299,24 @@ def print_donor(name, age, gender, birth_date, id, id_expiration,
         print("The Donor is NOT SUITABLE for donation")
 
 
+# main  # main  # main  # main  # main  # main  # main  # main  # main  # main  # main  # main  # main
 def main():
+    name = ""
+    weight = 0
+    gender = "n"
+    birth_date = datetime(1, 1, 1)
+    age = 0
+    last_donation = datetime(1, 1, 1)
+    blood_type = "00"
+    id = "--------"
+    exp_date = datetime(1, 1, 1)
+    email = "@.com"
+    mobile = "+3600000000"
+    hemoglobin = 0
+    suitable = False
+
+    if warn_user():
+        return
     name = input_name()
     weight = input_weight()
     gender = get_gender()
@@ -331,7 +331,9 @@ def main():
     hemoglobin = random_hemoglobin()
 
     suitable = donor_is_valid(age, weight, last_donation, hemoglobin, exp_date)
+
     print('-' * 10)
+
     print_donor(name, age, gender, birth_date, id, exp_date,
                 weight, blood_type, last_donation,
                 mobile, email, suitable)
@@ -339,3 +341,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
