@@ -2,13 +2,11 @@ import event_reg
 import donor_reg
 
 
-def print_separator_line():
-    print("-"*32)
-
-
 def greetings():
-    print("Welcome in the blood donor register application!!")
-    print_separator_line()
+    print("""
+-----------------------------------------------------------------------
+--- Welcome to the coolest donor and donation event managing system ---
+-----------------------------------------------------------------------""")
 
 
 if __name__ == '__main__':
@@ -16,15 +14,51 @@ if __name__ == '__main__':
     choice = ""
     while True:
             choice = input("""
-Please choose, you want to run Donor register or Location register?
-Donor register press: 1
-Location register press: 2
-Press 3 to exit \n >>>""")
+Main menu
+    1. Add new donor
+    2. Add new donation event
+    3. Delete a donor
+    4. Delete a donation event
+    5. List donors or donation events
+    6. Search
+    7. Exit
+
+Please choose your action: """)
             if choice == "1":
                 donor_reg.main()
-                break
             elif choice == "2":
                 event_reg.main()
-                break
             elif choice == "3":
+                pass
+            elif choice == "4":
+                pass
+            elif choice == "5":
+                choice = input("""
+Please choose if you want to list Donors or Donations:
+    1. Donors
+    2. Donations
+    3. Return
+
+Please choose your action: """)
+                if choice == 1:
+                    pass
+                elif choice == 2:
+                    pass
+                elif choice == 3:
+                    pass
+            elif choice == "6":
+                choice = input("""
+Please choose if you want to search in Donors or Donations:
+    1. Donors
+    2. Donations
+    3. Return
+
+Please choose your action: """)
+                if choice == 1:
+                    pass
+                elif choice == 2:
+                    pass
+                elif choice == 3:
+                    pass
+            elif choice == "7":
                 break
