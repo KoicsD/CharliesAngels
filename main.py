@@ -2,10 +2,6 @@ import event_reg
 import donor_reg
 
 
-def print_separator_line():
-    print("-"*32)
-
-
 def greetings():
     print("""
 -----------------------------------------------------------------------
@@ -33,12 +29,36 @@ Please choose your action: """)
             elif choice == "2":
                 event_reg.main()
             elif choice == "3":
-                break
+                pass
             elif choice == "4":
                 pass
             elif choice == "5":
-                pass
+                choice = input("""
+Please choose if you want to list Donors or Donations:
+    1. Donors
+    2. Donations
+    3. Return
+
+Please choose your action: """)
+                if choice == 1:
+                    pass
+                elif choice == 2:
+                    pass
+                elif choice == 3:
+                    pass
             elif choice == "6":
-                pass
+                choice = input("""
+Please choose if you want to search in Donors or Donations:
+    1. Donors
+    2. Donations
+    3. Return
+
+Please choose your action: """)
+                if choice == 1:
+                    pass
+                elif choice == 2:
+                    pass
+                elif choice == 3:
+                    pass
             elif choice == "7":
                 break
