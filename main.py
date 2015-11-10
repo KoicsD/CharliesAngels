@@ -30,17 +30,15 @@ Main menu
 Please choose your action: """)
             if choice == "1":
                 donor_reg.main()
-                break
             elif choice == "2":
                 event_reg.main()
-                break
             elif choice == "3":
                 break
             elif choice == "4":
-                break
+                pass
             elif choice == "5":
-                break
+                pass
             elif choice == "6":
-                break
+                pass
             elif choice == "7":
                 break
