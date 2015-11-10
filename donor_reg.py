@@ -83,7 +83,7 @@ def input_weight():
     return int(data_weight)
 
 
-def get_birth_date():
+def input_birth_date():
     birth_date = ""
     while not birth_date:
         birth_date = input("Please enter the New Donor's birth date (YYYY.MM.DD)!: ")
@@ -100,7 +100,7 @@ def calculate_age_in_year(birth_date: date):
     return (datetime.now().date() - birth_date).days // 365
 
 
-def get_last_donation_time():
+def input_last_donation_time():
     last_time = ""
     while not last_time:
         last_time = input("Please enter the New Donor's last donation date (YYYY.MM.DD) or leave empty!: ")
@@ -209,7 +209,7 @@ def check_mobil_number(mobile_number):
         return True
 
 
-def get_mobile_number():
+def input_mobile_number():
     mobile_number = ""
     while mobile_number == "":
         mobile_number = input("Please enter the New Donor's mobile number(like this:06201234567 or +36301234567):")
@@ -226,7 +226,7 @@ def gender_is_valid(string):
     return string.lower() == "m" or string.lower() == "f"
 
 
-def get_gender():
+def input_gender():
     data_gender = ""
     valid_gender = False
     while not valid_gender:
@@ -241,7 +241,7 @@ def email_is_valid(email_string):
            (email_string.endswith(".hu") or email_string.endswith(".com"))
 
 
-def get_email():
+def input_email():
     data_email = False
     email_string = " "
     while not data_email:
@@ -292,15 +292,15 @@ def main():
         return
     name = input_name()
     weight = input_weight()
-    gender = get_gender()
-    birth_date = get_birth_date()
+    gender = input_gender()
+    birth_date = input_birth_date()
     age = calculate_age_in_year(birth_date)
-    last_donation = get_last_donation_time()
+    last_donation = input_last_donation_time()
     blood_type = input_blood_type()
     id = validate_identifier()
     exp_date = input_id_expiration()
-    email = get_email()
-    mobile = get_mobile_number()
+    email = input_email()
+    mobile = input_mobile_number()
     hemoglobin = random_hemoglobin()
 
     suitable = donor_is_valid(age, weight, last_donation, hemoglobin, exp_date)
