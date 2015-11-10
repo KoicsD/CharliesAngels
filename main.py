@@ -7,8 +7,10 @@ def print_separator_line():
 
 
 def greetings():
-    print("Welcome in the blood donor register application!!")
-    print_separator_line()
+    print("""
+-----------------------------------------------------------------------
+--- Welcome to the coolest donor and donation event managing system ---
+-----------------------------------------------------------------------""")
 
 
 if __name__ == '__main__':
@@ -16,10 +18,16 @@ if __name__ == '__main__':
     choice = ""
     while True:
             choice = input("""
-Please choose, you want to run Donor register or Location register?
-Donor register press: 1
-Location register press: 2
-Press 3 to exit \n >>>""")
+Main menu
+    1. Add new donor
+    2. Add new donation event
+    3. Delete a donor
+    4. Delete a donation event
+    5. List donors or donation events
+    6. Search
+    7. Exit
+
+Please choose your action: """)
             if choice == "1":
                 donor_reg.main()
                 break
@@ -27,4 +35,12 @@ Press 3 to exit \n >>>""")
                 event_reg.main()
                 break
             elif choice == "3":
+                break
+            elif choice == "4":
+                break
+            elif choice == "5":
+                break
+            elif choice == "6":
+                break
+            elif choice == "7":
                 break
