@@ -279,40 +279,19 @@ def donor_is_valid():   # age, weight, last_don, hemo, id_exp
            data["exp_date"] > datetime.now().date()
 
 
-# printing as table                                                                     # print_donor
-def print_donor():
-    print("Name: %s" % data["name"])
-    print("Age: %d" % data["age"])
-    if data["gender"].lower() == 'n':
-        print("Gender: female")
-    else:
-        print("Gender: male")
-    print("Date of Birth: %s" % data["birth_date"].strftime("%Y.%m.%d"))
-    print("Identifier: %s" + data["id"])
-    print("Expiration Date of ID: %s" % data["exp_date"].strftime("%Y.%m.%d"))
-    print("Weight: %d kg" % data["weight"])
-    print("Type of Blood: %s" % data["blood_type"])
-    print("Date of Last Donation: %s" % data["last_donation"].strftime("%Y.%m.%d"))
-    print("Mobile: %s" % data["mobile"])
-    print("Email: %s" % data["email"])
-    if data["suitable"]:
-        print("The Donor is SUITABLE for donation.")
-    else:
-        print("The Donor is NOT SUITABLE for donation")
-
-
-# main  # main  # main  # main  # main  # main  # main  # main  # main  # main  # main  # main  # main
-def main():
+# main entry point below    # main entry point below    # main entry point below    # main entry point below
+# requesting for all the data and filling the form from this function:                  # fill_donor
+def fill_donor():
     # enough to do initialization here, locally:
     data["name"] = ""
     data["weight"] = 0
     data["gender"] = "n"
     data["birth_date"] = datetime(1, 1, 1).date()
     data["age"] = 0
-    data["last_donation"] = datetime(1, 1, 1)
+    data["last_donation"] = datetime(1, 1, 1).date()
     data["blood_type"] = "00"
     data["id"] = "--------"
-    data["exp_date"] = datetime(1, 1, 1)
+    data["exp_date"] = datetime(1, 1, 1).date()
     data["email"] = "@.com"
     data["mobile"] = "+3600000000"
     data["hemoglobin"] = 0
@@ -335,9 +314,35 @@ def main():
 
     donor_is_valid()
 
-    print('-' * 10)
 
-    print_donor()
+# printing as table                                                                     # print_donor
+def print_donor():
+    print("Name: %s" % data["name"])
+    print("Age: %d" % data["age"])
+    if data["gender"].lower() == 'n':
+        print("Gender: female")
+    else:
+        print("Gender: male")
+    print("Date of Birth: %s" % data["birth_date"].strftime("%Y.%m.%d"))
+    print("Identifier: %s" + data["id"])
+    print("Expiration Date of ID: %s" % data["exp_date"].strftime("%Y.%m.%d"))
+    print("Weight: %d kg" % data["weight"])
+    print("Type of Blood: %s" % data["blood_type"])
+    print("Date of Last Donation: %s" % data["last_donation"].strftime("%Y.%m.%d"))
+    print("Mobile: %s" % data["mobile"])
+    print("Email: %s" % data["email"])
+    if data["suitable"]:
+        print("The Donor is SUITABLE for donation.")
+    else:
+        print("The Donor is NOT SUITABLE for donation")
+
+
+# main function and dundername invoking it:
+def main():
+    # demo consists of 2 steps:
+    fill_donor()  # filling the form
+    print('-' * 10)
+    print_donor()  # and printing the data
 
 
 if __name__ == "__main__":
