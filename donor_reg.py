@@ -6,21 +6,8 @@ import random
 # Another thought: Why do we let User give unsuitable data if we have asked the most problematic questions in advance?
 
 
-# variables as global dictionary:
+# global dictionary for variables:
 data = dict()
-data["name"] = ""
-data["weight"] = 0
-data["gender"] = "n"
-data["birth_date"] = datetime(1, 1, 1).date()
-data["age"] = 0
-data["last_donation"] = datetime(1, 1, 1)
-data["blood_type"] = "00"
-data["id"] = "--------"
-data["exp_date"] = datetime(1, 1, 1)
-data["email"] = "@.com"
-data["mobile"] = "+3600000000"
-data["hemoglobin"] = 0
-data["suitable"] = False
 
 
 # check-/validating and other assistant functions:                                      # check- and assistants
@@ -316,6 +303,20 @@ def print_donor():
 
 # main  # main  # main  # main  # main  # main  # main  # main  # main  # main  # main  # main  # main
 def main():
+    # enough to do initialization here, locally:
+    data["name"] = ""
+    data["weight"] = 0
+    data["gender"] = "n"
+    data["birth_date"] = datetime(1, 1, 1).date()
+    data["age"] = 0
+    data["last_donation"] = datetime(1, 1, 1)
+    data["blood_type"] = "00"
+    data["id"] = "--------"
+    data["exp_date"] = datetime(1, 1, 1)
+    data["email"] = "@.com"
+    data["mobile"] = "+3600000000"
+    data["hemoglobin"] = 0
+    data["suitable"] = False
 
     if warn_user():
         return
