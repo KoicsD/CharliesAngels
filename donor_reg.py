@@ -1,14 +1,8 @@
 from datetime import datetime, date
 import random
+import donor_csv_writer
 
 
-# Task:
-#     warn_user:# weight > 50
-#                 Generate random number: Hemogblobin level between 80-200, write out is the donor suitable or not (value is greather than 110)?
-#                 last donation was more than 3 months ago
-#                 age > 18 years
-#                 How old is the donor in years based on date of birth?
-#                 ID is not expired.
 def warn_user():
     inp = ""
     l_inp = ""
@@ -57,13 +51,8 @@ def warn_user():
 
 
 def random_hemoglobin():
-    return random.randint(80,200)
+    return random.randint(80, 200)
 
-# -------------------------------------------------------------------------------
-#
-#     Name,
-#                 Parse name, store it in a separated object
-#
 
 def validate_name(name_string: str):
     splitted_name = name_string.split(" ")
@@ -83,12 +72,6 @@ def input_name():
     return data_name
 
 
-# -------------------------------------------------------------------------------
-#
-#     Weight,
-#                 weight > 50
-#
-
 def input_weight():
     data_weight = ""
     while not data_weight:
@@ -100,65 +83,43 @@ def input_weight():
     return int(data_weight)
 
 
-# -------------------------------------------------------------------------------
-#
-#
-#     Gender,
-#
-#     Date of Birth,
-#                 age > 18 years
-#                 How old is the donor in years based on date of birth?
-
-
-def get_birth_date():
+def input_birth_date():
     birth_date = ""
     while not birth_date:
-
-        birth_date = input("Please enter birth date (YYYY.MM.DD)!: ")
+        birth_date = input("Please enter the New Donor's birth date (YYYY.MM.DD)!: ")
         try:
             bdate = datetime.strptime(birth_date, "%Y.%m.%d").date()
         except ValueError:
             print("Wrong date format!")
             birth_date = ""
 
-    return  bdate
+    return bdate
 
 
 def calculate_age_in_year(birth_date: date):
     return (datetime.now().date() - birth_date).days // 365
 
-#
-#     Last donation date,
-#                 last donation was more than 3 months ago
-#                 never is also possible
 
-
-def get_last_donation_time():
+def input_last_donation_time():
     last_time = ""
     while not last_time:
-
-        last_time = input("Please enter last donation date (YYYY.MM.DD)!: ")
+        last_time = input("Please enter the New Donor's last donation date (YYYY.MM.DD) or leave empty!: ")
+        if last_time == "":
+            return datetime.now().date()
         try:
             ltime = datetime.strptime(last_time, "%Y.%m.%d").date()
         except ValueError:
             print("Wrong date format!")
             last_time = ""
 
-    return  ltime
+    return ltime
 
-def last_donation_time_is_valid(date_of_donation: date):
-    return (datetime.now().date() - date_of_donation).days > 90
-#
-#     Unique identifier  &     Expiration of ID
-#                 6digit + 2letter (123456AB) is identity card
-#                 6letter + 2digit (ASDFGH12) is passport
-#                 ID is not expired.
-# ID_expired=""
-# def get_ID_expired():
-#     ID_expired=input ("When will ID be expired?(YYYY/MM/DD")
-#
-# def check_ID_expiration(date):
-#     return ID_expired > today
+
+def last_donation_time_is_valid(date_of_donation):
+    if date_of_donation == datetime.now().date():
+        return date_of_donation
+    else:
+        return (datetime.now().date() - date_of_donation).days > 90
 
 
 def input_id_expiration():
@@ -215,9 +176,6 @@ def validate_identifier():
     return identifier
 
 
-# Blood type
-#
-
 def input_blood_type():
     valid_blood_type = False
     data_blood_type = ""
@@ -232,12 +190,6 @@ def input_blood_type():
 
     return data_blood_type
 
-
-# -------------------------------------------------------------------------------
-#     email address
-#                 Email address validation (contains @-ot and ending with .hu/.com)
-#     Mobil number
-#                 Mobil number validation (starts with +36/06 + 2 digit(provider identifier - 20/30/70) ending with 7 digits)
 
 def check_mobil_number(mobile_number):
     if mobile_number[0:2] != '06' and mobile_number[0:3] != "+36":
@@ -257,7 +209,7 @@ def check_mobil_number(mobile_number):
         return True
 
 
-def get_mobile_number():
+def input_mobile_number():
     mobile_number = ""
     while mobile_number == "":
         mobile_number = input("Please enter the New Donor's mobile number(like this:06201234567 or +36301234567):")
@@ -270,40 +222,11 @@ def get_mobile_number():
     return mobile_number
 
 
-#     __repr__
-#                 Write out data in a table form pl.:
-#                 Attila, Molnar
-#                 90kg [using of str function]
-#                 1989.05.06 - 26 years old
-#                 asd@test.hu,
-#                 Generate random number: Hemogblobin level between 80-200, write out is the donor suitable or not (value is greather than 110)?
-#
-# Functions:
-# Parse name, store it in a separated object                    used
-# Suitable for donation:                                        used
-# weight > 50
-# last donation was more than 3 months ago
-# age > 18 years
-# How old is the donor in years based on date of birth?
-# ID is not expired.                                            used
-# Define type of personal document based on its identifier:
-# 6digit + 2letter (123456AB) is identity card                  used
-# 6letter + 2digit (ASDFGH12) is passport                       used
-# Email address validation (contains @-ot and ending with .hu/.com)         used
-# Mobil number validation (starts with +36/06 + 2 digit(provider identifier - 20/30/70) ending with 7 digits)   used
-# Write out data in a table form pl.:
-# Attila, Molnar
-# 90kg [using of str function]
-# 1989.05.06 - 26 years old
-# asd@test.hu,
-# Generate random number: Hemogblobin level between 80-200, write out is the donor suitable or not (value is greather than 110)?
-
-
 def gender_is_valid(string):
     return string.lower() == "m" or string.lower() == "f"
 
 
-def get_gender():
+def input_gender():
     data_gender = ""
     valid_gender = False
     while not valid_gender:
@@ -318,7 +241,7 @@ def email_is_valid(email_string):
            (email_string.endswith(".hu") or email_string.endswith(".com"))
 
 
-def get_email():
+def input_email():
     data_email = False
     email_string = " "
     while not data_email:
@@ -340,23 +263,26 @@ def donor_is_valid(age, weight, last_don, hemo, id_exp):
 
 def print_donor(name, age, gender, birth_date, id, id_expiration,
                 weight, blood_type, last_donation,
-                mobile, email, suitable):
+                mobile, email, hemoglobin, suitable):
     print("Name: %s" % name)
-    print("Age: %d" % age)
-    if gender.lower() == 'n':
+    print("Date of Birth: %s - %d years old." % (birth_date.strftime("%Y.%m.%d"), age))
+    if gender.lower() == 'f':
         print("Gender: female")
     else:
         print("Gender: male")
-    print("Date of Birth: %s" % birth_date.strftime("%Y.%m.%d"))
-    print("Identifier: %s" + id)
+    print("Identifier: %s" % id)
     print("Expiration Date of ID: %s" % id_expiration.strftime("%Y.%m.%d"))
     print("Weight: %d kg" % weight)
     print("Type of Blood: %s" % blood_type)
     print("Date of Last Donation: %s" % last_donation.strftime("%Y.%m.%d"))
     print("Mobile: %s" % mobile)
     print("Email: %s" % email)
+    print("Hemoglobin: %s" % hemoglobin)
     if suitable:
         print("The New Donor is SUITABLE for donation.")
+        donor_csv_writer.store_donor(name, age, gender, birth_date, id, id_expiration,
+                weight, blood_type, last_donation,
+                mobile, email)
     else:
         print("The New Donor is NOT SUITABLE for donation")
 
@@ -366,22 +292,22 @@ def main():
         return
     name = input_name()
     weight = input_weight()
-    gender = get_gender()
-    birth_date = get_birth_date()
+    gender = input_gender()
+    birth_date = input_birth_date()
     age = calculate_age_in_year(birth_date)
-    last_donation = get_last_donation_time()
+    last_donation = input_last_donation_time()
     blood_type = input_blood_type()
     id = validate_identifier()
     exp_date = input_id_expiration()
-    email = get_email()
-    mobile = get_mobile_number()
+    email = input_email()
+    mobile = input_mobile_number()
     hemoglobin = random_hemoglobin()
 
     suitable = donor_is_valid(age, weight, last_donation, hemoglobin, exp_date)
     print('-' * 10)
     print_donor(name, age, gender, birth_date, id, exp_date,
                 weight, blood_type, last_donation,
-                mobile, email, suitable)
+                mobile, email, hemoglobin, suitable,)
 
 
 if __name__ == "__main__":
