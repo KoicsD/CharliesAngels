@@ -261,7 +261,7 @@ def print_donor(name, age, gender, birth_date, id, id_expiration,
     print("Mobile: %s" % mobile)
     print("The New Donor is SUITABLE for donation.")
     donor_csv_writer.store_donor(name, age, gender, birth_date, id, id_expiration,
-            weight, blood_type, hemoglobin, last_donation,
+            weight, blood_type, last_donation,
             mobile, email)
 
 
