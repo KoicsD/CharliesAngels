@@ -260,8 +260,8 @@ def print_donor(name, age, gender, birth_date, id, id_expiration,
     print("Email: %s" % email)
     print("Mobile: %s" % mobile)
     print("The New Donor is SUITABLE for donation.")
-    donor_csv_writer.store_donor(name, age, gender, birth_date, id, id_expiration,
-            weight, blood_type, last_donation,
+    donor_csv_writer.store_donor(name, age, gender, birth_date.strftime("%Y.%m.%d"), id, id_expiration.strftime("%Y.%m.%d"),
+            weight, blood_type, last_donation.strftime("%Y.%m.%d"),
             mobile, email)
 
 
