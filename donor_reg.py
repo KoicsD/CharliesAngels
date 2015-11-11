@@ -6,10 +6,6 @@ import random
 # Another thought: Why do we let User give unsuitable data if we have asked the most problematic questions in advance?
 
 
-# global dictionary for variables:
-data = dict()
-
-
 # check-/validating and other assistant functions:                                      # check- and assistants
 def validate_name(name_string: str):                                        # name
     splitted_name = name_string.split(" ")
@@ -130,7 +126,7 @@ def warn_user():
 
 
 # form-filling input functions:                                                         # input functions
-def input_name():                                                           # name
+def input_name(data: dict):                                                           # name
     valid_name = False
     data_name = ""
     while not valid_name:
@@ -143,7 +139,7 @@ def input_name():                                                           # na
     data["name"] = data_name
 
 
-def input_weight():                                                         # weight
+def input_weight(data: dict):                                                         # weight
     data_weight = ""
     while not data_weight:
         data_weight = input("Adja meg a testsulyat!(kg): ")
@@ -154,7 +150,7 @@ def input_weight():                                                         # we
     data["weight"] = int(data_weight)
 
 
-def get_birth_date():                                                       # birth date
+def get_birth_date(data: dict):                                                       # birth date
     birth_date = ""
     while not birth_date:
 
@@ -168,7 +164,7 @@ def get_birth_date():                                                       # bi
     data["birth_date"] = bdate
 
 
-def get_last_donation_time():                                               # date of last donation
+def get_last_donation_time(data: dict):                                               # date of last donation
     last_time = ""
     while not last_time:
 
@@ -182,7 +178,7 @@ def get_last_donation_time():                                               # da
     data["last_donation"] = ltime
 
 
-def input_id_expiration():                                                  # id expiration
+def input_id_expiration(data: dict):                                                  # id expiration
     ID_expiration = ""
     while True:
         sdate = input("Please enter date of ID expiration (YYYY.MM.DD): ")
@@ -203,7 +199,7 @@ def input_id_expiration():                                                  # id
     data["exp_date"] = pdate
 
 
-def validate_identifier():                                                  # identifier
+def validate_identifier(data: dict):                                                  # identifier
     identifier = ""
     while identifier == '':
         identifier = input("Please write your unique ID(identity card/passport)!")
@@ -215,7 +211,7 @@ def validate_identifier():                                                  # id
     data["id"] = identifier
 
 
-def input_blood_type():                                                     # blood type
+def input_blood_type(data: dict):                                                     # blood type
     valid_blood_type = False
     data_blood_type = ""
     blood_types = ("A+", "0+", "B+", "AB+", "A-", "0-", "B-", "AB-")
@@ -230,7 +226,7 @@ def input_blood_type():                                                     # bl
     data["blood_type"] = data_blood_type
 
 
-def get_mobile_number():                                                    # mobile
+def get_mobile_number(data: dict):                                                    # mobile
     mobile_number = ""
     while mobile_number == "":
         mobile_number = input("Please write your mobile number(like this:06201234567 or +36301234567):")
@@ -243,7 +239,7 @@ def get_mobile_number():                                                    # mo
     data["mobile"] = mobile_number
 
 
-def get_gender():                                                           # gender
+def get_gender(data: dict):                                                           # gender
     data_gender = ""
     valid_gender = False
     while not valid_gender:
@@ -252,7 +248,7 @@ def get_gender():                                                           # ge
     data["gender"] = data_gender
 
 
-def get_email():                                                            # email
+def get_email(data: dict):                                                            # email
     data_email = False
     email_string = ""
     while not data_email:
@@ -266,12 +262,12 @@ def get_email():                                                            # em
 
 
 # hemoglobin random-generated instead of input:                                         # hemoglobin random
-def random_hemoglobin():
+def random_hemoglobin(data: dict):
     data["hemoglobin"] = random.randint(80, 200)
 
 
 # checking if donor is suitable                                                         # is donor suitable?
-def donor_is_valid():   # age, weight, last_don, hemo, id_exp
+def donor_is_valid(data: dict):   # age, weight, last_don, hemo, id_exp
     data["suitable"] = data["weight"] > 50 and \
            data["hemoglobin"] > 110 and \
            last_donation_time_is_valid(data["last_donation"]) and \
@@ -281,7 +277,7 @@ def donor_is_valid():   # age, weight, last_don, hemo, id_exp
 
 # main entry point below    # main entry point below    # main entry point below    # main entry point below
 # requesting for all the data and filling the form from this function:                  # fill_donor
-def fill_donor():
+def fill_donor(data: dict):
     # enough to do initialization here, locally:
     data["name"] = ""
     data["weight"] = 0
@@ -299,24 +295,24 @@ def fill_donor():
 
     if warn_user():
         return
-    input_name()
-    input_weight()
-    get_gender()
-    get_birth_date()
+    input_name(data)
+    input_weight(data)
+    get_gender(data)
+    get_birth_date(data)
     data["age"] = calculate_age_in_year(data["birth_date"])
-    get_last_donation_time()
-    input_blood_type()
-    validate_identifier()
-    input_id_expiration()
-    get_email()
-    get_mobile_number()
-    random_hemoglobin()
+    get_last_donation_time(data)
+    input_blood_type(data)
+    validate_identifier(data)
+    input_id_expiration(data)
+    get_email(data)
+    get_mobile_number(data)
+    random_hemoglobin(data)
 
-    donor_is_valid()
+    donor_is_valid(data)
 
 
 # printing as table                                                                     # print_donor
-def print_donor():
+def print_donor(data: dict):
     print("Name: %s" % data["name"])
     print("Age: %d" % data["age"])
     if data["gender"].lower() == 'n':
@@ -340,9 +336,10 @@ def print_donor():
 # main function and dundername invoking it:
 def main():
     # demo consists of 2 steps:
-    fill_donor()  # filling the form
+    my_donor = dict()
+    fill_donor(my_donor)  # filling the form
     print('-' * 10)
-    print_donor()  # and printing the data
+    print_donor(my_donor)  # and printing the data
 
 
 if __name__ == "__main__":
