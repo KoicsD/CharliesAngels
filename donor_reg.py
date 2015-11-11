@@ -15,11 +15,6 @@ def input_name():
     return data_name
 
 
-def validate_name(name_string: str):
-    splitted_name = name_string.split(" ")
-    return name_string.replace(" ", "").isalpha() and len(splitted_name) > 1
-
-
 def input_weight():
     data_weight = ""
     while not data_weight:
@@ -31,10 +26,6 @@ def input_weight():
     return int(data_weight)
 
 
-def validate_weight(weight):
-    return weight > 50
-
-
 def input_gender():
     data_gender = ""
     valid_gender = False
@@ -44,15 +35,6 @@ def input_gender():
             valid_gender = validate_gender(data_gender)
             return valid_gender
         print("Must type 'M' or 'F'!")
-
-
-def validate_gender(string):
-    if string.lower() == "m":
-        string = "Male"
-        return string
-    elif string.lower() == "f":
-        string = "Female"
-        return string
 
 
 def input_birth_date():
@@ -68,14 +50,6 @@ def input_birth_date():
     return bdate
 
 
-def calculate_age_in_year(birth_date: date):
-    return (datetime.now().date() - birth_date).days // 365
-
-
-def validate_age(age):
-    return age >= 18
-
-
 def input_last_donation_time():
     last_time = ""
     while not last_time:
@@ -89,13 +63,6 @@ def input_last_donation_time():
             last_time = ""
 
     return ltime
-
-
-def validate_last_donation_time(date_of_donation):
-    if date_of_donation == datetime.now().date():
-        return date_of_donation
-    else:
-        return (datetime.now().date() - date_of_donation).days > 90
 
 
 def input_sickness():
@@ -114,10 +81,6 @@ def input_sickness():
     return l_sick
 
 
-def validate_sickness(sick):
-    return sick == "y"
-
-
 def input_identifier():
     identifier = ""
     while identifier == '':
@@ -128,6 +91,96 @@ def input_identifier():
         elif not validate_identifier(identifier):
             identifier = ""
     return identifier
+
+
+def input_id_expiration():
+    ID_expiration = ""
+    while True:
+        sdate = input("Please enter the New Donor's date of ID expiration (YYYY.MM.DD): ")
+        try:
+            pdate = datetime.strptime(sdate, "%Y.%m.%d").date()
+            msg = "OK"
+            if msg == "OK":
+                break
+            else:
+                print(msg)
+        except ValueError:
+            print("Wrong date format!")
+
+    return pdate
+
+
+def input_blood_type():
+    valid_blood_type = False
+    data_blood_type = ""
+    blood_types = ("A+", "0+", "B+", "AB+", "A-", "0-", "B-", "AB-")
+
+    while not valid_blood_type:
+        data_blood_type = input("Please enter the New Donor's blood type!: ")
+        if str(data_blood_type).upper() not in blood_types:
+            print("Blood type must be: A+, 0+, B+, AB+, A-, 0-, B- or AB-")
+        else:
+            valid_blood_type = True
+
+    return data_blood_type
+
+
+def input_email():
+    data_email = False
+    email_string = " "
+    while not data_email:
+        email_string = input("Please enter the New Donor's email address:  ")
+        if validate_email(email_string):
+            data_email = True
+        else:
+            print("The email address should contain '@'-t and should end with '.hu' or '.com'")
+    return email_string
+
+
+def input_mobile_number():
+    mobile_number = ""
+    while mobile_number == "":
+        mobile_number = input("Please enter the New Donor's mobile number(like this:06201234567 or +36301234567):")
+
+        if mobile_number == "":
+            print("Phone number is empty:")
+
+        elif not validate_mobil_number(mobile_number):
+            mobile_number = ""
+    return mobile_number
+
+
+def validate_name(name_string: str):
+    splitted_name = name_string.split(" ")
+    return name_string.replace(" ", "").isalpha() and len(splitted_name) > 1
+
+
+def validate_weight(weight):
+    return weight > 50
+
+
+def validate_gender(string):
+    if string.lower() == "m":
+        string = "Male"
+        return string
+    elif string.lower() == "f":
+        string = "Female"
+        return string
+
+
+def validate_age(age):
+    return age >= 18
+
+
+def validate_last_donation_time(date_of_donation):
+    if date_of_donation == datetime.now().date():
+        return date_of_donation
+    else:
+        return (datetime.now().date() - date_of_donation).days > 90
+
+
+def validate_sickness(sick):
+    return sick == "y"
 
 
 def validate_identifier(identifier):
@@ -151,44 +204,8 @@ def validate_identifier(identifier):
         return False
 
 
-def input_id_expiration():
-    ID_expiration = ""
-    while True:
-        sdate = input("Please enter the New Donor's date of ID expiration (YYYY.MM.DD): ")
-        try:
-            pdate = datetime.strptime(sdate, "%Y.%m.%d").date()
-            msg = "OK"
-            if msg == "OK":
-                break
-            else:
-                print(msg)
-        except ValueError:
-            print("Wrong date format!")
-
-    return pdate
-
-
 def validate_id_expiration(id_exp):
     return id_exp > datetime.now().date()
-
-
-def input_blood_type():
-    valid_blood_type = False
-    data_blood_type = ""
-    blood_types = ("A+", "0+", "B+", "AB+", "A-", "0-", "B-", "AB-")
-
-    while not valid_blood_type:
-        data_blood_type = input("Please enter the New Donor's blood type!: ")
-        if str(data_blood_type).upper() not in blood_types:
-            print("Blood type must be: A+, 0+, B+, AB+, A-, 0-, B- or AB-")
-        else:
-            valid_blood_type = True
-
-    return data_blood_type
-
-
-def random_hemoglobin():
-    return random.randint(80, 200)
 
 
 def validate_hemoglobin(hemo):
@@ -199,18 +216,6 @@ def validate_email(email_string):
     return "@" in email_string and \
            email_string.index("@") > 0 and \
            (email_string.endswith(".hu") or email_string.endswith(".com"))
-
-
-def input_email():
-    data_email = False
-    email_string = " "
-    while not data_email:
-        email_string = input("Please enter the New Donor's email address:  ")
-        if validate_email(email_string):
-            data_email = True
-        else:
-            print("The email address should contain '@'-t and should end with '.hu' or '.com'")
-    return email_string
 
 
 def validate_mobil_number(mobile_number):
@@ -231,17 +236,12 @@ def validate_mobil_number(mobile_number):
         return True
 
 
-def input_mobile_number():
-    mobile_number = ""
-    while mobile_number == "":
-        mobile_number = input("Please enter the New Donor's mobile number(like this:06201234567 or +36301234567):")
+def random_hemoglobin():
+    return random.randint(80, 200)
 
-        if mobile_number == "":
-            print("Phone number is empty:")
 
-        elif not validate_mobil_number(mobile_number):
-            mobile_number = ""
-    return mobile_number
+def calculate_age_in_year(birth_date: date):
+    return (datetime.now().date() - birth_date).days // 365
 
 
 def print_donor(name, age, gender, birth_date, id, id_expiration,
