@@ -266,8 +266,8 @@ class Donor:
 
 
     # main entry point below    # main entry point below    # main entry point below    # main entry point below
-    # requesting for all the data and filling the form from this function:                  # fill_donor
-    def fill_donor(self):
+    # requesting for all the data and filling the form from this function:                  # __init__
+    def __init__(self):
         # enough to do initialization here, locally:
         self.name = ""
         self.weight = 0
@@ -300,35 +300,36 @@ class Donor:
 
         self.donor_is_valid()
 
-    # printing as table                                                                     # print_donor
-    def print_donor(self):
-        print("Name: %s" % self.name)
-        print("Age: %d" % self.age)
+    # stringizing to print as table                                                         # __repr__
+    def __repr__(self):
+        text = ""
+        text += "Name: %s" % self.name + "\n"
+        text += "Age: %d" % self.age + "\n"
         if self.gender.lower() == 'n':
-            print("Gender: female")
+            text += "Gender: female\n"
         else:
-            print("Gender: male")
-        print("Date of Birth: %s" % self.birth_date.strftime("%Y.%m.%d"))
-        print("Identifier: %s" + self.id)
-        print("Expiration Date of ID: %s" % self.exp_date.strftime("%Y.%m.%d"))
-        print("Weight: %d kg" % self.weight)
-        print("Type of Blood: %s" % self.blood_type)
-        print("Date of Last Donation: %s" % self.last_donation.strftime("%Y.%m.%d"))
-        print("Mobile: %s" % self.mobile)
-        print("Email: %s" % self.email)
+            text += "Gender: male\n"
+        text += "Date of Birth: %s" % self.birth_date.strftime("%Y.%m.%d") + "\n"
+        text += "Identifier: %s" % self.id + "\n"
+        text += "Expiration Date of ID: %s" % self.exp_date.strftime("%Y.%m.%d") + "\n"
+        text += "Weight: %d kg" % self.weight + "\n"
+        text += "Type of Blood: %s" % self.blood_type + "\n"
+        text += "Date of Last Donation: %s" % self.last_donation.strftime("%Y.%m.%d") + "\n"
+        text += "Mobile: %s" % self.mobile + "\n"
+        text += "Email: %s" % self.email + "\n"
         if self.suitable:
-            print("The Donor is SUITABLE for donation.")
+            text += "The Donor is SUITABLE for donation.\n"
         else:
-            print("The Donor is NOT SUITABLE for donation")
+            text += "The Donor is NOT SUITABLE for donation\n"
+        return text
 
 
 # main function and dundername invoking it:
 def main():
     # demo consists of 2 steps:
-    my_donor = Donor()
-    my_donor.fill_donor()  # filling the form
+    my_donor = Donor()  # filling the form
     print('-' * 10)
-    my_donor.print_donor()  # and printing the data
+    print(my_donor)  # and printing the data
 
 
 if __name__ == "__main__":
