@@ -1,4 +1,5 @@
 import csv
+from datetime import datetime, date
 
 
 def listing():
@@ -34,11 +35,16 @@ def listing():
 def print_donors_data(index, result):
         print(result[0])
         print(result[1] + "kg")
-        print(result[3])
+        age = calculate_age_in_year(result[3])
+        print(result[3] + " - " + str(age) + " years old")
         print(result[10])
 
 exceptions = ["name","weight","gender","date_of_birth","last_donation","last_month_sickness","unique_identifier","expiration_of_id","blood_type","hemoglobin","email","mobil"]
 
+
+def calculate_age_in_year(birth_date):
+    bdate = datetime.strptime(str(birth_date), "%Y.%m.%d.").date()
+    return (datetime.now().date() - bdate).days // 365
 
 def main():
     listing()
