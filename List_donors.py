@@ -1,5 +1,5 @@
 import csv
-
+from datetime import datetime, date
 
 def listing():
     with open('DATA\donors.csv', newline='') as file:
@@ -21,7 +21,7 @@ def listing():
                     break
             print(result[0])
             print(result[6] + "kg")
-            print(result[3] + " - " + result[1] + " years old")
+            print(result[3] + " - " + str((datetime.now().date() - datetime.strptime(result[3], "%Y-%m-%d").date()).days // 365) + " years old")
             print(result[10])
 
 def main():
