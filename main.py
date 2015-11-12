@@ -1,6 +1,7 @@
 import event_reg
 import donor_reg
 import List_donors
+import search_in_files
 
 
 def greetings():
@@ -58,7 +59,7 @@ Please choose if you want to search in Donors or Donations:
 
 Please choose your action: """)
                 if choice == "1":
-                    pass
+                    search_in_files.search_in_donors()
                 elif choice == "2":
                     pass
                 elif choice == "3":
