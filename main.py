@@ -1,5 +1,7 @@
 import event_reg
 import donor_reg
+import List_donors
+import search_in_files
 
 
 def greetings():
@@ -33,18 +35,20 @@ Please choose your action: """)
             elif choice == "4":
                 pass
             elif choice == "5":
-                choice = input("""
+                choice_list = input("""
 Please choose if you want to list Donors or Donations:
     1. Donors
     2. Donations
     3. Return
 
 Please choose your action: """)
-                if choice == 1:
+                if choice_list == "1":
+                    print("-" * 22)
+                    print("----Listing Donors Sorted By Names----")
+                    List_donors.main()
+                elif choice_list == "2":
                     pass
-                elif choice == 2:
-                    pass
-                elif choice == 3:
+                elif choice_list == "3":
                     pass
             elif choice == "6":
                 choice = input("""
@@ -54,11 +58,11 @@ Please choose if you want to search in Donors or Donations:
     3. Return
 
 Please choose your action: """)
-                if choice == 1:
+                if choice == "1":
+                    search_in_files.search_in_donors()
+                elif choice == "2":
                     pass
-                elif choice == 2:
-                    pass
-                elif choice == 3:
+                elif choice == "3":
                     pass
             elif choice == "7":
                 break
