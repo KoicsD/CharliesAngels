@@ -31,13 +31,15 @@ def listing():
         print("-" * 39)
 
 
-def print_donors_data(index,result):
+def print_donors_data(index, result):
         print(result[0])
-        print(result[6] + "kg")
-        print(result[3] + " - " + result[1] + " years old")
+        print(result[1] + "kg")
+        print(result[3])
         print(result[10])
 
 exceptions = ["name","weight","gender","date_of_birth","last_donation","last_month_sickness","unique_identifier","expiration_of_id","blood_type","hemoglobin","email","mobil"]
+
+
 def main():
     listing()
 
