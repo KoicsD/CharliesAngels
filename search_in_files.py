@@ -14,12 +14,12 @@ def search_in_donors():
                     print("-"*35)
                     print(str(index) + ".")
                     print("\t" + row[0])
-                    print("\t" + row[6] + " kg")
-                    print("\t" + row[3] + " - " + row[1] + " years old")
+                    print("\t" + row[1] + " kg")
+                    print("\t" + row[3] + " - " +  + " years old")
                     print("\t" + row[10])
                     print("-" * 35)
                     next_page = input("Press enter to next hit or enter 'exit' to return to the main menu.")
                     if next_page.lower() == "exit":
                         return
 
-# print(search_in_donors())
+print(search_in_donors())

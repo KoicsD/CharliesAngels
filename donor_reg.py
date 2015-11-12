@@ -41,9 +41,9 @@ def input_gender():
 def input_birth_date():
     birth_date = ""
     while not birth_date:
-        birth_date = input("Please enter the New Donor's birth date (YYYY.MM.DD)!: ")
+        birth_date = input("Please enter the New Donor's birth date (YYYY.MM.DD.)!: ")
         try:
-            bdate = datetime.strptime(birth_date, "%Y.%m.%d").date()
+            bdate = datetime.strptime(birth_date, "%Y.%m.%d.").date()
         except ValueError:
             print("Wrong date format!")
             birth_date = ""
