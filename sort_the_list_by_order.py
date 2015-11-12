@@ -5,7 +5,7 @@ def sorting(lista):
     lst=[]
     for i in lista:
 
-        lst.append(str(i))
+        lst.append(str(i).lower())
 
     if len(lst)==1:
         good.append(min(lst))
@@ -25,7 +25,7 @@ def sorting_row(index,good_index):
     with open('proba.csv', newline='') as donor_file:
         reader = csv.reader(donor_file)
         for row in reader:
-            if row[index]==good[good_index]:
+            if row[index].lower()==good[good_index]:
                 print (row)
         good_index += 1
         if good_index<len(good):

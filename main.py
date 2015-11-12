@@ -44,7 +44,7 @@ Please choose if you want to list Donors or Donations:
 Please choose your action: """)
                 if choice_list == "1":
                     print("-" * 22)
-                    print("----Listing Donors Sorted By Names----")
+                    print("----Listing Donors----")
                     List_donors.main()
                 elif choice_list == "2":
                     pass
