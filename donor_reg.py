@@ -247,7 +247,7 @@ def calculate_age_in_year(birth_date: date):
 
 def print_donor(name, age, gender, birth_date, id, id_expiration,
                 weight, blood_type, last_donation,
-                mobile, email, hemoglobin):
+                mobile, email, hemoglobin, was_sick_in_last_month):
     print("Name: %s" % name)
     print("Date of Birth: %s - %d years old." % (birth_date.strftime("%Y.%m.%d"), age))
     print("Gender: %s" % gender)
@@ -260,9 +260,10 @@ def print_donor(name, age, gender, birth_date, id, id_expiration,
     print("Email: %s" % email)
     print("Mobile: %s" % mobile)
     print("The New Donor is SUITABLE for donation.")
-    donor_csv_writer.store_donor(name, age, gender, birth_date.strftime("%Y.%m.%d"), id, id_expiration.strftime("%Y.%m.%d"),
-            weight, blood_type, last_donation.strftime("%Y.%m.%d"),
-            mobile, email)
+    donor_csv_writer.store_donor(name,weight,gender,birth_date.strftime("%Y.%m.%d"),
+                                 last_donation.strftime("%Y.%m.%d"),was_sick_in_last_month,
+                                 id,id_expiration.strftime("%Y.%m.%d"),
+                                 blood_type,hemoglobin,email,mobile)
 
 
 def main():
@@ -301,7 +302,7 @@ def main():
     print('-' * 10)
     print_donor(name, age, gender, birth_date, id, id_exp_date,
             weight, blood_type, last_donation,
-            mobile, email, hemoglobin,)
+            mobile, email, hemoglobin,was_sick_in_last_month)
     print('-' * 10)
 
 if __name__ == "__main__":
