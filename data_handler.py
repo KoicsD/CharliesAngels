@@ -33,6 +33,7 @@ def add_event():
     err_msg = "Adding donation event unsuccessful.\nReason:\n%s"
     try:
         new_event = event_reg.Donation.from_user()
+        new_event.input_successful_donation()
         our_events.append(new_event)
         write()
     except event_reg.UserInterrupt as interruption:
