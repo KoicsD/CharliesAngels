@@ -286,7 +286,7 @@ class Donation:
         self = cls()
         # assert len(header) == len(data)
         # assert header == Donation.header
-        self.date = datetime.strptime(data[0], "%Y.%m.%d").date()
+        self.date = datetime.strptime(data[0], "%Y.%m.%d.").date()
         self.start_time = datetime.strptime(data[1], "%H:%M").time()
         self.end_time = datetime.strptime(data[2], "%H:%M").time()
         self.zipcode = data[3]

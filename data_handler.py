@@ -7,7 +7,7 @@ our_events = []
 
 
 def read():
-    with open("DATA/event.csv", "r", newline='') as file_obj:
+    with open("DATA/donations.csv", "r", newline='') as file_obj:
         new_events = []
         reader = csv.reader(file_obj)
         # assert header.index("id") == 0
@@ -21,7 +21,7 @@ def read():
 
 
 def write():
-    with open("DATA/event.csv", "w", newline='') as file_obj:
+    with open("DATA/donations.csv", "w", newline='') as file_obj:
         global our_events
         writer = csv.writer(file_obj)
         writer.writerow(["id"] + event_reg.Donation.header)
