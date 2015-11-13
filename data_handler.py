@@ -30,9 +30,16 @@ def write():
 
 
 def add_event():
-    new_event = event_reg.Donation.from_user()
-    our_events.append(new_event)
-    write()
+    err_msg = "Adding donation event unsuccessful.\nReason:\n%s"
+    try:
+        new_event = event_reg.Donation.from_user()
+        our_events.append(new_event)
+        write()
+    except event_reg.UserInterrupt as interruption:
+        print(err_msg % str(interruption))
+    except FileNotFoundError:
+        our_events.pop()
+        print(err_msg % "File cannot be written.")
 
 def remove_event(index: int):
     global our_events
@@ -56,7 +63,10 @@ def demo():
     print("Demo terminates.")
 
 
-read()
+try:
+    read()
+except FileNotFoundError:
+    print("Error: File cannot be read. Database stays empty in memory.")
 
 
 if __name__ == '__main__':
