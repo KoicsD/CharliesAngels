@@ -7,6 +7,8 @@ def listing():
         reader = csv.reader(file)
         index = 1
         next_page = ""
+        if len(list(reader)) <= 1:
+            print("List of Donors empty!")
         for row in reader:
             if "name" in row:
                 continue
