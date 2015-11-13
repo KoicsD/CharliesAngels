@@ -48,7 +48,7 @@ def initialize():
                        "Please, choose if you want to search in donors or donation events.")
     main_menu.add_item(menu_6)
 
-    menu_6_1 = menu.MenuPoint("Search in donors", search_in_files.search_in_donors())
+    menu_6_1 = menu.MenuPoint("Search in donors", search_in_files.search_in_donors)
     menu_6.add_item(menu_6_1)
 
     # menu_6_2  # Search in donation events
