@@ -216,7 +216,7 @@ class Donation:
 
     @classmethod
     def from_user(cls):
-        self = Donation()
+        self = cls()
 
         print("You can escape any time by typing '\quit'.")
         self.input_date()

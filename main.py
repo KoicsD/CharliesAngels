@@ -1,5 +1,7 @@
 import data_handler
 import donor_reg
+import List_donors
+import search_in_files
 import menu
 from sys import exit
 from os import system
@@ -37,15 +39,17 @@ def initialize():
     menu_5 = menu.Menu("List donors or donations", "Please, choose if you want to list donors or donation events.")
     main_menu.add_item(menu_5)
 
-    # menu_5_1  # List donors
+    menu_5_1 = menu.MenuPoint("List donors", List_donors.main)
+    menu_5.add_item(menu_5_1)
 
-    # menu_5_2  # List donation events
+    # menu_5_2  # List donation events  
 
     menu_6 = menu.Menu("Search in donors or donations",
                        "Please, choose if you want to search in donors or donation events.")
     main_menu.add_item(menu_6)
 
-    # menu_6_1  # Search in donors
+    menu_6_1 = menu.MenuPoint("Search in donors", search_in_files.search_in_donors())
+    menu_6.add_item(menu_6_1)
 
     # menu_6_2  # Search in donation events
 

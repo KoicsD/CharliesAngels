@@ -7,7 +7,7 @@ our_events = []
 
 
 def read():
-    with open("DATA/event.csv", "r", newline='') as file_obj:
+    with open("DATA/donations.csv", "r", newline='') as file_obj:
         new_events = []
         reader = csv.reader(file_obj)
         # assert header.index("id") == 0
@@ -21,7 +21,7 @@ def read():
 
 
 def write():
-    with open("DATA/event.csv", "w", newline='') as file_obj:
+    with open("DATA/donations.csv", "w", newline='') as file_obj:
         global our_events
         writer = csv.writer(file_obj)
         writer.writerow(["id"] + event_reg.Donation.header)
@@ -30,9 +30,17 @@ def write():
 
 
 def add_event():
-    new_event = event_reg.Donation.from_user()
-    our_events.append(new_event)
-    write()
+    err_msg = "Adding donation event unsuccessful.\nReason:\n%s"
+    try:
+        new_event = event_reg.Donation.from_user()
+        new_event.input_successful_donation()
+        our_events.append(new_event)
+        write()
+    except event_reg.UserInterrupt as interruption:
+        print(err_msg % str(interruption))
+    except FileNotFoundError:
+        our_events.pop()
+        print(err_msg % "File cannot be written.")
 
 def remove_event(index: int):
     global our_events
@@ -56,7 +64,10 @@ def demo():
     print("Demo terminates.")
 
 
-read()
+try:
+    read()
+except FileNotFoundError:
+    print("Error: File cannot be read. Database stays empty in memory.")
 
 
 if __name__ == '__main__':
