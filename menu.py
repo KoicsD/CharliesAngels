@@ -4,6 +4,9 @@ from os import system
 from msvcrt import getch
 
 
+header = ""
+
+
 class Index:
     def __init__(self, limit: int):
         self.limit = limit
@@ -36,6 +39,8 @@ class Menu(MenuItem):
     def load(self):
         index = Index(len(self.items))
         while True:
+            system("cls")
+            print(header)
             self.list_items(index.value)
             usr_ans = Menu.q_input()
 
@@ -44,15 +49,15 @@ class Menu(MenuItem):
             elif usr_ans == Menu.enum_keys["down"] or usr_ans == Menu.enum_keys["right"]:
                 index.increase()
             elif usr_ans == Menu.enum_keys["enter"]:
-                if not self.items[index.value].load():
-                    break
+                if index.value in range(len(self.items)):
+                    if not self.items[index.value].load():
+                        break
             elif usr_ans == Menu.enum_keys["backspace"]:
                 return True  # means: caller must keep loop going on
             elif usr_ans == Menu.enum_keys["escape"]:
                 return False  # means: caller must return
 
     def list_items(self, selected):
-        system("cls")
         print(self.title)
         print()
         print(self.message)
