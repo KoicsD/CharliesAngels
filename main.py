@@ -1,7 +1,4 @@
 import data_handler
-import donor_reg
-import List_donors
-import search_in_files
 import menu
 from sys import exit
 from os import system
@@ -25,7 +22,7 @@ def shutdown():
 def initialize():
     global main_menu
 
-    menu_1 = menu.MenuPoint("Add new donor", donor_reg.main)
+    menu_1 = menu.MenuPoint("Add new donor", data_handler.add_donor)
     main_menu.add_item(menu_1)
 
     menu_2 = menu.MenuPoint("Add new donation event", data_handler.add_event)
@@ -39,7 +36,7 @@ def initialize():
     menu_5 = menu.Menu("List donors or donations", "Please, choose if you want to list donors or donation events.")
     main_menu.add_item(menu_5)
 
-    menu_5_1 = menu.MenuPoint("List donors", List_donors.main)
+    menu_5_1 = menu.MenuPoint("List donors", data_handler.list_donors)
     menu_5.add_item(menu_5_1)
 
     # menu_5_2  # List donation events  
@@ -48,7 +45,7 @@ def initialize():
                        "Please, choose if you want to search in donors or donation events.")
     main_menu.add_item(menu_6)
 
-    menu_6_1 = menu.MenuPoint("Search in donors", search_in_files.search_in_donors)
+    menu_6_1 = menu.MenuPoint("Search in donors", data_handler.search_in_donors)
     menu_6.add_item(menu_6_1)
 
     # menu_6_2  # Search in donation events

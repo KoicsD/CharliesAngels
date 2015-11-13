@@ -6,7 +6,7 @@ def store_donor(name,weight,gender,birth_date,
                                  id,id_expiration,
                                  blood_type,hemoglobin,email,mobile):
 
-    with open("DATA\donors.csv", "a", newline="") as csv_file:
+    with open("DATA/donors.csv", "a", newline="") as csv_file:
         csv_file_writer = csv.writer(csv_file)
         csv_file_writer.writerow([name,weight,gender,birth_date,
                                  last_donation,was_sick_in_last_month,
