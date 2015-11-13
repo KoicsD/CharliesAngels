@@ -7,8 +7,6 @@ def listing():
         reader = csv.reader(file)
         index = 1
         next_page = ""
-        if len(list(reader)) <= 1:
-            print("List of Donors empty!")
         for row in reader:
             if "name" in row:
                 continue
@@ -41,7 +39,17 @@ def calculate_age_in_year(birth_date):
     return (datetime.now().date() - bdate).days // 365
 
 
+def check_if_donors_list_empty():
+    file = open('DATA\donors.csv', "r", )
+    reader = csv.reader(file)
+    if len(list(reader)) == 1:
+        print("List of Donors empty!")
+        return
+    file.close()
+
+
 def main():
+    check_if_donors_list_empty()
     listing()
 
 if __name__ == "__main__":
