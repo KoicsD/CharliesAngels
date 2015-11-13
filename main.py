@@ -23,7 +23,7 @@ Main menu
     4. Delete a donation event
     5. List donors or donation events
     6. Search
-    0. Exit
+    7. Exit
 
 Please choose your action: """)
             if choice == "1":
@@ -64,5 +64,5 @@ Please choose your action: """)
                     pass
                 elif choice == "0":
                     pass
-            elif choice == "0":
+            elif choice == "7":
                 break
