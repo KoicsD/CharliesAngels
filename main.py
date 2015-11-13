@@ -23,7 +23,7 @@ Main menu
     4. Delete a donation event
     5. List donors or donation events
     6. Search
-    7. Exit
+    0. Exit
 
 Please choose your action: """)
             if choice == "1":
@@ -39,7 +39,7 @@ Please choose your action: """)
 Please choose if you want to list Donors or Donations:
     1. Donors
     2. Donations
-    3. Return
+    0. Return
 
 Please choose your action: """)
                 if choice_list == "1":
@@ -48,21 +48,21 @@ Please choose your action: """)
                     List_donors.main()
                 elif choice_list == "2":
                     pass
-                elif choice_list == "3":
+                elif choice_list == "0":
                     pass
             elif choice == "6":
                 choice = input("""
 Please choose if you want to search in Donors or Donations:
     1. Donors
     2. Donations
-    3. Return
+    0. Return
 
 Please choose your action: """)
                 if choice == "1":
                     search_in_files.search_in_donors()
                 elif choice == "2":
                     pass
-                elif choice == "3":
+                elif choice == "0":
                     pass
-            elif choice == "7":
+            elif choice == "0":
                 break
