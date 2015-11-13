@@ -30,14 +30,14 @@ Press enter to next page or enter 'exit' to return to the main menu.
 def print_donors_data(index, result):
         print(result[0])
         print(result[1] + "kg")
-        age = calculate_age_in_year(result[3])
-        print(result[3] + " - " + str(age) + " years old")
+        print(result[3] + " - " + str(calculate_age_in_year(result[3])) + " years old")
         print(result[10])
 
 
 def calculate_age_in_year(birth_date):
     bdate = datetime.strptime(str(birth_date), "%Y.%m.%d.").date()
     return (datetime.now().date() - bdate).days // 365
+
 
 def main():
     listing()
