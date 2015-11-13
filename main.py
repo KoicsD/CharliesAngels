@@ -1,4 +1,4 @@
-import event_reg
+import data_handler
 import donor_reg
 import List_donors
 import search_in_files
@@ -29,11 +29,17 @@ Please choose your action: """)
             if choice == "1":
                 donor_reg.main()
             elif choice == "2":
-                event_reg.main()
+                data_handler.add_event()
             elif choice == "3":
                 pass
             elif choice == "4":
-                pass
+                try:
+                    index = int(input("Please enter the index of the item you want to delete: "))
+                    data_handler.remove_event(index)
+                except ValueError:
+                    print("Input cannot be parsed as integer!")
+                except IndexError:
+                    print("Wrong index!")
             elif choice == "5":
                 choice_list = input("""
 Please choose if you want to list Donors or Donations:
