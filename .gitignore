@@ -64,4 +64,5 @@ target/
 .koics/
 
 # data file:
-DATA/
+DATA/donations.csv
+DATA/donors.csv

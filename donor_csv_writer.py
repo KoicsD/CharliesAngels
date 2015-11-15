@@ -1,12 +1,14 @@
 __author__ = 'viczmandi'
 import csv
 
-def store_donor(name, age, gender, birth_date, id, id_expiration,
-                weight, blood_type, last_donation,
-                mobile, email):
+def store_donor(name,weight,gender,birth_date,
+                                 last_donation,was_sick_in_last_month,
+                                 id,id_expiration,
+                                 blood_type,hemoglobin,email,mobile):
 
-    with open("DATA\donors.csv", "a", newline="") as csv_file:
+    with open("DATA/donors.csv", "a", newline="") as csv_file:
         csv_file_writer = csv.writer(csv_file)
-        csv_file_writer.writerow([name, age, gender, birth_date, id, id_expiration,
-                weight, blood_type, last_donation,
-                mobile, email])
+        csv_file_writer.writerow([name,weight,gender,birth_date,
+                                 last_donation,was_sick_in_last_month,
+                                 id,id_expiration,
+                                 blood_type,hemoglobin,email,mobile])

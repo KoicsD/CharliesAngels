@@ -1,6 +1,7 @@
 from datetime import datetime, date
 import random
 import donor_csv_writer
+date_format = "%Y.%m.%d."
 
 
 def input_name():
@@ -41,9 +42,9 @@ def input_gender():
 def input_birth_date():
     birth_date = ""
     while not birth_date:
-        birth_date = input("Please enter the New Donor's birth date (YYYY.MM.DD)!: ")
+        birth_date = input("Please enter the New Donor's birth date (YYYY.MM.DD.)!: ")
         try:
-            bdate = datetime.strptime(birth_date, "%Y.%m.%d").date()
+            bdate = datetime.strptime(birth_date, date_format).date()
         except ValueError:
             print("Wrong date format!")
             birth_date = ""
@@ -54,11 +55,11 @@ def input_birth_date():
 def input_last_donation_time():
     last_time = ""
     while not last_time:
-        last_time = input("Please enter the New Donor's last donation date (YYYY.MM.DD) or leave empty!: ")
+        last_time = input("Please enter the New Donor's last donation date (YYYY.MM.DD.) or leave empty!: ")
         if last_time == "":
             return datetime.now().date()
         try:
-            ltime = datetime.strptime(last_time, "%Y.%m.%d").date()
+            ltime = datetime.strptime(last_time, date_format).date()
         except ValueError:
             print("Wrong date format!")
             last_time = ""
@@ -97,9 +98,9 @@ def input_identifier():
 def input_id_expiration():
     ID_expiration = ""
     while True:
-        sdate = input("Please enter the New Donor's date of ID expiration (YYYY.MM.DD): ")
+        sdate = input("Please enter the New Donor's date of ID expiration (YYYY.MM.DD.): ")
         try:
-            pdate = datetime.strptime(sdate, "%Y.%m.%d").date()
+            pdate = datetime.strptime(sdate, date_format).date()
             msg = "OK"
             if msg == "OK":
                 break
@@ -247,22 +248,23 @@ def calculate_age_in_year(birth_date: date):
 
 def print_donor(name, age, gender, birth_date, id, id_expiration,
                 weight, blood_type, last_donation,
-                mobile, email, hemoglobin):
+                mobile, email, hemoglobin, was_sick_in_last_month):
     print("Name: %s" % name)
-    print("Date of Birth: %s - %d years old." % (birth_date.strftime("%Y.%m.%d"), age))
+    print("Date of Birth: %s - %d years old." % (birth_date.strftime(date_format), age))
     print("Gender: %s" % gender)
     print("Weight: %d kg" % weight)
     print("Identifier: %s" % id)
-    print("Expiration Date of ID: %s" % id_expiration.strftime("%Y.%m.%d"))
-    print("Date of Last Donation: %s" % last_donation.strftime("%Y.%m.%d"))
+    print("Expiration Date of ID: %s" % id_expiration.strftime(date_format))
+    print("Date of Last Donation: %s" % last_donation.strftime(date_format))
     print("Type of Blood: %s" % blood_type)
     print("Hemoglobin: %s" % hemoglobin)
     print("Email: %s" % email)
     print("Mobile: %s" % mobile)
     print("The New Donor is SUITABLE for donation.")
-    donor_csv_writer.store_donor(name, age, gender, birth_date.strftime("%Y.%m.%d"), id, id_expiration.strftime("%Y.%m.%d"),
-            weight, blood_type, last_donation.strftime("%Y.%m.%d"),
-            mobile, email)
+    donor_csv_writer.store_donor(name,weight,gender,birth_date.strftime(date_format),
+                                 last_donation.strftime(date_format),was_sick_in_last_month,
+                                 id,id_expiration.strftime(date_format),
+                                 blood_type,hemoglobin,email,mobile)
 
 
 def main():
@@ -301,7 +303,7 @@ def main():
     print('-' * 10)
     print_donor(name, age, gender, birth_date, id, id_exp_date,
             weight, blood_type, last_donation,
-            mobile, email, hemoglobin,)
+            mobile, email, hemoglobin,was_sick_in_last_month)
     print('-' * 10)
 
 if __name__ == "__main__":
