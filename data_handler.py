@@ -1,12 +1,13 @@
 __author__ = 'ozsvarmarton'
+from os import system
+from time import sleep
 import event_reg
 import donor_reg
 import List_donors
 import delete_donor
 import search_in_files
 import csv
-from os import system
-from time import sleep
+import menu
 
 
 header = """
@@ -54,6 +55,7 @@ def add_event():
     try:
         new_event = event_reg.Donation.from_user()
         new_event.input_successful_donation()
+        new_event.evaluate_event()
         our_events.append(new_event)
         write()
     except event_reg.UserInterrupt as interruption:
@@ -74,8 +76,11 @@ def remove_event_at(index: int):
     global our_events
     clone_events = our_events.copy()
     our_events.pop(index)
-    write()
-    our_events = clone_events
+    try:
+        write()
+    except FileNotFoundError as err:
+        our_events = clone_events
+        raise err
 
 
 def remove_event():
@@ -109,7 +114,25 @@ def remove_donor():
 
 # lister functions:
 def list_events():
-    pass
+    global our_events
+    if len(our_events) == 0:
+        print("The list of donation event is empty!")
+        sleep(1.5)
+        return
+    pointer = menu.Index(len(our_events))
+    while True:
+        system("cls")
+        print(header)
+        print("Listing donation events")
+        print("{0} th record from {1}".format(pointer.value + 1, pointer.limit))
+        print(our_events[pointer.value])
+        button_press = menu.q_input()
+        if button_press == menu.enum_keys["left"]:
+            pointer.decrease()
+        elif button_press == menu.enum_keys["right"]:
+            pointer.increase()
+        elif button_press == menu.enum_keys["escape"]:
+            return
 
 
 def list_donors():

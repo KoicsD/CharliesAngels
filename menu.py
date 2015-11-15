@@ -4,6 +4,9 @@ from os import system
 from msvcrt import getch
 
 
+enum_keys = {"up": 0, "down": 1, "right": 2, "left": 3, "enter": 4, "backspace": 5, "escape": 6}
+
+
 header = ""
 
 
@@ -21,12 +24,35 @@ class Index:
             self.value -= 1
 
 
+def q_input():
+    key = ord(getch())
+    if key == 224:
+        key = ord(getch())
+        if key == 72:
+            return enum_keys["up"]
+        elif key == 80:
+            return enum_keys["down"]
+        elif key == 77:
+            return enum_keys["right"]
+        elif key == 75:
+            return enum_keys["left"]
+        else:
+            return None
+    elif key == 13:
+        return enum_keys["enter"]
+    elif key == 8:
+        return enum_keys["backspace"]
+    elif key == 27:
+        return enum_keys["escape"]
+    else:
+        return None
+
+
 class MenuItem:
     pass
 
 
 class Menu(MenuItem):
-    enum_keys = {"up": 0, "down": 1, "right": 2, "left": 3, "enter": 4, "backspace": 5, "escape": 6}
 
     def __init__(self, title: str, message=""):
         self.title = title
@@ -42,19 +68,19 @@ class Menu(MenuItem):
             system("cls")
             print(header)
             self.list_items(index.value)
-            usr_ans = Menu.q_input()
+            usr_ans = q_input()
 
-            if usr_ans == Menu.enum_keys["up"] or usr_ans == Menu.enum_keys["left"]:
+            if usr_ans == enum_keys["up"] or usr_ans == enum_keys["left"]:
                 index.decrease()
-            elif usr_ans == Menu.enum_keys["down"] or usr_ans == Menu.enum_keys["right"]:
+            elif usr_ans == enum_keys["down"] or usr_ans == enum_keys["right"]:
                 index.increase()
-            elif usr_ans == Menu.enum_keys["enter"]:
+            elif usr_ans == enum_keys["enter"]:
                 if index.value in range(len(self.items)):
                     if not self.items[index.value].load():
                         break
-            elif usr_ans == Menu.enum_keys["backspace"]:
+            elif usr_ans == enum_keys["backspace"]:
                 return True  # means: caller must keep loop going on
-            elif usr_ans == Menu.enum_keys["escape"]:
+            elif usr_ans == enum_keys["escape"]:
                 return False  # means: caller must return
 
     def list_items(self, selected):
@@ -67,30 +93,6 @@ class Menu(MenuItem):
                 print("\t*\t" + self.items[i].title)
             else:
                 print("\t\t" + self.items[i].title)
-
-    @staticmethod
-    def q_input():
-        key = ord(getch())
-        if key == 224:
-            key = ord(getch())
-            if key == 72:
-                return Menu.enum_keys["up"]
-            elif key == 80:
-                return Menu.enum_keys["down"]
-            elif key == 77:
-                return Menu.enum_keys["right"]
-            elif key == 75:
-                return Menu.enum_keys["left"]
-            else:
-                return None
-        elif key == 13:
-            return Menu.enum_keys["enter"]
-        elif key == 8:
-            return Menu.enum_keys["backspace"]
-        elif key == 27:
-            return Menu.enum_keys["escape"]
-        else:
-            return None
 
 
 class MenuPoint(MenuItem):
