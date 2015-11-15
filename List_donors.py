@@ -35,7 +35,7 @@ def listing():
 def print_donors_data(index, result):
         print(result[0])
         print(result[1] + "kg")
-        print(result[3])
+        print(result[3] + " - " + str((datetime.now().date() - datetime.strptime(result[3], "%Y-%m-%d").date()).days // 365) + " years old")
         print(result[10])
 
 exceptions = ["name","weight","gender","date_of_birth","last_donation","last_month_sickness","unique_identifier","expiration_of_id","blood_type","hemoglobin","email","mobil"]
