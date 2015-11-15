@@ -249,7 +249,7 @@ def print_donor(name, age, gender, birth_date, id, id_expiration,
                 weight, blood_type, last_donation,
                 mobile, email, hemoglobin, was_sick_in_last_month):
     print("Name: %s" % name)
-    print("Date of Birth: %s - %d years old." % (birth_date.strftime("%Y.%m.%d"), age))
+    print("Date of Birth: %s - %d years old." % (birth_date.strftime("%Y.%m.%d."), age))
     print("Gender: %s" % gender)
     print("Weight: %d kg" % weight)
     print("Identifier: %s" % id)
@@ -260,7 +260,7 @@ def print_donor(name, age, gender, birth_date, id, id_expiration,
     print("Email: %s" % email)
     print("Mobile: %s" % mobile)
     print("The New Donor is SUITABLE for donation.")
-    donor_csv_writer.store_donor(name,weight,gender,birth_date.strftime("%Y.%m.%d"),
+    donor_csv_writer.store_donor(name,weight,gender,birth_date.strftime("%Y.%m.%d."),
                                  last_donation.strftime("%Y.%m.%d"),was_sick_in_last_month,
                                  id,id_expiration.strftime("%Y.%m.%d"),
                                  blood_type,hemoglobin,email,mobile)
