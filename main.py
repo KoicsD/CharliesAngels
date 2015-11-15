@@ -28,7 +28,8 @@ def initialize():
     menu_2 = menu.MenuPoint("Add new donation event", data_handler.add_event)
     main_menu.add_item(menu_2)
 
-    # menu_3  # delete donor
+    menu_3 = menu.MenuPoint("Delete donor", data_handler.remove_donor)
+    main_menu.add_item(menu_3)
 
     menu_4 = menu.MenuPoint("Delete a donation event", data_handler.remove_event)
     main_menu.add_item(menu_4)
@@ -39,7 +40,8 @@ def initialize():
     menu_5_1 = menu.MenuPoint("List donors", data_handler.list_donors)
     menu_5.add_item(menu_5_1)
 
-    # menu_5_2  # List donation events  
+    menu_5_2 = menu.MenuPoint("List donation events", data_handler.list_events)
+    menu_5.add_item(menu_5_2)
 
     menu_6 = menu.Menu("Search in donors or donations",
                        "Please, choose if you want to search in donors or donation events.")

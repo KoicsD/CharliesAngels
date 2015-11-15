@@ -2,6 +2,7 @@ __author__ = 'ozsvarmarton'
 import event_reg
 import donor_reg
 import List_donors
+import delete_donor
 import search_in_files
 import csv
 from os import system
@@ -102,18 +103,48 @@ def remove_event():
         sleep(1.5)
 
 
+def remove_donor():
+    delete_donor.delete()
+
+
 # lister functions:
 def list_events():
     pass
 
 
 def list_donors():
-    List_donors.main()
+    err_msg = "Error while listing donors\n%s"
+    try:
+        List_donors.main()
+    except FileNotFoundError as lister_error:
+        system("cls")
+        print(err_msg % "File cannot be found\n%s" % str(lister_error))
+    except ValueError as lister_error:
+        system("cls")
+        print(err_msg % "ValueError\n%" % str(lister_error))
+    except IndexError as lister_error:
+        system("cls")
+        print(err_msg % "IndexError" % str(lister_error))
+    finally:
+        sleep(1.5)
 
 
 # searcher functions:
 def search_in_donors():
-    search_in_files.search_in_donors()
+    err_msg = "Error while searching in donors\n%s"
+    try:
+        search_in_files.search_in_donors()
+    except FileNotFoundError as searcher_error:
+        system("cls")
+        print(err_msg % "File cannot be found\n%s" % str(searcher_error))
+    except ValueError as searcher_error:
+        system("cls")
+        print(err_msg % "ValueError\n%" % str(searcher_error))
+    except IndexError as searcher_error:
+        system("cls")
+        print(err_msg % "IndexError" % str(searcher_error))
+    finally:
+        sleep(1.5)
 
 
 # initializer (on start-up we need to read the files):
@@ -139,18 +170,30 @@ def initialize():
 
 # demo for stand-alone running:
 def demo():
-    print("Adding 2 events:")
-    print("First...")
-    add_event()
-    print("Second...")
-    add_event()
+    # print("Adding 2 events:")
+    # print("First...")
+    # add_event()
+    # print("Second...")
+    # add_event()
+    # print("Done.")
+    # print("Removing 2nd element...")
+    # remove_event()
+    # print("Done.")
+    # print("Adding another element...")
+    # add_event()
+    # print("Done.")
+    print("Listing donors...")
+    list_donors()
+    print("Adding new donor...")
+    donor_reg.main()
     print("Done.")
-    print("Removing 2nd element...")
-    remove_event()
+    print("Listing donors.")
+    list_donors()
+    print("Deleting one donor...")
+    remove_donor()
     print("Done.")
-    print("Adding another element...")
-    add_event()
-    print("Done.")
+    print("Listing donors again.")
+    list_donors()
     print("Demo terminates.")
 
 
