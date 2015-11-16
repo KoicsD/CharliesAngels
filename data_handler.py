@@ -126,6 +126,8 @@ def list_events():
         print("Listing donation events")
         print("{0} th record from {1}".format(pointer.value + 1, pointer.limit))
         print(our_events[pointer.value])
+        print('-' * 21)
+        print("Left arrow: last event; Right arrow: next event; Esc: main menu")
         button_press = menu.q_input()
         if button_press == menu.enum_keys["left"]:
             pointer.decrease()
