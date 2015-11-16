@@ -127,15 +127,17 @@ def list_events():
         print("{0} th record from {1}".format(pointer.value + 1, pointer.limit))
         print(our_events[pointer.value])
         print('-' * 21)
-        print("Left arrow: last event; Right arrow: next event; Esc: main menu")
-        button_press = menu.q_input()
-        if button_press == menu.enum_keys["left"]:
-            pointer.decrease()
-        elif button_press == menu.enum_keys["right"]:
+        print("Write 'next' to show the next item, 'prev' to show the last item or 'q' to return to main menu")
+        command = input("your command:")
+        if command == "next":
             pointer.increase()
-        elif button_press == menu.enum_keys["escape"]:
+        elif command == "prev":
+            pointer.decrease()
+        elif command == "q":
             return
-
+        else:
+            print("wrong command!")
+            sleep(0.75)
 
 def list_donors():
     err_msg = "Error while listing donors\n%s"

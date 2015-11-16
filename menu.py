@@ -2,6 +2,7 @@ __author__ = 'KoicsD'
 
 from os import system
 from msvcrt import getch
+from time import sleep
 
 
 enum_keys = {"up": 0, "down": 1, "right": 2, "left": 3, "enter": 4, "backspace": 5, "escape": 6}
@@ -67,35 +68,34 @@ class Menu(MenuItem):
         while True:
             system("cls")
             print(header)
-            self.list_items(index.value)
+            self.list_items()
             print('-' * 21)
-            print("Left arrow, Up arrow: move up; Right arrow, Up arrow: move down")
-            print("Enter: select; Backspace: back to last submenu; Esc: return to main menu")
-            usr_ans = q_input()
-
-            if usr_ans == enum_keys["up"] or usr_ans == enum_keys["left"]:
-                index.decrease()
-            elif usr_ans == enum_keys["down"] or usr_ans == enum_keys["right"]:
-                index.increase()
-            elif usr_ans == enum_keys["enter"]:
-                if index.value in range(len(self.items)):
-                    if not self.items[index.value].load():
-                        break
-            elif usr_ans == enum_keys["backspace"]:
+            print("Please enter the number of item you want to select.")
+            print("Or type 'b' to go beck to the previous level or 'q' to return to the main menu.")
+            command = input("Your choice: ")
+            if command == "b":
                 return True  # means: caller must keep loop going on
-            elif usr_ans == enum_keys["escape"]:
+            elif command == "q":
                 return False  # means: caller must return
+            else:
+                try:
+                    choice = int(command) - 1
+                    if not self.items[choice].load():
+                        break
+                except ValueError:
+                    print("Your command cannot be parsed as integer.")
+                except IndexError:
+                    print("The number you've given is not in list.")
+                finally:
+                    sleep(1.5)
 
-    def list_items(self, selected):
+    def list_items(self):
         print(self.title)
         print()
         print(self.message)
         print()
         for i in range(len(self.items)):
-            if i == selected:
-                print("\t*\t" + self.items[i].title)
-            else:
-                print("\t\t" + self.items[i].title)
+            print("\t{0}\t".format(i + 1) + self.items[i].title)
 
 
 class MenuPoint(MenuItem):
