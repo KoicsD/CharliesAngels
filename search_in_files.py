@@ -1,6 +1,6 @@
 __author__ = 'Zoltan'
 import csv
-from datetime import datetime, date
+from datetime import datetime
 date_format = "%Y.%m.%d."
 
 def calculate_age_in_year(birth_date):

@@ -1,6 +1,6 @@
 __author__ = ['KoicsD', 'BodiZs']
 from time import sleep
-from datetime import datetime, date, time, timedelta
+from datetime import datetime, date, time
 date_format = "%Y.%m.%d."
 
 

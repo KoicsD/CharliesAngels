@@ -1,5 +1,5 @@
 import csv
-from datetime import datetime, date
+from datetime import datetime
 date_format = "%Y.%m.%d."
 
 
