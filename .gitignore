@@ -64,5 +64,7 @@ target/
 .koics/
 
 # data file:
-DATA/donations.csv
-DATA/donors.csv
+DATA/
+
+# automatic save
+*.autosave
