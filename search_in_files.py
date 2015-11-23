@@ -1,9 +1,10 @@
 __author__ = 'Zoltan'
 import csv
 from datetime import datetime, date
+date_format = "%Y.%m.%d."
 
 def calculate_age_in_year(birth_date):
-    bdate = datetime.strptime(str(birth_date), "%Y.%m.%d").date()
+    bdate = datetime.strptime(str(birth_date), date_format).date()
     return (datetime.now().date() - bdate).days // 365
 
 def search_in_donors():

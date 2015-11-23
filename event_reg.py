@@ -1,6 +1,7 @@
 __author__ = ['KoicsD', 'BodiZs']
 from time import sleep
 from datetime import datetime, date, time, timedelta
+date_format = "%Y.%m.%d."
 
 
 class UserInterrupt(Exception):
@@ -40,11 +41,11 @@ class Donation:
         sdate = ""
         pdate = date(1, 1, 1)
         while True:
-            sdate = input("Please enter date of event (YYYY.MM.DD): ")
+            sdate = input("Please enter date of event (YYYY.MM.DD.): ")
             if sdate == "\\quit":
                 raise UserInterrupt("input_date")
             try:
-                pdate = datetime.strptime(sdate, "%Y.%m.%d").date()
+                pdate = datetime.strptime(sdate, date_format).date()
                 time_until_event = pdate - datetime.now().date()
                 msg = "OK"
                 if time_until_event.days < 10:
@@ -251,7 +252,7 @@ class Donation:
             text += "valid: " + str(self.valid) + "\n"
         elif not self.valid:
             return "<Invalid Donation Object.>"
-        text += "Date of Donation: " + self.date.strftime("%Y.%m.%d") + "\n"
+        text += "Date of Donation: " + self.date.strftime(date_format) + "\n"
         text += "Start-Time: " + self.start_time.strftime("%H:%M") + "\n"
         text += "End-Time: " + self.end_time.strftime("%H:%M") + "\n"
         if self.test_mode:
@@ -286,7 +287,7 @@ class Donation:
         self = cls()
         # assert len(header) == len(data)
         # assert header == Donation.header
-        self.date = datetime.strptime(data[0], "%Y.%m.%d").date()
+        self.date = datetime.strptime(data[0], date_format).date()
         self.start_time = datetime.strptime(data[1], "%H:%M").time()
         self.end_time = datetime.strptime(data[2], "%H:%M").time()
         self.zipcode = data[3]
@@ -314,7 +315,7 @@ class Donation:
         if not self.valid:
             raise ValueError("Invalid donor object.")
         data = []
-        data.append(self.date.strftime("%Y.%m.%d"))
+        data.append(self.date.strftime(date_format))
         data.append(self.start_time.strftime("%H:%M"))
         data.append(self.end_time.strftime("%H:%M"))
         data.append(self.zipcode)
