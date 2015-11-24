@@ -174,6 +174,23 @@ def search_in_donors():
         sleep(1.5)
 
 
+def search_in_events():
+    err_msg = "Error while searching in donors\n%s"
+    try:
+        search_in_files.search_in_events()
+    except FileNotFoundError as searcher_error:
+        system("cls")
+        print(err_msg % "File cannot be found\n%s" % str(searcher_error))
+    except ValueError as searcher_error:
+        system("cls")
+        print(err_msg % "ValueError\n%" % str(searcher_error))
+    except IndexError as searcher_error:
+        system("cls")
+        print(err_msg % "IndexError" % str(searcher_error))
+    finally:
+        sleep(1.5)
+
+
 # initializer (on start-up we need to read the files):
 def initialize():
     try:
