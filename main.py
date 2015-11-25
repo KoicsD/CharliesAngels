@@ -53,10 +53,11 @@ def initialize():
     menu_6_2 = menu.MenuPoint("Search in events", data_handler.search_in_events)
     menu_6.add_item(menu_6_2)
 
-    # menu_6_2  # Search in donation events
-
-    menu_7 = menu.MenuPoint("Exit", shutdown)
+    menu_7 = menu.MenuPoint("Change Donor or Donation event", data_handler.modify)
     main_menu.add_item(menu_7)
+
+    menu_8 = menu.MenuPoint("Exit", shutdown)
+    main_menu.add_item(menu_8)
 
 
 def main():

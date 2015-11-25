@@ -191,6 +191,38 @@ def search_in_events():
         sleep(1.5)
 
 
+# changer:
+def modify_event(event):
+    system('cls')
+    print(header)
+    print("Donation to modify:")
+    print(event)
+    event = event_reg.Donation.from_user()
+    event.input_successful_donation()
+    event.evaluate_event()
+    return event
+
+
+def modify():
+    global our_events
+    system('cls')
+    print(header)
+    inp = input("Please, enter the id of Donor or Donation you want to modify:")
+    if inp.isdigit():
+        i = int(inp) - 1
+        if i in range(len(our_events)):
+            our_events[i] = modify_event(our_events[i])
+            write()
+        else:
+            print("Id number is not found in list of Donations!")
+            sleep(1.5)
+    elif donor_reg.validate_identifier(inp):
+        pass    # here comes modify_donor
+    else:
+        print("Input cannot be parsed as an id of either a Donor or an Donation event.")
+        sleep(1.5)
+
+
 # initializer (on start-up we need to read the files):
 def initialize():
     try:
@@ -226,19 +258,22 @@ def demo():
     # print("Adding another element...")
     # add_event()
     # print("Done.")
-    print("Listing donors...")
-    list_donors()
-    print("Adding new donor...")
-    donor_reg.main()
-    print("Done.")
-    print("Listing donors.")
-    list_donors()
-    print("Deleting one donor...")
-    remove_donor()
-    print("Done.")
-    print("Listing donors again.")
-    list_donors()
-    print("Demo terminates.")
+
+    # print("Listing donors...")
+    # list_donors()
+    # print("Adding new donor...")
+    # donor_reg.main()
+    # print("Done.")
+    # print("Listing donors.")
+    # list_donors()
+    # print("Deleting one donor...")
+    # remove_donor()
+    # print("Done.")
+    # print("Listing donors again.")
+    # list_donors()
+    # print("Demo terminates.")
+
+    modify()
 
 
 # on start-up calling initializer:
