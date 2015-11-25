@@ -22,7 +22,7 @@ def sorting(lista):
 
 def sorting_row(index,good_index):
     global donor_file, reader, row
-    with open('proba.csv', newline='') as donor_file:
+    with open('DATA/donors.csv', newline='') as donor_file:
         reader = csv.reader(donor_file)
         for row in reader:
             if row[index].lower()==good[good_index]:
@@ -30,20 +30,20 @@ def sorting_row(index,good_index):
         good_index += 1
         if good_index<len(good):
             sorting_row(index,good_index)
-        print (good_index)
 
 
-word = input("What do you search?")
-index = input("What is the key?")
-with open('proba.csv', newline='') as donor_file:
+
+
+index = 0
+with open('DATA/donors.csv', newline='') as donor_file:
     reader = csv.reader(donor_file)
     lista = []
     good = []
 
     for row in reader:
-        print(row[index])
+
         lista.append(row[index])
     sorting(lista)
-    print(good)
+
     good_index=0
     sorting_row(index,good_index)
