@@ -202,6 +202,9 @@ def modify_event(event):
     event.evaluate_event()
     return event
 
+def modify_donor(donor):
+    print("Coming soon!")
+    return donor
 
 def modify():
     global our_events
@@ -213,11 +216,13 @@ def modify():
         if i in range(len(our_events)):
             our_events[i] = modify_event(our_events[i])
             write()
+            print("Donation event data successfully modified!")
+            sleep(1.5)
         else:
             print("Id number is not found in list of Donations!")
             sleep(1.5)
     elif donor_reg.validate_identifier(inp):
-        pass    # here comes modify_donor
+        print("Donor data successfully modified!")
     else:
         print("Input cannot be parsed as an id of either a Donor or an Donation event.")
         sleep(1.5)
