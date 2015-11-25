@@ -49,6 +49,9 @@ def initialize():
 
     menu_6_1 = menu.MenuPoint("Search in donors", data_handler.search_in_donors)
     menu_6.add_item(menu_6_1)
+    
+    menu_6_2 = menu.MenuPoint("Search in events", data_handler.search_in_events)
+    menu_6.add_item(menu_6_2)
 
     # menu_6_2  # Search in donation events
 
