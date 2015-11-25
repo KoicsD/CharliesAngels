@@ -29,7 +29,7 @@ def sorting_row(index,good_index):
                 if "name" in row:
                     continue
                 print("-"*35)
-                print(str(index) + ".")
+                print(str(good_index) + ".")
                 print("\t" + row[0])
                 print("\t" + row[1] + " kg")
                 print("\t" + row[3] + " - " + str(calculate_age_in_year(row[3])) + " years old")
