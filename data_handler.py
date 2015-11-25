@@ -211,8 +211,17 @@ def modify():
     if inp.isdigit():
         i = int(inp) - 1
         if i in range(len(our_events)):
-            our_events[i] = modify_event(our_events[i])
-            write()
+            try:
+                events = our_events.copy()
+                our_events[i] = modify_event(our_events[i])
+                write()
+            except event_reg.UserInterrupt:
+                print("Input interrupted by user")
+                sleep(1)
+            except FileNotFoundError:
+                our_events = events
+                print("File cannot be written")
+                sleep(2)
         else:
             print("Id number is not found in list of Donations!")
             sleep(1.5)
