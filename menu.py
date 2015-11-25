@@ -99,13 +99,14 @@ class Menu(MenuItem):
 
 
 class MenuPoint(MenuItem):
-    def __init__(self, title: str, function):
+    def __init__(self, title: str, function, *args):
         self.title = title
         self.function = function
+        self.args = args
 
     def load(self):
         system("cls")
-        self.function()
+        self.function(*self.args)
         return False  # caller must always return
 
 
