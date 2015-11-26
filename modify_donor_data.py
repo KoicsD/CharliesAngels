@@ -21,25 +21,23 @@ def donor_data_to_list(our_donors):
     return our_donors
 
 
-def donor_id_donor_data(list, id):
-    return id == list[6]
-
-
 def modify_donor():
     newrow = []
     our_donors = []
     new_donors = []
     our_donors = donor_data_to_list(our_donors)
-    id = "123456AB"
+    id = "123457AB"
+    if not any(e[6] == id for e in our_donors):
+        print("ID not found!")
     for row in our_donors:
         newrow = []
-        if donor_id_donor_data(row, id):
+        if id == row[6]:
             newrow = donor_reg.input_and_store_data(row)
         if not newrow:
             new_donors.append(row)
         else:
             new_donors.append(newrow)
-    write_donors_modified_data_to_csv(new_donors)
+        write_donors_modified_data_to_csv(new_donors)
+
 
 modify_donor()
-
