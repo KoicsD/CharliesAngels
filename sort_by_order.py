@@ -30,7 +30,7 @@ def sorting_donor_by_order():
         if index == 1 or index == 9:
             lst = sorted(reader, key=lambda donor: int(donor[index]))
         else:
-            lst = (sorted(reader, key=lambda donor: donor[index]))
+            lst = (sorted(reader, key=lambda donor: donor[index].lower()))
 
         for row in lst:
             print("-" * 35)
@@ -67,7 +67,7 @@ def sorting_donation_by_order():
         if index == 0 or index == 7 or index == 8 or index ==9:
             lst = sorted(reader, key=lambda donor: int(donor[index]))
         else:
-            lst = (sorted(reader, key=lambda donor: donor[index]))
+            lst = (sorted(reader, key=lambda donor: donor[index].lower()))
 
         for row in lst:
             print("-" * 35)
@@ -79,4 +79,4 @@ def sorting_donation_by_order():
             print("\t" + row[6])
             print("-" * 35)
 
-sorting_donation_by_order()
+sorting_donor_by_order()
