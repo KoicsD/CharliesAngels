@@ -26,16 +26,20 @@ def donor_id_donor_data(list, id):
 
 
 def modify_donor():
+    newrow = []
     our_donors = []
     new_donors = []
     our_donors = donor_data_to_list(our_donors)
-    id = input("Give me ID!")
+    id = "123456AB"
     for row in our_donors:
+        newrow = []
         if donor_id_donor_data(row, id):
-            row = donor_reg.input_and_store_data(row)
-        new_donors.append(row)
+            newrow = donor_reg.input_and_store_data(row)
+        if not newrow:
+            new_donors.append(row)
+        else:
+            new_donors.append(newrow)
     write_donors_modified_data_to_csv(new_donors)
-
 
 modify_donor()
 
