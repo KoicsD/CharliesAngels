@@ -79,4 +79,6 @@ def sorting_donation_by_order():
             print("\t" + row[6])
             print("-" * 35)
 
-sorting_donor_by_order()
+if __name__ == '__main__':
+    sorting_donor_by_order()
+    sorting_donation_by_order()

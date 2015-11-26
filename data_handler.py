@@ -3,11 +3,11 @@ from os import system
 from time import sleep
 import event_reg
 import donor_reg
-import List_donors
+import sort_by_order
 import delete_donor
 import search_in_files
 import csv
-import menu
+# import menu
 
 
 header = """
@@ -117,7 +117,7 @@ def list_events():
     global our_events
     err_msg = "Error while listing donors\n%s"
     try:
-        List_donors.list_events(our_events)
+        sort_by_order.sorting_donation_by_order()
     except ValueError as lister_error:
         system("cls")
         print(err_msg % "ValueError\n%" % str(lister_error))
@@ -129,7 +129,7 @@ def list_events():
 def list_donors():
     err_msg = "Error while listing donors\n%s"
     try:
-        List_donors.main()
+        sort_by_order.sorting_donor_by_order()
     except FileNotFoundError as lister_error:
         system("cls")
         print(err_msg % "File cannot be found\n%s" % str(lister_error))
