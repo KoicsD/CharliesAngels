@@ -115,29 +115,16 @@ def remove_donor():
 # lister functions:
 def list_events():
     global our_events
-    if len(our_events) == 0:
-        print("The list of donation event is empty!")
-        sleep(1.5)
-        return
-    pointer = menu.Index(len(our_events))
-    while True:
+    err_msg = "Error while listing donors\n%s"
+    try:
+        List_donors.list_events(our_events)
+    except ValueError as lister_error:
         system("cls")
-        print(header)
-        print("Listing donation events")
-        print("{0} th record from {1}".format(pointer.value + 1, pointer.limit))
-        print(our_events[pointer.value])
-        print('-' * 21)
-        print("Write 'next' to show the next item, 'prev' to show the last item or 'q' to return to main menu")
-        command = input("your command:")
-        if command == "next":
-            pointer.increase()
-        elif command == "prev":
-            pointer.decrease()
-        elif command == "q":
-            return
-        else:
-            print("wrong command!")
-            sleep(0.75)
+        print(err_msg % "ValueError\n%" % str(lister_error))
+    except IndexError as lister_error:
+        system("cls")
+        print(err_msg % "IndexError" % str(lister_error))
+
 
 def list_donors():
     err_msg = "Error while listing donors\n%s"

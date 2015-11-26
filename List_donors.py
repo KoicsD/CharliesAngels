@@ -49,6 +49,34 @@ def check_if_donors_list_empty():
     file.close()
 
 
+def list_events(our_events):
+    if len(our_events) == 0:
+        print("The list of donation event is empty!")
+        return
+    index = 1
+    next_page = ""
+    for event in our_events:
+        next_page = input("""
+--------------------------------------------------------------------
+Press enter to next page or enter 'exit' to return to the main menu.
+--------------------------------------------------------------------""")
+        print(str(index) + ". page")
+        index += 1
+        if next_page.lower() == "exit":
+            return
+        print_event(event)
+    print("-" * 39)
+    exit = input("Press enter to return to the main menu.")
+    print("-" * 39)
+
+def print_event(event):
+    data = event.to_lists()
+    print(data[0])
+    print(data[1] + " - " + data[2])
+    print(data[3] + " " + data[4])
+    print(data[5])
+
+
 def main():
     check_if_donors_list_empty()
     listing()
