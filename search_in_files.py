@@ -3,9 +3,11 @@ import csv
 from datetime import datetime
 date_format = "%Y.%m.%d."
 
+
 def calculate_age_in_year(birth_date):
     bdate = datetime.strptime(str(birth_date), date_format).date()
     return (datetime.now().date() - bdate).days // 365
+
 
 def search_in_donors():
     search_term = input("Search term: ")
@@ -28,6 +30,9 @@ def search_in_donors():
                     if next_page.lower() == "exit":
                         return
                     break
+        print("Searching reached its end. Press Enter to return to main menu.")
+        input("")
+
 
 def search_in_events():
     search_term = input("Search term: ")
@@ -50,3 +55,5 @@ def search_in_events():
                     if next_page.lower() == "exit":
                         return
                     break
+        print("Searching reached its end. Press Enter to return to main menu.")
+        input("")
