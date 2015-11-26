@@ -21,12 +21,12 @@ def donor_data_to_list(our_donors):
     return our_donors
 
 
-def modify_donor():
+def modify_donor(inp):
     newrow = []
     our_donors = []
     new_donors = []
     our_donors = donor_data_to_list(our_donors)
-    id = "123457AB"
+    id = inp
     if not any(e[6] == id for e in our_donors):
         print("ID not found!")
     for row in our_donors:
@@ -37,7 +37,8 @@ def modify_donor():
             new_donors.append(row)
         else:
             new_donors.append(newrow)
+            print("Donors data has been modified!")
         write_donors_modified_data_to_csv(new_donors)
 
 
-modify_donor()
+modify_donor("123456AB")
