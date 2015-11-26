@@ -7,6 +7,7 @@ import sort_by_order
 import delete_donor
 import search_in_files
 import csv
+import  modify_donor_data
 # import menu
 
 
@@ -189,10 +190,6 @@ def modify_event(event):
     event.evaluate_event()
     return event
 
-def modify_donor(donor):
-    print("Coming soon!")
-    return donor
-
 def modify():
     global our_events
     system('cls')
@@ -218,7 +215,8 @@ def modify():
             print("Id number is not found in list of Donations!")
             sleep(1.5)
     elif donor_reg.validate_identifier(inp):
-        print("Donor data successfully modified!")
+        modify_donor_data.modify_donor(inp)
+        sleep(1.5)
     else:
         print("Input cannot be parsed as an id of either a Donor or an Donation event.")
         sleep(1.5)
