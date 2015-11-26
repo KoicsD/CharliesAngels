@@ -12,6 +12,7 @@ def search_in_donors():
     with open('DATA\donors.csv', newline='') as file:
         reader = csv.reader(file)
         index = 0
+        next(reader)
         for row in reader:
             for i in row:
                 if search_term in i:
@@ -26,16 +27,15 @@ def search_in_donors():
                     next_page = input("Press enter to next hit or enter 'exit' to return to the main menu.")
                     if next_page.lower() == "exit":
                         return
-
+                    break
 
 def search_in_events():
     search_term = input("Search term: ")
     with open('DATA\donations.csv', newline='') as file:
         reader = csv.reader(file)
         index = 0
+        next(reader)
         for row in reader:
-            if "id" in row:
-                continue
             for i in row:
                 if search_term.lower() in i.lower():
                     index += 1
@@ -49,5 +49,4 @@ def search_in_events():
                     next_page = input("Press enter to next hit or enter 'exit' to return to the main menu.")
                     if next_page.lower() == "exit":
                         return
-
-# print(search_in_donors())
+                    break
