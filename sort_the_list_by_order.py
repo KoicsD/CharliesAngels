@@ -34,12 +34,9 @@ def sorting_row(index,good_index):
                 print("\t" + row[1] + " kg")
                 print("\t" + row[3] + " - " + str(calculate_age_in_year(row[3])) + " years old")
                 print("\t" + row[10])
-                print("-" * 35)
         good_index += 1
         if good_index<len(good):
             sorting_row(index,good_index)
-
-
 
 
 index = 0
