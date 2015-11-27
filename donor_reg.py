@@ -209,12 +209,16 @@ def validate_sickness(sick):
     return sick == "y"
 
 
-def validate_identifier(identifier):
+def is_id_unique(identifier):
     with open("DATA/donors.csv", newline="") as donor_file:
         for row in donor_file:
             if identifier.lower() in row.lower():
                 print("The given identifier already exists in database!")
                 return False
+    return True
+
+
+def validate_identifier(identifier):
     if len(identifier) != 8:
         print("It isn't a correct form for identifier, should be 8 character long.")
         return False
@@ -314,6 +318,8 @@ def main():
             You can not donate blood if you were sick in the past 30 days!")
             return
         id = input_identifier()
+        if not is_id_unique(id):
+            return
         id_exp_date = input_id_expiration()
         if not validate_id_expiration(id_exp_date):
             print("Sorry the New Donor is not suitable for donation! ID expired or expiring today!!")

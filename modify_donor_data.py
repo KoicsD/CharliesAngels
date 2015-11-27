@@ -46,7 +46,7 @@ def modify_donor(inp):
         print("ID not found!")
     for row in our_donors:
         newrow = []
-        if id == row[6]:
+        if id.lower() == row[6].lower():
             print_current_data(row)
             try:
                 newrow = donor_reg.input_and_store_data()
@@ -61,4 +61,5 @@ def modify_donor(inp):
         write_donors_modified_data_to_csv(new_donors)
 
 
-modify_donor("123654AS")
+if __name__ == '__main__':
+    modify_donor("123654AS")
