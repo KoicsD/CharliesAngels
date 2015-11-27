@@ -4,11 +4,17 @@ import donor_csv_writer
 date_format = "%Y.%m.%d."
 
 
+class UserInterrupt(Exception):
+    pass
+
+
 def input_name():
     valid_name = False
     data_name = ""
     while not valid_name:
         data_name = input("Please enter the New Donor's full name separated with space!(Firstname Surname): ")
+        if data_name.lower() == "\\quit":
+            raise UserInterrupt("Inputting name interrupted by User.")
         if validate_name(data_name):
             valid_name = True
         else:
@@ -21,6 +27,8 @@ def input_weight():
     data_weight = ""
     while not data_weight:
         data_weight = input("Please enter the New Donor's weight!(kg): ")
+        if data_weight.lower() == "\\quit":
+            raise UserInterrupt("Inputting weight interrupted by User.")
         if not (str(data_weight).isdigit() and int(data_weight) > 0):
             print("Weight must be integer!")
             data_weight = ""
@@ -33,6 +41,8 @@ def input_gender():
     valid_gender = False
     while not valid_gender:
         data_gender = input("Please enter the New Donor's gender!(M/F): ")
+        if data_gender.lower() == "\\quit":
+            raise UserInterrupt("Inputting gender interrupted by User.")
         if data_gender.lower() == "m" or data_gender.lower() == "f":
             valid_gender = validate_gender(data_gender)
             return valid_gender
@@ -43,6 +53,8 @@ def input_birth_date():
     birth_date = ""
     while not birth_date:
         birth_date = input("Please enter the New Donor's birth date (YYYY.MM.DD.)!: ")
+        if birth_date.lower() == "\\quit":
+            raise UserInterrupt("Inputting birth date interrupted by User.")
         try:
             bdate = datetime.strptime(birth_date, date_format).date()
         except ValueError:
@@ -56,6 +68,8 @@ def input_last_donation_time():
     last_time = ""
     while not last_time:
         last_time = input("Please enter the New Donor's last donation date (YYYY.MM.DD.) or leave empty!: ")
+        if last_time.lower() == "\\quit":
+            raise UserInterrupt("Inputting date of last donation interrupted by User.")
         if last_time == "":
             return datetime.now().date()
         try:
@@ -72,6 +86,8 @@ def input_sickness():
     while True:
         sick = input("Was the New Donor ill in the last 30 days? (y/n) ")
         l_sick = sick.lower()
+        if l_sick == "\\quit":
+            raise UserInterrupt("Inputting last month sickness interrupted by User.")
         if sick == "":
             print("You must enter 'y' or 'n'")
         elif l_sick == 'n':
@@ -87,7 +103,8 @@ def input_identifier():
     identifier = ""
     while identifier == '':
         identifier = input("Please enter the New Donor's unique ID(identity card/passport)!")
-
+        if identifier.lower() == "\\quit":
+            raise UserInterrupt("Inputting identifier interrupted by User.")
         if identifier == "":
             print("Unique identifier cannot be empty")
         elif not validate_identifier(identifier):
@@ -99,6 +116,8 @@ def input_id_expiration():
     ID_expiration = ""
     while True:
         sdate = input("Please enter the New Donor's date of ID expiration (YYYY.MM.DD.): ")
+        if sdate.lower() == "\\quit":
+            raise UserInterrupt("Inputting expiration time of ID interrupted by User.")
         try:
             pdate = datetime.strptime(sdate, date_format).date()
             msg = "OK"
@@ -119,6 +138,8 @@ def input_blood_type():
 
     while not valid_blood_type:
         data_blood_type = input("Please enter the New Donor's blood type!: ")
+        if data_blood_type.lower() == "\\quit":
+            raise UserInterrupt("Inputting blood type interrupted by User.")
         if str(data_blood_type).upper() not in blood_types:
             print("Blood type must be: A+, 0+, B+, AB+, A-, 0-, B- or AB-")
         else:
@@ -132,6 +153,8 @@ def input_email():
     email_string = " "
     while not data_email:
         email_string = input("Please enter the New Donor's email address:  ")
+        if email_string.lower() == "\\quit":
+            raise UserInterrupt("Inputting email address interrupted by User.")
         if validate_email(email_string):
             data_email = True
         else:
@@ -143,7 +166,8 @@ def input_mobile_number():
     mobile_number = ""
     while mobile_number == "":
         mobile_number = input("Please enter the New Donor's mobile number(like this:06201234567 or +36301234567):")
-
+        if mobile_number.lower() == "\\quit":
+            raise UserInterrupt("Inputting mobile number interrupted by User.")
         if mobile_number == "":
             print("Phone number is empty:")
 
@@ -262,48 +286,51 @@ def print_donor(name, age, gender, birth_date, id, id_expiration,
     print("Mobile: %s" % mobile)
 
 def main():
-    name = input_name()
-    weight = input_weight()
-    if not validate_weight(weight):
-        print("Sorry the New Donor is not suitable for donation! Too low weight!")
-        return
-    gender = input_gender()
-    birth_date = input_birth_date()
-    age = calculate_age_in_year(birth_date)
-    if not validate_age(age):
-        print("Sorry the New Donor is not suitable for donation! Too young!")
-        return
-    last_donation = input_last_donation_time()
-    if not validate_last_donation_time(last_donation):
-        print("Sorry the New Donor is not suitable for donation! Already donated blood in the past 90 days!")
-        return
-    was_sick_in_last_month = input_sickness()
-    if validate_sickness(was_sick_in_last_month):
-        print("Sorry the New Donor is not suitable for donation! \
-        You can not donate blood if you were sick in the past 30 days!")
-        return
-    id = input_identifier()
-    id_exp_date = input_id_expiration()
-    if not validate_id_expiration(id_exp_date):
-        print("Sorry the New Donor is not suitable for donation! ID expired or expiring today!!")
-        return
-    blood_type = input_blood_type()
-    hemoglobin = random_hemoglobin()
-    if not validate_hemoglobin(hemoglobin):
-        print("Sorry the New Donor not suitable for donation! Too low hemoglobin count!")
-        return
-    email = input_email()
-    mobile = input_mobile_number()
-    print('-' * 10)
-    print_donor(name, age, gender, birth_date, id, id_exp_date,
-            weight, blood_type, last_donation,
-            mobile, email, hemoglobin,was_sick_in_last_month)
+    try:
+        name = input_name()
+        weight = input_weight()
+        if not validate_weight(weight):
+            print("Sorry the New Donor is not suitable for donation! Too low weight!")
+            return
+        gender = input_gender()
+        birth_date = input_birth_date()
+        age = calculate_age_in_year(birth_date)
+        if not validate_age(age):
+            print("Sorry the New Donor is not suitable for donation! Too young!")
+            return
+        last_donation = input_last_donation_time()
+        if not validate_last_donation_time(last_donation):
+            print("Sorry the New Donor is not suitable for donation! Already donated blood in the past 90 days!")
+            return
+        was_sick_in_last_month = input_sickness()
+        if validate_sickness(was_sick_in_last_month):
+            print("Sorry the New Donor is not suitable for donation! \
+            You can not donate blood if you were sick in the past 30 days!")
+            return
+        id = input_identifier()
+        id_exp_date = input_id_expiration()
+        if not validate_id_expiration(id_exp_date):
+            print("Sorry the New Donor is not suitable for donation! ID expired or expiring today!!")
+            return
+        blood_type = input_blood_type()
+        hemoglobin = random_hemoglobin()
+        if not validate_hemoglobin(hemoglobin):
+            print("Sorry the New Donor not suitable for donation! Too low hemoglobin count!")
+            return
+        email = input_email()
+        mobile = input_mobile_number()
+        print('-' * 10)
+        print_donor(name, age, gender, birth_date, id, id_exp_date,
+                weight, blood_type, last_donation,
+                mobile, email, hemoglobin,was_sick_in_last_month)
 
-    print("The New Donor is SUITABLE for donation.")
-    donor_csv_writer.store_donor(name,weight,gender,birth_date.strftime(date_format),
-                                 last_donation.strftime(date_format),was_sick_in_last_month,
-                                 id,id.strftime(date_format),
-                                 blood_type,hemoglobin,email,mobile)
+        print("The New Donor is SUITABLE for donation.")
+        donor_csv_writer.store_donor(name,weight,gender,birth_date.strftime(date_format),
+                                     last_donation.strftime(date_format),was_sick_in_last_month,
+                                     id,id.strftime(date_format),
+                                     blood_type,hemoglobin,email,mobile)
+    except UserInterrupt as interruption:
+        print(str(interruption))
     print('-' * 10)
 
 def input_and_store_data(list):
