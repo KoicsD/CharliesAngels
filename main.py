@@ -1,5 +1,5 @@
 import event_reg
-import donor_reg
+import donor_reg_class
 
 
 def print_separator_line():
@@ -21,7 +21,7 @@ Donor register press: 1
 Location register press: 2
 Press 3 to exit \n >>>""")
             if choice == "1":
-                donor_reg.main()
+                donor_reg_class.main()
                 break
             elif choice == "2":
                 event_reg.main()
