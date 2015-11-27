@@ -62,3 +62,9 @@ target/
 .idea/
 
 .koics/
+
+# data file:
+DATA/
+
+# automatic save
+*.autosave
