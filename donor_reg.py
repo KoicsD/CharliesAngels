@@ -284,6 +284,7 @@ def print_donor(name, age, gender, birth_date, id, id_expiration,
     print("Hemoglobin: %s" % hemoglobin)
     print("Email: %s" % email)
     print("Mobile: %s" % mobile)
+    print("Was sick in last month: %s" % was_sick_in_last_month)
 
 def main():
     try:
@@ -374,7 +375,7 @@ def input_and_store_data():
                                  blood_type,hemoglobin,email,mobile]
     print_donor(name, age, gender, birth_date, id, id_exp_date,
             weight, blood_type, last_donation,
-            mobile, email, hemoglobin,was_sick_in_last_month)
+            mobile, email, hemoglobin, was_sick_in_last_month)
     print('-' * 10)
     return list
 
