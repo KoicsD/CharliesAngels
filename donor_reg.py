@@ -206,7 +206,7 @@ def validate_last_donation_time(date_of_donation):
 
 
 def validate_sickness(sick):
-    return sick == "y"
+    return sick == "n"
 
 
 def validate_identifier(identifier):
@@ -286,6 +286,20 @@ def print_donor(name, age, gender, birth_date, id, id_expiration,
     print("Mobile: %s" % mobile)
     print("Was sick in last month: %s" % was_sick_in_last_month)
 
+
+def donor_is_suitable(age, weight, sickness, hemo, l_don):
+    if validate_age(age):
+        return False
+    if validate_weight(weight):
+        return False
+    if validate_sickness(sickness):
+        return False
+    if validate_hemoglobin(hemo):
+        return False
+    if validate_last_donation_time(l_don):
+        return False
+    return True
+
 def main():
     try:
         name = input_name()
@@ -304,7 +318,7 @@ def main():
             print("Sorry the New Donor is not suitable for donation! Already donated blood in the past 90 days!")
             return
         was_sick_in_last_month = input_sickness()
-        if validate_sickness(was_sick_in_last_month):
+        if not validate_sickness(was_sick_in_last_month):
             print("Sorry the New Donor is not suitable for donation! \
             You can not donate blood if you were sick in the past 30 days!")
             return
@@ -338,34 +352,15 @@ def main():
 def input_and_store_data():
     name = input_name()
     weight = input_weight()
-    if not validate_weight(weight):
-        print("Sorry the New Donor is not suitable for donation! Too low weight!")
-        return
     gender = input_gender()
     birth_date = input_birth_date()
     age = calculate_age_in_year(birth_date)
-    if not validate_age(age):
-        print("Sorry the New Donor is not suitable for donation! Too young!")
-        return
     last_donation = input_last_donation_time()
-    if not validate_last_donation_time(last_donation):
-        print("Sorry the New Donor is not suitable for donation! Already donated blood in the past 90 days!")
-        return
     was_sick_in_last_month = input_sickness()
-    if validate_sickness(was_sick_in_last_month):
-        print("Sorry the New Donor is not suitable for donation! \
-        You can not donate blood if you were sick in the past 30 days!")
-        return
     id = input_identifier()
     id_exp_date = input_id_expiration()
-    if not validate_id_expiration(id_exp_date):
-        print("Sorry the New Donor is not suitable for donation! ID expired or expiring today!!")
-        return
     blood_type = input_blood_type()
     hemoglobin = random_hemoglobin()
-    if not validate_hemoglobin(hemoglobin):
-        print("Sorry the New Donor not suitable for donation! Too low hemoglobin count!")
-        return
     email = input_email()
     mobile = input_mobile_number()
     print('-' * 10)
@@ -377,6 +372,17 @@ def input_and_store_data():
             weight, blood_type, last_donation,
             mobile, email, hemoglobin, was_sick_in_last_month)
     print('-' * 10)
+    while True:
+        if not donor_is_suitable(age, weight, was_sick_in_last_month, hemoglobin, last_donation):
+            choose = input("ASD: ")
+            if choose == "n":
+                list = []
+                return list
+            elif choose == "y":
+                break
+        else:
+            print("The Donor is SUITABLE for donation.")
+            break
     return list
 
 
