@@ -8,7 +8,7 @@ def input_name():
     valid_name = False
     data_name = ""
     while not valid_name:
-        data_name = input("Please enter the New Donor's full name separated with space!(Firstname Surname): ")
+        data_name = input("Please enter the Donor's full name separated with space!(Firstname Surname): ")
         if validate_name(data_name):
             valid_name = True
         else:
@@ -20,7 +20,7 @@ def input_name():
 def input_weight():
     data_weight = ""
     while not data_weight:
-        data_weight = input("Please enter the New Donor's weight!(kg): ")
+        data_weight = input("Please enter the Donor's weight!(kg): ")
         if not (str(data_weight).isdigit() and int(data_weight) > 0):
             print("Weight must be integer!")
             data_weight = ""
@@ -32,7 +32,7 @@ def input_gender():
     data_gender = ""
     valid_gender = False
     while not valid_gender:
-        data_gender = input("Please enter the New Donor's gender!(M/F): ")
+        data_gender = input("Please enter the Donor's gender!(M/F): ")
         if data_gender.lower() == "m" or data_gender.lower() == "f":
             valid_gender = validate_gender(data_gender)
             return valid_gender
@@ -42,7 +42,7 @@ def input_gender():
 def input_birth_date():
     birth_date = ""
     while not birth_date:
-        birth_date = input("Please enter the New Donor's birth date (YYYY.MM.DD.)!: ")
+        birth_date = input("Please enter the Donor's birth date (YYYY.MM.DD.)!: ")
         try:
             bdate = datetime.strptime(birth_date, date_format).date()
         except ValueError:
@@ -55,7 +55,7 @@ def input_birth_date():
 def input_last_donation_time():
     last_time = ""
     while not last_time:
-        last_time = input("Please enter the New Donor's last donation date (YYYY.MM.DD.) or leave empty!: ")
+        last_time = input("Please enter the Donor's last donation date (YYYY.MM.DD.) or leave empty!: ")
         if last_time == "":
             return datetime.now().date()
         try:
@@ -70,7 +70,7 @@ def input_last_donation_time():
 def input_sickness():
     sick = ""
     while True:
-        sick = input("Was the New Donor ill in the last 30 days? (y/n) ")
+        sick = input("Was the Donor ill in the last 30 days? (y/n) ")
         l_sick = sick.lower()
         if sick == "":
             print("You must enter 'y' or 'n'")
@@ -86,7 +86,7 @@ def input_sickness():
 def input_identifier():
     identifier = ""
     while identifier == '':
-        identifier = input("Please enter the New Donor's unique ID(identity card/passport)!")
+        identifier = input("Please enter the Donor's unique ID(identity card/passport)!")
 
         if identifier == "":
             print("Unique identifier cannot be empty")
@@ -98,7 +98,7 @@ def input_identifier():
 def input_id_expiration():
     ID_expiration = ""
     while True:
-        sdate = input("Please enter the New Donor's date of ID expiration (YYYY.MM.DD.): ")
+        sdate = input("Please enter the Donor's date of ID expiration (YYYY.MM.DD.): ")
         try:
             pdate = datetime.strptime(sdate, date_format).date()
             msg = "OK"
@@ -118,7 +118,7 @@ def input_blood_type():
     blood_types = ("A+", "0+", "B+", "AB+", "A-", "0-", "B-", "AB-")
 
     while not valid_blood_type:
-        data_blood_type = input("Please enter the New Donor's blood type!: ")
+        data_blood_type = input("Please enter the Donor's blood type!: ")
         if str(data_blood_type).upper() not in blood_types:
             print("Blood type must be: A+, 0+, B+, AB+, A-, 0-, B- or AB-")
         else:
@@ -131,7 +131,7 @@ def input_email():
     data_email = False
     email_string = " "
     while not data_email:
-        email_string = input("Please enter the New Donor's email address:  ")
+        email_string = input("Please enter the Donor's email address:  ")
         if validate_email(email_string):
             data_email = True
         else:
@@ -142,7 +142,7 @@ def input_email():
 def input_mobile_number():
     mobile_number = ""
     while mobile_number == "":
-        mobile_number = input("Please enter the New Donor's mobile number(like this:06201234567 or +36301234567):")
+        mobile_number = input("Please enter the Donor's mobile number(like this:06201234567 or +36301234567):")
 
         if mobile_number == "":
             print("Phone number is empty:")
