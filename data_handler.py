@@ -3,11 +3,11 @@ from os import system
 from time import sleep
 import event_reg
 import donor_reg
-import List_donors
+import sort_by_order
 import delete_donor
 import search_in_files
 import csv
-import menu
+# import menu
 
 
 header = """
@@ -115,34 +115,21 @@ def remove_donor():
 # lister functions:
 def list_events():
     global our_events
-    if len(our_events) == 0:
-        print("The list of donation event is empty!")
-        sleep(1.5)
-        return
-    pointer = menu.Index(len(our_events))
-    while True:
+    err_msg = "Error while listing donors\n%s"
+    try:
+        sort_by_order.sorting_donation_by_order()
+    except ValueError as lister_error:
         system("cls")
-        print(header)
-        print("Listing donation events")
-        print("{0} th record from {1}".format(pointer.value + 1, pointer.limit))
-        print(our_events[pointer.value])
-        print('-' * 21)
-        print("Write 'next' to show the next item, 'prev' to show the last item or 'q' to return to main menu")
-        command = input("your command:")
-        if command == "next":
-            pointer.increase()
-        elif command == "prev":
-            pointer.decrease()
-        elif command == "q":
-            return
-        else:
-            print("wrong command!")
-            sleep(0.75)
+        print(err_msg % "ValueError\n%" % str(lister_error))
+    except IndexError as lister_error:
+        system("cls")
+        print(err_msg % "IndexError" % str(lister_error))
+
 
 def list_donors():
     err_msg = "Error while listing donors\n%s"
     try:
-        List_donors.main()
+        sort_by_order.sorting_donor_by_order()
     except FileNotFoundError as lister_error:
         system("cls")
         print(err_msg % "File cannot be found\n%s" % str(lister_error))
@@ -191,6 +178,52 @@ def search_in_events():
         sleep(1.5)
 
 
+# changer:
+def modify_event(event):
+    system('cls')
+    print(header)
+    print("Donation to modify:")
+    print(event)
+    event = event_reg.Donation.from_user()
+    event.input_successful_donation()
+    event.evaluate_event()
+    return event
+
+def modify_donor(donor):
+    print("Coming soon!")
+    return donor
+
+def modify():
+    global our_events
+    system('cls')
+    print(header)
+    inp = input("Please, enter the id of Donor or Donation you want to modify:")
+    if inp.isdigit():
+        i = int(inp) - 1
+        if i in range(len(our_events)):
+            try:
+                events = our_events.copy()
+                our_events[i] = modify_event(our_events[i])
+                write()
+                print("Donation event data successfully modified!")
+                sleep(1.5)
+            except event_reg.UserInterrupt:
+                print("Input interrupted by user")
+                sleep(1)
+            except FileNotFoundError:
+                our_events = events
+                print("File cannot be written")
+                sleep(2)
+        else:
+            print("Id number is not found in list of Donations!")
+            sleep(1.5)
+    elif donor_reg.validate_identifier(inp):
+        print("Donor data successfully modified!")
+    else:
+        print("Input cannot be parsed as an id of either a Donor or an Donation event.")
+        sleep(1.5)
+
+
 # initializer (on start-up we need to read the files):
 def initialize():
     try:
@@ -226,19 +259,22 @@ def demo():
     # print("Adding another element...")
     # add_event()
     # print("Done.")
-    print("Listing donors...")
-    list_donors()
-    print("Adding new donor...")
-    donor_reg.main()
-    print("Done.")
-    print("Listing donors.")
-    list_donors()
-    print("Deleting one donor...")
-    remove_donor()
-    print("Done.")
-    print("Listing donors again.")
-    list_donors()
-    print("Demo terminates.")
+
+    # print("Listing donors...")
+    # list_donors()
+    # print("Adding new donor...")
+    # donor_reg.main()
+    # print("Done.")
+    # print("Listing donors.")
+    # list_donors()
+    # print("Deleting one donor...")
+    # remove_donor()
+    # print("Done.")
+    # print("Listing donors again.")
+    # list_donors()
+    # print("Demo terminates.")
+
+    modify()
 
 
 # on start-up calling initializer:

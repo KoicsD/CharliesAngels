@@ -3,15 +3,18 @@ import csv
 from datetime import datetime
 date_format = "%Y.%m.%d."
 
+
 def calculate_age_in_year(birth_date):
     bdate = datetime.strptime(str(birth_date), date_format).date()
     return (datetime.now().date() - bdate).days // 365
+
 
 def search_in_donors():
     search_term = input("Search term: ")
     with open('DATA\donors.csv', newline='') as file:
         reader = csv.reader(file)
         index = 0
+        next(reader)
         for row in reader:
             for i in row:
                 if search_term in i:
@@ -26,6 +29,9 @@ def search_in_donors():
                     next_page = input("Press enter to next hit or enter 'exit' to return to the main menu.")
                     if next_page.lower() == "exit":
                         return
+                    break
+        print("Searching reached its end. Press Enter to return to main menu.")
+        input("")
 
 
 def search_in_events():
@@ -33,9 +39,8 @@ def search_in_events():
     with open('DATA\donations.csv', newline='') as file:
         reader = csv.reader(file)
         index = 0
+        next(reader)
         for row in reader:
-            if "id" in row:
-                continue
             for i in row:
                 if search_term.lower() in i.lower():
                     index += 1
@@ -49,5 +54,6 @@ def search_in_events():
                     next_page = input("Press enter to next hit or enter 'exit' to return to the main menu.")
                     if next_page.lower() == "exit":
                         return
-
-# print(search_in_donors())
+                    break
+        print("Searching reached its end. Press Enter to return to main menu.")
+        input("")
