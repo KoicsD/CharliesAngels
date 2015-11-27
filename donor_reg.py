@@ -306,7 +306,8 @@ def main():
                                  blood_type,hemoglobin,email,mobile)
     print('-' * 10)
 
-def input_and_store_data(list):
+
+def input_and_store_data():
     name = input_name()
     weight = input_weight()
     if not validate_weight(weight):

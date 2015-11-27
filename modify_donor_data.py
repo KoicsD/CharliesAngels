@@ -26,6 +26,7 @@ def print_current_data(list):
     print("Email: %s" % list[10])
     print("Mobile: %s" % list[11])
 
+
 def donor_data_to_list(our_donors):
     our_donors = []
     with open('DATA/donors.csv', "r") as file_obj:
@@ -47,7 +48,7 @@ def modify_donor(inp):
         newrow = []
         if id == row[6]:
             print_current_data(row)
-            newrow = donor_reg.input_and_store_data(row)
+            newrow = donor_reg.input_and_store_data()
         if not newrow:
             new_donors.append(row)
         else:
