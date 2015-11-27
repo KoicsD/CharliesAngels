@@ -1,4 +1,5 @@
 from datetime import datetime, date
+import csv
 import random
 import donor_csv_writer
 date_format = "%Y.%m.%d."
@@ -186,6 +187,11 @@ def validate_sickness(sick):
 
 
 def validate_identifier(identifier):
+    with open("DATA/donors.csv", newline="") as donor_file:
+        for row in donor_file:
+            if identifier in row:
+                print("The given identifier already exists in database!")
+                return False
     if len(identifier) != 8:
         print("It isn't a correct form for identifier, should be 8 character long.")
         return False
@@ -302,7 +308,7 @@ def main():
     print("The New Donor is SUITABLE for donation.")
     donor_csv_writer.store_donor(name,weight,gender,birth_date.strftime(date_format),
                                  last_donation.strftime(date_format),was_sick_in_last_month,
-                                 id,id.strftime(date_format),
+                                 id,id_exp_date.strftime(date_format),
                                  blood_type,hemoglobin,email,mobile)
     print('-' * 10)
 
