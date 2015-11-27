@@ -210,6 +210,11 @@ def validate_sickness(sick):
 
 
 def validate_identifier(identifier):
+    with open("DATA/donors.csv", newline="") as donor_file:
+        for row in donor_file:
+            if identifier in row:
+                print("The given identifier already exists in database!")
+                return False
     if len(identifier) != 8:
         print("It isn't a correct form for identifier, should be 8 character long.")
         return False
