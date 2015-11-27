@@ -1,5 +1,4 @@
 from datetime import datetime, date
-import csv
 import random
 import donor_csv_writer
 date_format = "%Y.%m.%d."
