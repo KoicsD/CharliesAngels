@@ -44,22 +44,25 @@ def modify_donor(inp):
     id = inp
     if not any(e[6].lower() == id.lower() for e in our_donors):
         print("ID not found!")
-    for row in our_donors:
-        newrow = []
-        if id.lower() == row[6].lower():
-            print_current_data(row)
-            try:
-                newrow = donor_reg.input_and_store_data()
-            except donor_reg.UserInterrupt as interruption:
-                newrow = []
-                print(str(interruption))
-        if not newrow:
-            new_donors.append(row)
-        else:
-            new_donors.append(newrow)
-            print("Donors data has been modified!")
+    else:
+        for row in our_donors:
+            newrow = []
+            if id.lower() == row[6].lower():
+                print_current_data(row)
+                try:
+                    newrow = donor_reg.input_and_store_data()
+                except donor_reg.UserInterrupt as interruption:
+                    newrow = []
+                    print(str(interruption))
+            if not newrow:
+                new_donors.append(row)
+            else:
+                new_donors.append(newrow)
+                print("Donors data has been modified!")
+    if new_donors == our_donors or len(new_donors) < len(our_donors):
+        write_donors_modified_data_to_csv(our_donors)
+    else:
         write_donors_modified_data_to_csv(new_donors)
-
 
 if __name__ == '__main__':
     modify_donor("123654AS")
