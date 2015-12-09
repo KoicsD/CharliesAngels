@@ -385,11 +385,12 @@ def input_and_store_data():
     print('-' * 10)
     while True:
         if not donor_is_suitable(age, weight, was_sick_in_last_month, hemoglobin, last_donation):
-            choose = input("ASD: ")
-            if choose == "n":
+            choose = input("The donor is not suitable do you want to still save the data? (y/n): ")
+            if choose.lower() == "n":
                 list = []
+                print("Donors data has not been modified!")
                 return list
-            elif choose == "y":
+            elif choose.lower() == "y":
                 break
         else:
             print("The Donor is SUITABLE for donation.")
