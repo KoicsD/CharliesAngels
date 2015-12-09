@@ -190,6 +190,7 @@ def modify_event(event):
     event.evaluate_event()
     return event
 
+
 def modify():
     global our_events
     system('cls')
@@ -215,7 +216,10 @@ def modify():
             print("Id number is not found in list of Donations!")
             sleep(1.5)
     elif donor_reg.validate_identifier(inp):
-        modify_donor_data.modify_donor(inp)
+        if donor_reg.is_id_unique(inp):
+            print("The given ID is not in data-base!")
+        else:
+            modify_donor_data.modify_donor(inp)
         sleep(1.5)
     else:
         print("Input cannot be parsed as an id of either a Donor or an Donation event.")

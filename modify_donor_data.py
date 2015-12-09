@@ -42,12 +42,12 @@ def modify_donor(inp):
     new_donors = []
     our_donors = donor_data_to_list(our_donors)
     id = inp
-    if not any(e[6] == id.upper() for e in our_donors):
+    if not any(e[6].lower() == id.lower() for e in our_donors):
         print("ID not found!")
     else:
         for row in our_donors:
             newrow = []
-            if id.upper() == row[6]:
+            if id.lower() == row[6].lower():
                 print_current_data(row)
                 try:
                     newrow = donor_reg.input_and_store_data()
@@ -59,8 +59,10 @@ def modify_donor(inp):
             else:
                 new_donors.append(newrow)
                 print("Donors data has been modified!")
-
-    if new_donors == our_donors or len(new_donors) > len(our_donors):
+    if new_donors == our_donors or len(new_donors) < len(our_donors):
         write_donors_modified_data_to_csv(our_donors)
     else:
         write_donors_modified_data_to_csv(new_donors)
+
+if __name__ == '__main__':
+    modify_donor("123654AS")
