@@ -279,10 +279,6 @@ def demo():
     modify()
 
 
-# on start-up calling initializer:
-initialize()
-
-
 # in main mode running demo:
 if __name__ == '__main__':
     demo()
