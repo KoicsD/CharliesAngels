@@ -50,7 +50,7 @@ def modify_donor(inp):
             if id.lower() == row[6].lower():
                 print_current_data(row)
                 try:
-                    newrow = donor_reg.input_and_store_data()
+                    newrow = donor_reg.main()
                 except donor_reg.UserInterrupt as interruption:
                     newrow = []
                     print(str(interruption))

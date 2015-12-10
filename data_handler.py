@@ -7,7 +7,8 @@ import sort_by_order
 import delete_donor
 import search_in_files
 import csv
-import  modify_donor_data
+import modify_donor_data
+import donor_csv_writer
 # import menu
 
 
@@ -72,7 +73,9 @@ def add_event():
 
 
 def add_donor():
-    donor_reg.main()
+    data = donor_reg.main()
+    if data:
+        donor_csv_writer.store_donor(data)
 
 
 # remover functions:

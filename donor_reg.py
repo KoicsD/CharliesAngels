@@ -298,104 +298,59 @@ def print_donor(name, age, gender, birth_date, id, id_expiration,
 
 def donor_is_suitable(age, weight, sickness, hemo, l_don):
     if validate_age(age):
-        return False
+        return "too young!"
     if validate_weight(weight):
-        return False
+        return "has too low weight!"
     if validate_sickness(sickness):
-        return False
+        return "was sick in the last month!"
     if validate_hemoglobin(hemo):
-        return False
+        return "has too low hemoglobin!"
     if validate_last_donation_time(l_don):
-        return False
-    return True
+        return "already donated blood in the past 90 days!"
+    return 0
+
 
 def main():
     try:
         name = input_name()
         weight = input_weight()
-        if not validate_weight(weight):
-            print("Sorry the New Donor is not suitable for donation! Too low weight!")
-            return
         gender = input_gender()
         birth_date = input_birth_date()
         age = calculate_age_in_year(birth_date)
-        if not validate_age(age):
-            print("Sorry the New Donor is not suitable for donation! Too young!")
-            return
         last_donation = input_last_donation_time()
-        if not validate_last_donation_time(last_donation):
-            print("Sorry the New Donor is not suitable for donation! Already donated blood in the past 90 days!")
-            return
         was_sick_in_last_month = input_sickness()
-        if not validate_sickness(was_sick_in_last_month):
-            print("Sorry the New Donor is not suitable for donation! \
-            You can not donate blood if you were sick in the past 30 days!")
-            return
         id = input_identifier()
         if not is_id_unique(id):
             return
         id_exp_date = input_id_expiration()
-        if not validate_id_expiration(id_exp_date):
-            print("Sorry the New Donor is not suitable for donation! ID expired or expiring today!!")
-            return
         blood_type = input_blood_type()
         hemoglobin = random_hemoglobin()
-        if not validate_hemoglobin(hemoglobin):
-            print("Sorry the New Donor not suitable for donation! Too low hemoglobin count!")
-            return
         email = input_email()
         mobile = input_mobile_number()
+        data = [name,weight,gender,birth_date.strftime(date_format),
+                                 last_donation.strftime(date_format),was_sick_in_last_month,
+                                 id,id_exp_date.strftime(date_format),
+                                 blood_type,hemoglobin,email,mobile]
         print('-' * 10)
         print_donor(name, age, gender, birth_date, id, id_exp_date,
                 weight, blood_type, last_donation,
                 mobile, email, hemoglobin,was_sick_in_last_month)
-
-        print("The New Donor is SUITABLE for donation.")
-        donor_csv_writer.store_donor(name,weight,gender,birth_date.strftime(date_format),
-                                     last_donation.strftime(date_format),was_sick_in_last_month,
-                                     id,id.strftime(date_format),
-                                     blood_type,hemoglobin,email,mobile)
+        while True:
+            suitable = donor_is_suitable(age, weight, was_sick_in_last_month, hemoglobin, last_donation)
+            if suitable != 0:
+                choose = input("The donor is not suitable because, %s Do you want to still save the data? (y/n): " % suitable)
+                if choose.lower() == "n":
+                    data = []
+                    print("Donors data has not been saved!")
+                    return data
+                elif choose.lower() == "y":
+                    return data
+            else:
+                print("The Donor is SUITABLE for donation.")
+                return data
     except UserInterrupt as interruption:
         print(str(interruption))
     print('-' * 10)
-
-
-def input_and_store_data():
-    name = input_name()
-    weight = input_weight()
-    gender = input_gender()
-    birth_date = input_birth_date()
-    age = calculate_age_in_year(birth_date)
-    last_donation = input_last_donation_time()
-    was_sick_in_last_month = input_sickness()
-    id = input_identifier()
-    id_exp_date = input_id_expiration()
-    blood_type = input_blood_type()
-    hemoglobin = random_hemoglobin()
-    email = input_email()
-    mobile = input_mobile_number()
-    print('-' * 10)
-    list = [name,weight,gender,birth_date.strftime(date_format),
-                                 last_donation.strftime(date_format),was_sick_in_last_month,
-                                 id,id_exp_date.strftime(date_format),
-                                 blood_type,hemoglobin,email,mobile]
-    print_donor(name, age, gender, birth_date, id, id_exp_date,
-            weight, blood_type, last_donation,
-            mobile, email, hemoglobin, was_sick_in_last_month)
-    print('-' * 10)
-    while True:
-        if not donor_is_suitable(age, weight, was_sick_in_last_month, hemoglobin, last_donation):
-            choose = input("The donor is not suitable do you want to still save the data? (y/n): ")
-            if choose.lower() == "n":
-                list = []
-                print("Donors data has not been modified!")
-                return list
-            elif choose.lower() == "y":
-                break
-        else:
-            print("The Donor is SUITABLE for donation.")
-            break
-    return list
 
 
 if __name__ == "__main__":
