@@ -63,8 +63,12 @@ target/
 
 .koics/
 
-# data file:
+# data files:
 DATA/
 
-# automatic save
+# automatic save of UML
 *.autosave
+*.dia~
+
+# probes:
+PROBE/
