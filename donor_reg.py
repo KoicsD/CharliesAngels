@@ -298,16 +298,16 @@ def print_donor(name, age, gender, birth_date, id, id_expiration,
 
 def donor_is_suitable(age, weight, sickness, hemo, l_don):
     if validate_age(age):
-        return False
+        return "too young!"
     if validate_weight(weight):
-        return False
+        return "has too low weight!"
     if validate_sickness(sickness):
-        return False
+        return "was sick in the last month!"
     if validate_hemoglobin(hemo):
-        return False
+        return "has too low hemoglobin!"
     if validate_last_donation_time(l_don):
-        return False
-    return True
+        return "already donated blood in the past 90 days!"
+    return 0
 
 
 def main():
@@ -336,8 +336,9 @@ def main():
                 weight, blood_type, last_donation,
                 mobile, email, hemoglobin,was_sick_in_last_month)
         while True:
-            if not donor_is_suitable(age, weight, was_sick_in_last_month, hemoglobin, last_donation):
-                choose = input("The donor is not suitable do you want to still save the data? (y/n): ")
+            suitable = donor_is_suitable(age, weight, was_sick_in_last_month, hemoglobin, last_donation)
+            if suitable != 0:
+                choose = input("The donor is not suitable because, %s Do you want to still save the data? (y/n): " % suitable)
                 if choose.lower() == "n":
                     data = []
                     print("Donors data has not been saved!")
