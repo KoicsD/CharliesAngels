@@ -23,22 +23,22 @@ event_file = "DATA/donations.csv"
 
 
 # list of donation events:
-our_events = []
+our_events = {}
 
 
 # data-reader and writer functions:
 def read():
     with open(event_file, "r", newline='') as file_obj:
-        new_events = []
+        new_events = {}
         reader = csv.reader(file_obj)
         # assert header.index("id") == 0
         next(reader)
         for row in reader:
+            index = int(row[0])
             data = row[1:]
-            new_events.append(event_reg.Donation.from_lists(data))
+            new_events[index] = event_reg.Donation.from_lists(data)
     global our_events
-    our_events.clear()
-    our_events += new_events
+    our_events = new_events
 
 
 def write():
@@ -46,8 +46,8 @@ def write():
         global our_events
         writer = csv.writer(file_obj)
         writer.writerow(["id"] + event_reg.Donation.header)
-        for ind in range(len(our_events)):
-            writer.writerow([str(ind + 1)] + our_events[ind].to_lists())
+        for ind, event in our_events.items():
+            writer.writerow([str(ind)] + event.to_lists())
 
 
 # adder functions:
@@ -58,7 +58,10 @@ def add_event():
         new_event = event_reg.Donation.from_user()
         new_event.input_successful_donation()
         new_event.evaluate_event()
-        our_events.append(new_event)
+        ind = 1
+        while ind in our_events.keys():
+            ind += 1
+        our_events[ind] = new_event
         write()
     except event_reg.UserInterrupt as interruption:
         print(err_msg % str(interruption))
@@ -98,7 +101,7 @@ def remove_event():
         if s_index == 'q':
             return
         try:
-            p_index = int(s_index) - 1
+            p_index = int(s_index)
             remove_event_at(p_index)
             print("Deleting donation event successful.")
             sleep(1.5)
@@ -200,7 +203,7 @@ def modify():
     print(header)
     inp = input("Please, enter the id of Donor or Donation you want to modify:")
     if inp.isdigit():
-        i = int(inp) - 1
+        i = int(inp)
         if i in range(len(our_events)):
             try:
                 events = our_events.copy()
