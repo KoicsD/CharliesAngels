@@ -1,5 +1,7 @@
 import mysql.connector as sql
 import donor_reg, event_reg
+from os import system
+from time import sleep
 
 
 connection_obj = None
@@ -7,7 +9,21 @@ cursor_obj = None
 
 
 def add_event():
-    pass
+    global connection_obj, cursor_obj
+    try:
+        new_event = event_reg.Donation.from_user()
+        new_event.input_successful_donation()
+        new_event.evaluate_event()
+        cursor_obj.execute("INSERT INTO donations (" +
+                           ", ".join(event_reg.Donation.header) +
+                           ") VALUES (" +
+                           ", ".join(["%s"] * len(event_reg.Donation.header)) +
+                           ")",
+                           new_event.to_lists())
+        connection_obj.commit()
+    except event_reg.UserInterrupt as interruption:
+        print(interruption)
+        sleep(1.5)
 
 
 def add_donor():
