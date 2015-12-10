@@ -3,8 +3,10 @@ import data_handler
 import menu
 from sys import exit
 from os import system
+import json
 
 
+config_file_path = "DATA/my_app.config"
 menu.header = """
 -----------------------------------------------------------------------
 --- Welcome to the coolest donor and donation event managing system ---
@@ -12,8 +14,10 @@ menu.header = """
 """
 
 
-main_menu = menu.Menu("Main menu", "Please, choose your action.")
 mode = "csv"
+init_params = ()
+
+main_menu = menu.Menu("Main menu", "Please, choose your action.")
 
 
 def shutdown():
@@ -22,18 +26,23 @@ def shutdown():
 
 
 def read_config():
-    pass
+    global mode, init_params
+    with open(config_file_path) as file_obj:
+        data = json.loads(file_obj.read())
+        mode = data["mode"]
+        if mode == "db":
+            init_params = (data["connection_params"],)
 
 
 def initialize():
-    global main_menu
+    global main_menu, mode, init_params
     read_config()
-    global mode
     if mode == "db":
         working_module = sql_handler
     else:
         working_module = data_handler
-    working_module.initialize()
+        init_params = ()
+    working_module.initialize(*init_params)
 
     menu_1 = menu.MenuPoint("Add new donor", working_module.add_donor)
     main_menu.add_item(menu_1)
