@@ -1,3 +1,4 @@
+import sql_handler
 import data_handler
 import menu
 from sys import exit
@@ -12,6 +13,7 @@ menu.header = """
 
 
 main_menu = menu.Menu("Main menu", "Please, choose your action.")
+mode = "csv"
 
 
 def shutdown():
@@ -25,9 +27,12 @@ def read_config():
 
 def initialize():
     global main_menu
-
-    working_module = data_handler
-
+    read_config()
+    global mode
+    if mode == "db":
+        working_module = sql_handler
+    else:
+        working_module = data_handler
     working_module.initialize()
 
     menu_1 = menu.MenuPoint("Add new donor", working_module.add_donor)
