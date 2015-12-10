@@ -285,6 +285,9 @@ def demo():
     modify()
 
 
+def shutdown():
+    pass
+
 # in main mode running demo:
 if __name__ == '__main__':
     demo()

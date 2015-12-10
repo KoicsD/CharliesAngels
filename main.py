@@ -15,6 +15,7 @@ menu.header = """
 
 
 mode = "csv"
+working_module = data_handler
 init_params = ()
 
 main_menu = menu.Menu("Main menu", "Please, choose your action.")
@@ -22,6 +23,7 @@ main_menu = menu.Menu("Main menu", "Please, choose your action.")
 
 def shutdown():
     system("cls")
+    working_module.shutdown()
     exit()
 
 
@@ -35,7 +37,8 @@ def read_config():
 
 
 def initialize():
-    global main_menu, mode, init_params
+    global main_menu
+    global mode, working_module, init_params
     read_config()
     if mode == "db":
         working_module = sql_handler
