@@ -28,7 +28,15 @@ def add_event():
 
 
 def add_donor():
-    pass
+    global connection_obj, cursor_obj
+    add_donor = ("INSERT INTO Donation.donors "
+               "(name,weight,gender,date_of_birth,last_donation,last_month_sickness,unique_identifier,expiration_of_id,blood_type,hemoglobin,email,mobil) "
+               "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,%s)")
+    donors_data = donor_reg.main()
+    cursor_obj.execute(add_donor, donors_data)
+    connection_obj.commit()
+    cursor_obj.close()
+    connection_obj.close()
 
 
 def remove_event():
@@ -36,7 +44,14 @@ def remove_event():
 
 
 def remove_donor():
-    pass
+    global connection_obj, cursor_obj
+    id = input("Enter the personal ID of the donor you want to delete")
+    cursor_obj.execute("DELETE FROM donation.donors WHERE unique_identifier = '%s'" % id)
+    connection_obj.commit()
+    cursor_obj.close()
+    connection_obj.close()
+
+
 
 
 def list_events():

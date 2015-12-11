@@ -297,15 +297,15 @@ def print_donor(name, age, gender, birth_date, id, id_expiration,
 
 
 def donor_is_suitable(age, weight, sickness, hemo, l_don):
-    if validate_age(age):
+    if not validate_age(age):
         return "too young!"
-    if validate_weight(weight):
+    elif not validate_weight(weight):
         return "has too low weight!"
-    if validate_sickness(sickness):
+    elif not validate_sickness(sickness):
         return "was sick in the last month!"
-    if validate_hemoglobin(hemo):
+    elif not validate_hemoglobin(hemo):
         return "has too low hemoglobin!"
-    if validate_last_donation_time(l_don):
+    elif not validate_last_donation_time(l_don):
         return "already donated blood in the past 90 days!"
     return 0
 
