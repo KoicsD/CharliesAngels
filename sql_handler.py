@@ -43,7 +43,14 @@ def remove_event():
 
 
 def remove_donor():
-    pass
+    global connection_obj, cursor_obj
+    id = input("Enter the personal ID of the donor you want to delete")
+    cursor_obj.execute("DELETE FROM donation.donors WHERE unique_identifier = '%s'" % id)
+    connection_obj.commit()
+    cursor_obj.close()
+    connection_obj.close()
+
+
 
 
 def list_events():
