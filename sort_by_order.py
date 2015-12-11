@@ -1,10 +1,12 @@
 __author__ = 'Zoltan'
 from search_in_files import calculate_age_in_year
 import csv
+import mysql.connector as sql
 
 
-def sorting_donor_by_order():
-    with open('DATA/donors.csv', newline='') as donor_file:
+class SortingAsker:
+    @staticmethod
+    def ask_donor_question():
         index = input('What will donors get ordered by?'+'\n'
                           'name:0,'+'\n'
                           'weight:1'+'\n'
@@ -23,27 +25,10 @@ def sorting_donor_by_order():
             index=0
         else:
             index=int(index)
-        row_index = 1
-        reader = csv.reader(donor_file)
-        next(reader)
-        lst = []
-        if index == 1 or index == 9:
-            lst = sorted(reader, key=lambda donor: int(donor[index]))
-        else:
-            lst = (sorted(reader, key=lambda donor: donor[index].lower()))
+        return index
 
-        for row in lst:
-            print("-" * 35)
-            print(str(row_index) + ".")
-            row_index += 1
-            print("\t" + row[0])
-            print("\t" + row[1] + " kg")
-            print("\t" + row[3] + " - " + str(calculate_age_in_year(row[3])) + " years old")
-            print("\t" + row[10])
-            print("-" * 35)
-
-def sorting_donation_by_order():
-    with open('DATA/donations.csv', newline='') as donor_file:
+    @staticmethod
+    def ask_donation_question():
         index = input('What will donations get ordered by?' + '\n'
                       'id:0'+ '\n'
                       'date_of_event:1'+ '\n'
@@ -60,24 +45,62 @@ def sorting_donation_by_order():
             index=0
         else:
             index=int(index)
-        row_index = 1
-        reader = csv.reader(donor_file)
-        next(reader)
-        lst = []
-        if index == 0 or index == 7 or index == 8 or index ==9:
-            lst = sorted(reader, key=lambda donor: int(donor[index]))
-        else:
-            lst = (sorted(reader, key=lambda donor: donor[index].lower()))
+        return index
 
-        for row in lst:
-            print("-" * 35)
-            print(str(row_index) + ".")
-            row_index += 1
-            print("\t" + row[1])
-            print("\t" + row[2] + "-" + row[3])
-            print("\t" + row[4] + " " + row[5])
-            print("\t" + row[6])
-            print("-" * 35)
+
+class CsvLister:
+    @staticmethod
+    def list_donors(ord_index, path='DATA/donors.csv'):
+        with open(path, newline='') as donor_file:
+            row_index = 1
+            reader = csv.reader(donor_file)
+            next(reader)
+            lst = []
+            if ord_index == 1 or ord_index == 9:
+                lst = sorted(reader, key=lambda donor: int(donor[ord_index]))
+            else:
+                lst = (sorted(reader, key=lambda donor: donor[ord_index].lower()))
+
+            for row in lst:
+                print("-" * 35)
+                print(str(row_index) + ".")
+                row_index += 1
+                print("\t" + row[0])
+                print("\t" + row[1] + " kg")
+                print("\t" + row[3] + " - " + str(calculate_age_in_year(row[3])) + " years old")
+                print("\t" + row[10])
+                print("-" * 35)
+
+    @staticmethod
+    def list_donations(ord_index, path='DATA/donations.csv'):
+        with open(path, newline='') as donor_file:
+            row_index = 1
+            reader = csv.reader(donor_file)
+            next(reader)
+            lst = []
+            if ord_index == 0 or ord_index == 7 or ord_index == 8 or ord_index ==9:
+                lst = sorted(reader, key=lambda donor: int(donor[ord_index]))
+            else:
+                lst = (sorted(reader, key=lambda donor: donor[ord_index].lower()))
+
+            for row in lst:
+                print("-" * 35)
+                print(str(row_index) + ".")
+                row_index += 1
+                print("\t" + row[1])
+                print("\t" + row[2] + "-" + row[3])
+                print("\t" + row[4] + " " + row[5])
+                print("\t" + row[6])
+                print("-" * 35)
+
+
+def sorting_donor_by_order(cursor_obj=None):
+    CsvLister.list_donors(SortingAsker.ask_donor_question())
+
+
+def sorting_donation_by_order(cursor_obj=None):
+    CsvLister.list_donations(SortingAsker.ask_donation_question())
+
 
 if __name__ == '__main__':
     sorting_donor_by_order()
