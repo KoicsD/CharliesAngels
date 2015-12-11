@@ -1,7 +1,8 @@
-import mysql.connector as sql
-import donor_reg, event_reg
 from os import system
 from time import sleep
+import mysql.connector as sql
+import donor_reg, event_reg
+import sort_by_order
 
 
 connection_obj = None
@@ -39,11 +40,11 @@ def remove_donor():
 
 
 def list_events():
-    pass
+    sort_by_order.sorting_donation_by_order(cursor_obj=cursor_obj)
 
 
 def list_donors():
-    pass
+    sort_by_order.sorting_donor_by_order(cursor_obj=cursor_obj)
 
 
 def search_in_donors():
