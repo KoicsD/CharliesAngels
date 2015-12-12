@@ -1,6 +1,7 @@
 from os import system
 from time import sleep
 import mysql.connector as sql
+from mysql.connector import errorcode, cursor, connection
 import donor_reg, event_reg
 import sort_by_order
 
@@ -46,8 +47,38 @@ def add_donor():
         sleep(3)
 
 
+def remove_event_at(index: int):
+    global connection_obj, cursor_obj
+    cursor_obj.execute("SELECT COUNT(*) FROM Donations WHERE id = %s", (index,))
+    ans = cursor_obj.fetchall()
+    if ans[0][0]:
+        cursor_obj.execute("DELETE FROM Donations WHERE id = %s", (index,))
+        connection_obj.commit()
+    else:
+        raise KeyError("Key '%d' not in database!" % index)
+
+
 def remove_event():
-    pass
+    while True:
+        s_id = input("Please enter the id of donation event: ")
+        if s_id == 'q':
+            print("Operation interrupted by user")
+            break
+        try:
+            p_id = int(s_id)
+            remove_event_at(p_id)
+            print("Donation deleted successfully")
+            break
+        except KeyError as err:
+            print(err)
+        except ValueError:
+            print("input cannot be parsed as integer!")
+        except sql.Error as err:
+            print(err)
+            print("Error code: %d" % err.errno)
+        finally:
+            sleep(3)
+    sleep(3)
 
 
 def remove_donor():
