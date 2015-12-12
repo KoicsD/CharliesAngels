@@ -15,28 +15,35 @@ def add_event():
         new_event = event_reg.Donation.from_user()
         new_event.input_successful_donation()
         new_event.evaluate_event()
-        cursor_obj.execute("INSERT INTO donations (" +
+        cursor_obj.execute("INSERT INTO Donations (" +
                            ", ".join(event_reg.Donation.header) +
                            ") VALUES (" +
                            ", ".join(["%s"] * len(event_reg.Donation.header)) +
                            ")",
                            new_event.to_lists())
         connection_obj.commit()
+        print("New event stored successfully")
     except event_reg.UserInterrupt as interruption:
         print(interruption)
-        sleep(1.5)
+    except sql.Error as err:
+        print(err)
+    sleep(3)
 
 
 def add_donor():
     global connection_obj, cursor_obj
-    add_donor = ("INSERT INTO Donation.donors "
+    add_donor = ("INSERT INTO Donors "
                "(name,weight,gender,date_of_birth,last_donation,last_month_sickness,unique_identifier,expiration_of_id,blood_type,hemoglobin,email,mobil) "
                "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,%s)")
     donors_data = donor_reg.main()
-    cursor_obj.execute(add_donor, donors_data)
-    connection_obj.commit()
-    cursor_obj.close()
-    connection_obj.close()
+    if donors_data is not None:
+        try:
+            cursor_obj.execute(add_donor, donors_data)
+            connection_obj.commit()
+            print("New donor stored successfully")
+        except sql.Error as err:
+            print(err)
+        sleep(3)
 
 
 def remove_event():
@@ -46,20 +53,29 @@ def remove_event():
 def remove_donor():
     global connection_obj, cursor_obj
     id = input("Enter the personal ID of the donor you want to delete")
-    cursor_obj.execute("DELETE FROM donation.donors WHERE unique_identifier = '%s'" % id)
-    connection_obj.commit()
-    cursor_obj.close()
-    connection_obj.close()
-
-
+    try:
+        cursor_obj.execute("DELETE FROM Donors WHERE unique_identifier = '%s'" % id)
+        connection_obj.commit()
+        print("Donor object removed successfully")
+    except sql.Error as err:
+        print(err)
+    sleep(3)
 
 
 def list_events():
-    sort_by_order.sorting_donation_by_order(cursor_obj=cursor_obj)
+    try:
+        sort_by_order.sorting_donation_by_order(cursor_obj=cursor_obj)
+    except sql.Error as err:
+        print(err)
+        sleep(3)
 
 
 def list_donors():
-    sort_by_order.sorting_donor_by_order(cursor_obj=cursor_obj)
+    try:
+        sort_by_order.sorting_donor_by_order(cursor_obj=cursor_obj)
+    except sql.Error as err:
+        print(err)
+        sleep(3)
 
 
 def search_in_donors():
