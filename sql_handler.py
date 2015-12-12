@@ -62,7 +62,7 @@ def remove_event():
     while True:
         s_id = input("Please enter the id of donation event: ")
         if s_id == 'q':
-            print("Operation interrupted by user")
+            print("Operation interrupted by User")
             break
         try:
             p_id = int(s_id)
@@ -83,13 +83,25 @@ def remove_event():
 
 def remove_donor():
     global connection_obj, cursor_obj
-    id = input("Enter the personal ID of the donor you want to delete")
-    try:
-        cursor_obj.execute("DELETE FROM Donors WHERE unique_identifier = '%s'" % id)
-        connection_obj.commit()
-        print("Donor object removed successfully")
-    except sql.Error as err:
-        print(err)
+    while True:
+        id = input("Enter the personal ID of the donor you want to delete")
+        if id == 'q':
+            print("Operation interrupted by User")
+            break
+        try:
+            cursor_obj.execute("SELECT COUNT(*) FROM Donations WHERE id = %s", (id,))
+            ans = cursor_obj.fetchall()
+            if ans[0][0]:
+                cursor_obj.execute("DELETE FROM Donors WHERE unique_identifier = '%s'" % id)
+                connection_obj.commit()
+                print("Donor object removed successfully")
+                break
+            else:
+                print("Key '%s' not in database!" % id)
+                sleep(3)
+        except sql.Error as err:
+            print(err)
+            sleep(3)
     sleep(3)
 
 
