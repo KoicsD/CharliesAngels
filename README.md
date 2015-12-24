@@ -8,14 +8,17 @@ Blood Donation Register program in Charlie's Angels (no 3) team in CodeCool Msc-
 
 Our mentors at CodeCool decided to give us a big project which can help us practicing scrum. This is a database manager software for blood donations. There were ca. 10 scrum groups working separately from each other. We have chosen the name "Charlie's Angels" for our group, that's what the name of this repository comes from.
 
+[You can easily acces to the full Task Description here.](TaskDescription/TaskDescription.html)
+> [General](TaskDescription/InitialOrder.html)
+
 ### Members of "Charlie's Angels":
-| Name			| GitHub UserName
-| ----			| ----
-| Zoltan Székely	| Szezol
-| Zsolt Bódi		| bodizsolt1992
-| Gergely Viczmándi	| viczmandi
-| Márton Ozsvár		| ozsvarmartoncc
-| Dániel Koics		| KoicsD
+| Name			        | GitHub UserName
+| ----			        | ----
+| Zoltan Székely    | [Szezol](https://github.com/Szezol)
+| Zsolt Bódi        | [bodizsolt1992](https://github.com/bodizsolt1992)
+| Gergely Viczmándi	| [viczmandi](https://github.com/viczmandi)
+| Márton Ozsvár		  | [ozsvarmartoncc](https://github.com/ozsvarmartoncc)
+| Dániel Koics		  | KoicsD
 
 Please, don't forget to have a look at Their GitHub Profile as well.
 
