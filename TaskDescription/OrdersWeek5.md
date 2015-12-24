@@ -208,3 +208,8 @@ As a user I want to see more visualization in the menu. I don't want to enter a 
 * By default the first menu item is selected
 
 Order: 9
+
+----------------------------------------------
+----------------------------------------------
+
+[Back to README](../README.md)

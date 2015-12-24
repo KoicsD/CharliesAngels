@@ -1,4 +1,5 @@
 # Centralized data storage
+
 As a user I want to store my saved data in a centralized storage. I have a MySQL server so I want to use it as a storage.
 
 ## Acceptance:
@@ -10,3 +11,8 @@ As a user I want to store my saved data in a centralized storage. I have a MySQL
 * I can connect to any available DB source by configuring the connection string
 * The csv store is working as well by configuration
 * All previous requirements still satisfied
+
+-------------------------------------------------------
+-------------------------------------------------------
+
+[Back to README](../README.md)
