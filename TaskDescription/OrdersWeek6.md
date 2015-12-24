@@ -39,4 +39,6 @@ I'd like to have the opportunity to change any data I want.
 ------------------------------------------------
 ------------------------------------------------
 
+[Next: Week7](OrdersWeek7.md)  
+[Previous: Week5](OrdersWeek5.md)  
 [Back to README](../README.md)
