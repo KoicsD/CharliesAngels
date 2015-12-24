@@ -25,4 +25,4 @@ Task descriptions:
 
 **Please, don't forget to have a look at Their GitHub Profile as well!**
 
-Thank you for visiting our repository.
+Thank you for visiting our repository. Have a nice day! :D
