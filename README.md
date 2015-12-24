@@ -23,6 +23,6 @@ Task descriptions:
 | Márton Ozsvár		  | [ozsvarmartoncc](https://github.com/ozsvarmartoncc)
 | Dániel Koics		  | KoicsD
 
-Please, don't forget to have a look at Their GitHub Profile as well.
+**Please, don't forget to have a look at Their GitHub Profile as well!**
 
 Thank you for visiting our repository.
