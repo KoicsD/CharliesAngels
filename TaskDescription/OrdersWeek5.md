@@ -12,8 +12,8 @@ Kandisz Nóra,1990.09.10.,123456AB,,,"Régiposta u. 9. , Fsz/1",,
 ## Acceptance criteria:
 
 * Add donor is available from main menu
-* After enter all necessary data that is appended to the previous stored donors.csv
-* The donors.csv file should be in a separated folder named: "Data"
+* After enter all necessary data that is appended to the previous stored **donors.csv**
+* The **donors.csv** file should be in a separated folder named: "**Data**"
 
 Order: 1
 
@@ -34,8 +34,8 @@ Miskolc,2015.12.01,,,,"Régiposta u. 9. , Fsz/1",,
 ## Acceptance criteria:
 
 * Add doantion is available from main menu
-* After enter all necessary data that is appended to the previous stored donations.csv
-* The donations.csv file should be in a separated folder named: "Data"
+* After enter all necessary data that is appended to the previous stored **donations.csv**
+* The **donations.csv** file should be in a separated folder named: "**Data**"
 
 Order: 2
 
@@ -47,6 +47,7 @@ Order: 2
 ## Description:
 
 As a user I want to able to choose my next action from a menu. The menu should look like this:
+
 1. Add new donor
 2. Add new donation event
 3. Delete a donor
@@ -124,14 +125,14 @@ Order: 5
 
 As a user I want to have a List menu in the application. When the list menu is selected I want to have a question to select the "DONOR" or "DONATION" to list. Every donor or donation is listed to the console. Please keep in mind print only the amount of donor or donation that is readable in the screen. Add the opportunity to page to next page.
 
+```
 -------------------------------------------
-
 Bela, Kiss
 90kg
 1995.01.01 - 20 years old
 [email protected]
-
 -------------------------------------------
+```
 
 ## Acceptance criteria:
 
@@ -149,9 +150,9 @@ Order: 6
 
 ## Description:
 
-As a user I want to have a Search menu in the application. When the search menu is selected I want to have a question to select the "DONOR" or "DONATION" to search. Every donor or donation from the result is listed to the console. Search should be like search everywhere so in every field of the items (name, email, age). Please keep in mind print only the amount of donor or donation that is readable in the screen. Add the opportunity to page to next page.
+As a user I want to have a **Search** menu in the application. When the search menu is selected I want to have a question to select the "DONOR" or "DONATION" to search. Every donor or donation from the result is listed to the console. Search should be like search everywhere so in every field of the items (name, email, age). Please keep in mind print only the amount of donor or donation that is readable in the screen. Add the opportunity to page to next page.
 
-<img src=search_menu.jpg>
+![](search_menu.jpg)
 
 ## Acceptance criteria:
 
@@ -173,7 +174,7 @@ Order: 7
 
 ## Description:
 
-As a user I want to be able to give a field as an order by clause when I choose list menu item. After I type it from an option list the result should be sorted ascendantly according to the choosen field. If I didn't choose any field (only hit ENTER) the result should be sorted by
+As a user I want to be able to give a field as an order by clause when I choose **list** menu item. After I type it from an option list the result should be sorted ascendantly according to the choosen field. If I didn't choose any field (only hit ENTER) the result should be sorted by
 
 * Name in case of Donors
 * Date of event in case of Donation
