@@ -31,23 +31,27 @@ So the task is create an application which suitable for handling blood donation 
 ### Functions:
 
 * Parse name, store it in a separated object
-* Suitable for donation:
+* Suitable for donation:  
   weight > 50
-* last donation was more than 3 months ago
+* last donation was more than 3 months ago  
   age > 18 years
 * How old is the donor in years based on date of birth?
 * ID is not expired.
 * Define type of personal document based on its identifier:
   * 6digit + 2letter (123456AB) is identity card
   * 6letter + 2digit (ASDFGH12) is passport
-* Email address validation (contains @-ot and ending with .hu/.com)
+* Email address validation (contains @ and ends with .hu/.com)
 * Mobil number validation (starts with +36/06 + 2 digit(provider identifier - 20/30/70) ending with 7 digits)
-* Write out data in a table form pl.:
-  Attila, Moln·r
+* Write out data in a table form eg.:
+```
+  Attila, Moln√°r
   90kg [using of str function]
   1989.05.06 - 26 years old
-  asd@test.hu,
+  asd@test.hu
+```
 * Generate random number: Hemogblobin level between 80-200, write out is the donor suitable or not (value is greather than 110)?
+
+----------------------------------------
 
 ## Donation event registration:
 
@@ -73,12 +77,9 @@ So the task is create an application which suitable for handling blood donation 
 * Streetname maximum length is 25,
 * City is in this list: Miskolc, Kazincbarcika, Szerencs, Sarospatak
 * Calculate duration in minutes based on start and endtime
-* You can use [datetime.strptime](https://docs.python.org/3.4/library/datetime.html#strftime-and-strptime-behavior) and [timedelta.total_seconds](https://docs.python.org/3.4/library/datetime.html#datetime.timedelta.total_seconds) functions
-
-  max_donor_number = ((event_duration_in_minutes - preparation_time) / donation_time) * number_of_beds
-
-  preparation_time = 30
-
+* You can use [datetime.strptime](https://docs.python.org/3.4/library/datetime.html#strftime-and-strptime-behavior) and [timedelta.total_seconds](https://docs.python.org/3.4/library/datetime.html#datetime.timedelta.total_seconds) functions  
+  max_donor_number = ((event_duration_in_minutes - preparation_time) / donation_time) * number_of_beds  
+  preparation_time = 30  
   donation_time = 30
 
 At the end of the event registration ask the user about how many successfull donation was on the event and store it as an integer!
