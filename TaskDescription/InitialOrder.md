@@ -94,7 +94,57 @@ At the end of the event registration ask the user about how many successfull don
 --------------------------------------------------------
 --------------------------------------------------------
 
-tags: error handling, git, OOP, python, SCRUM
+## What we have done
+
+### [Tag *Week4B*](https://github.com/KoicsD/CharliesAngels/tree/Week4B):
+
+What we have done and our Mentors have seen is under tag [*Week4B*](https://github.com/KoicsD/CharliesAngels/tree/Week4B). That commit was added on *30th Oct*.
+
+There were 3 files:
+* [*event_reg.py*](https://github.com/KoicsD/CharliesAngels/blob/Week4B/event_reg.py) -- This contained donation event data input functions.
+* [*donor_reg.py*](https://github.com/KoicsD/CharliesAngels/blob/Week4B/donor_reg.py) -- This contained donor data input functions.
+* [*main.py*](https://github.com/KoicsD/CharliesAngels/blob/Week4B/main.py) -- This was the entry point, containing a menu to decide whether to input donor or event data.
+
+[*Zsolt Bódi*](https://github.com/bodizsolt1992) and I myself worked on [*event_reg.py*](https://github.com/KoicsD/CharliesAngels/blob/Week4B/event_reg.py) while [*Zoltán Székely*](https://github.com/Szezol), [*Márton Ozsvár*](https://github.com/ozsvarmartoncc) and [*Gergely Viczmándi*]() worked on [*donor_reg*](https://github.com/KoicsD/CharliesAngels/blob/Week4B/donor_reg.py).
+This has had an effect on the structure of our code:
+While [*event_reg.py*](https://github.com/KoicsD/CharliesAngels/blob/Week4B/event_reg.py) had a class-definition providing *Donation*-type objects, [*donor_reg*](https://github.com/KoicsD/CharliesAngels/blob/Week4B/donor_reg.py) was a simple function-collection. In case of *Donation* function [*__ init __*](https://docs.python.org/3/reference/datamodel.html?highlight=__init__#object.__init__) invoked the input functions while *donor_reg* module had a *main* function for this reason.  
+In addition [*donor_reg*](https://github.com/KoicsD/CharliesAngels/blob/Week4B/donor_reg.py) was not user-safe (eg. it trumbled when user typed wrong date format) and none of the two mode was able to print inputted data in a table form.  
+As a good point, I managed to allow user to quit when inputting data in [*event_reg.py*](https://github.com/KoicsD/CharliesAngels/blob/Week4B/event_reg.py). If user typed "\quit", control returned to [*main.py*](https://github.com/KoicsD/CharliesAngels/blob/Week4B/main.py) -- meaning that an invalid *Donation* object was constructed.
+
+### [Tag *Week4B_weekend*](https://github.com/KoicsD/CharliesAngels/tree/Week4B_weekend):
+
+We were not satisfied with ourself on that friday, so we worked on the code all the weekend. You can find our result under tag [*Week4B_weekend*](https://github.com/KoicsD/CharliesAngels/tree/Week4B_weekend). The date of that commit is *1st Nov*.
+
+We fixed and optimized [*donor_reg.py*](https://github.com/KoicsD/CharliesAngels/blob/Week4B/donor_reg.py) and I developed [*event_reg.py*](https://github.com/KoicsD/CharliesAngels/blob/Week4B/event_reg.py) further.
+
+In case of [*donor_reg.py*](https://github.com/KoicsD/CharliesAngels/blob/Week4B/donor_reg.py):
+* user-safety problems of [string-parsing *datetime*](https://docs.python.org/3/library/datetime.html?highlight=datetime.strptime#datetime.datetime.strptime) was fixed
+* inner structure of module was refactored for optimization purpose
+* a printer function was added to print data in a table-like form and it was invoked from function *main*
+
+In case of [*event_reg.py*](https://github.com/KoicsD/CharliesAngels/blob/Week4B/event_reg.py):
+* function [*__ repr __*](https://docs.python.org/3/reference/datamodel.html?highlight=__repr__#object.__repr__) was overdefined to make *Donation* objects printable
+* *main* function was added and printing was invoked from it after intantiating
+
+In both module, function *main* was automatically invoked if module was run directly as [*__ main __*](https://docs.python.org/3/library/__main__.html?highlight=__main__#module-__main__).
+
+Unfortunatelly, the difference between the point of view of the two modules still remained, demolishing the elegance of our code.
+
+-----------------------
+
+### What we have learnt:
+Members should plan togather the whole project at the beginning of the sprint, if you want your code to have a unified structure.
+Maybe on the first day a [SCRUM](https://en.wikipedia.org/wiki/Scrum_(software_development))-team should deal with nothing but planning.
+
+--------------------------------------------------------
+--------------------------------------------------------
+
+tags:
+[error handling](https://docs.python.org/3/tutorial/errors.html?highlight=error%20handling),
+[git](https://git-scm.com),
+[OOP](https://en.wikipedia.org/wiki/Object-oriented_programming),
+[python](https://www.python.org),
+[SCRUM](https://en.wikipedia.org/wiki/Scrum_(software_development))
 
 [Next: Week5](OrdersWeek5.md)  
 [Back to README](../README.md)
