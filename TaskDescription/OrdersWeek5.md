@@ -290,9 +290,6 @@ Our work can be fing under tag [Week5B](https://github.com/KoicsD/CharliesAngels
 * basic menu for all above points (with [OOP](https://en.wikipedia.org/wiki/Object-oriented_programming) point of view)
 * we made possible to leave the field *"Date of Last Donation"* empty when entering new *Donor*
 
-In a phase of developement our menu supported arrow keys as well, but later this feature was reverted as it was unable to cooperate with our [IDE](https://en.wikipedia.org/wiki/Integrated_development_environment), [*PyCharm*](https://www.jetbrains.com/pycharm/).
-(See also delta of [commit "menu reverted to regain platform independence"](https://github.com/KoicsD/CharliesAngels/commit/abcbe272c07948452c9ea5182c75dde8cccf1c27) and browse files of [commit "footnote instructions added to menu"](https://github.com/KoicsD/CharliesAngels/commit/de418fea998d2e4f1381661f8bb39dee4dbe5ff9))
-
 ------------------
 
 ## Structure of code
@@ -302,6 +299,12 @@ blabla
 
 ### Handling *Donors*:
 blabla
+
+### Object-orientecd menu
+blabla
+
+In a phase of developement our menu supported arrow keys as well, but later this feature was reverted as it was unable to cooperate with our [IDE](https://en.wikipedia.org/wiki/Integrated_development_environment), [*PyCharm*](https://www.jetbrains.com/pycharm/).
+(See also delta of [commit "menu reverted to regain platform independence"](https://github.com/KoicsD/CharliesAngels/commit/abcbe272c07948452c9ea5182c75dde8cccf1c27) and browse files of [commit "footnote instructions added to menu"](https://github.com/KoicsD/CharliesAngels/commit/de418fea998d2e4f1381661f8bb39dee4dbe5ff9))
 
 ### Module Files:  
 Our application consisted of (and still contains) the following files:  
@@ -338,6 +341,19 @@ The following files were created for making expirements but they are no parts of
   [Gergely Viczmándi](https://github.com/viczmandi) created this file but he left it empty.  
 * sort_the_list_by_order.py  
   This was an expirement to implement ordered sorting of *Donors*.
+
+--------------------------
+
+## Lack of [unit-tests](https://docs.python.org/3/library/unittest.html?highlight=unittest#module-unittest)
+
+blabla
+
+----------------------------------------------
+----------------------------------------------
+
+# What we have learnt
+
+blabla
 
 ----------------------------------------------
 ----------------------------------------------
