@@ -39,6 +39,13 @@ I'd like to have the opportunity to change any data I want.
 ------------------------------------------------
 ------------------------------------------------
 
+# What we have done
+
+[Week6B](https://github.com/KoicsD/CharliesAngels/tree/Week6B)
+
+------------------------------------------------
+------------------------------------------------
+
 [Next: Week7](OrdersWeek7.md)  
 [Previous: Week5](OrdersWeek5.md)  
 [Back to README](../README.md)
