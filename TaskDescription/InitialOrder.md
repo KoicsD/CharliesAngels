@@ -123,6 +123,7 @@ In case of [*donor_reg.py*](https://github.com/KoicsD/CharliesAngels/blob/Week4B
 * user-safety problems of [string-parsing *datetime*](https://docs.python.org/3/library/datetime.html?highlight=datetime.strptime#datetime.datetime.strptime) was fixed
 * inner structure of module was refactored for optimization purpose
 * a printer function was added to print data in a table-like form and it was invoked from function *main*
+* despite the above fixing and refactoring we still forgot to handle the situation when the new donor has never donated
 
 In case of [*event_reg.py*](https://github.com/KoicsD/CharliesAngels/blob/Week4B/event_reg.py):
 * function [*__ repr __*](https://docs.python.org/3/reference/datamodel.html?highlight=__repr__#object.__repr__) was overdefined to make *Donation* objects printable
