@@ -288,6 +288,10 @@ Our work can be fing under tag [Week5B](https://github.com/KoicsD/CharliesAngels
 * listing without sorting -- different style in case of *Donors* and *Donation* events
 * searcher function for *Donors*
 * basic menu for all above points (with [OOP](https://en.wikipedia.org/wiki/Object-oriented_programming) point of view)
+* we made possible to leave the field *"Date of Last Donation"* empty when entering new *Donor*
+
+In a phase of developement our menu supported arrow keys as well, but later this feature was reverted as it was unable to cooperate with our [IDE](https://en.wikipedia.org/wiki/Integrated_development_environment), [*PyCharm*](https://www.jetbrains.com/pycharm/).
+(See also delta of [commit "menu reverted to regain platform independence"](https://github.com/KoicsD/CharliesAngels/commit/abcbe272c07948452c9ea5182c75dde8cccf1c27) and browse files of [commit "footnote instructions added to menu"](https://github.com/KoicsD/CharliesAngels/commit/de418fea998d2e4f1381661f8bb39dee4dbe5ff9))
 
 ------------------
 
@@ -299,23 +303,41 @@ blabla
 ### Handling *Donors*:
 blabla
 
-### Module Files:
-Our application consisted of the following files:
-* data_handler.py
-* delete_donor.py
-* donor_csv_writer.py
-* donor_reg.py
-* event_reg.py
-* List_donors.py
-* main.py
-* menu.py
-* search_in_files.py
+### Module Files:  
+Our application consisted of (and still contains) the following files:  
+* data_handler.py  
+  Database module. This module handles *Donation* objects and delegates control to modules handling *Donors*.  
+* delete_donor.py  
+  This file is responsible for asking a *Donor* ID and deleting *Donor*.  
+* donor_csv_writer.py  
+  Module *donor_reg* use this module to append inputted data to [*csv* file](https://en.wikipedia.org/wiki/Comma-separated_values).  
+* donor_reg.py  
+  This module is responsible for inputting new *Donor*'s data.  
+* event_reg.py  
+  This module contains the class definition of *Donation* objects.  
+* List_donors.py  
+  This module is responsible for listing *Donors*.  
+* main.py  
+  This is the entry point.  
+  Its function *initialize* instantiates classes of module *menu*
+  -- storing the function delegates of module *data_handler* in the new menu-objects.  
+  The heart of our application is a while-True loop in *main* function
+  which invokes the *load* method of object *main_menu* repeatedly
+  until user hits the quit option and function *shutdown* is invoked.
+* menu.py  
+  This module contains general class-definitions for menu systems.  
+* search_in_files.py  
+  This module is responsible for searching in *Donors*.
+  It asks user for a search key and searches in *Donor*'s file.
 
 ### Experimental Files:
-The following files are created for making expirements but they are not part of our application:
-* delete_in_files.py
-* donor_writer.py
-* sort_the_list_by_order.py
+The following files were created for making expirements but they are no parts of our application:
+* delete_in_files.py  
+  This was [Zoltán Székely](https://github.com/Szezol)'s expirement on deleting *Donors* using an assistant file.  
+* donor_writer.py  
+  [Gergely Viczmándi](https://github.com/viczmandi) created this file but he left it empty.  
+* sort_the_list_by_order.py  
+  This was an expirement to implement ordered sorting of *Donors*.
 
 ----------------------------------------------
 ----------------------------------------------
