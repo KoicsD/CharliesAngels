@@ -115,7 +115,9 @@ As a good point, I managed to allow user to quit when inputting data in [*event_
 
 We were not satisfied with ourself on that friday, so we worked on the code all the weekend. You can find our result under tag [*Week4B_weekend*](https://github.com/KoicsD/CharliesAngels/tree/Week4B_weekend). The date of that commit is *1st Nov*.
 
-We fixed and optimized [*donor_reg.py*](https://github.com/KoicsD/CharliesAngels/blob/Week4B/donor_reg.py) and I developed [*event_reg.py*](https://github.com/KoicsD/CharliesAngels/blob/Week4B/event_reg.py) further.
+We fixed and optimized [*donor_reg.py*](https://github.com/KoicsD/CharliesAngels/blob/Week4B/donor_reg.py) and I developed [*event_reg.py*](https://github.com/KoicsD/CharliesAngels/blob/Week4B/event_reg.py) further.  
+Unfortunatelly, the difference between the point of view of the two modules still remained, demolishing the elegance of our code.  
+In addition we did not worked in [test-driven developement](https://en.wikipedia.org/wiki/Test-driven_development) and finally we was not able to write any [unit-tests](https://docs.python.org/3/library/unittest.html?highlight=unittest#module-unittest) for our code.
 
 In case of [*donor_reg.py*](https://github.com/KoicsD/CharliesAngels/blob/Week4B/donor_reg.py):
 * user-safety problems of [string-parsing *datetime*](https://docs.python.org/3/library/datetime.html?highlight=datetime.strptime#datetime.datetime.strptime) was fixed
@@ -124,11 +126,15 @@ In case of [*donor_reg.py*](https://github.com/KoicsD/CharliesAngels/blob/Week4B
 
 In case of [*event_reg.py*](https://github.com/KoicsD/CharliesAngels/blob/Week4B/event_reg.py):
 * function [*__ repr __*](https://docs.python.org/3/reference/datamodel.html?highlight=__repr__#object.__repr__) was overdefined to make *Donation* objects printable
-* *main* function was added and printing was invoked from it after intantiating
+* *main* function was added and printing was invoked from it after instantiating
+* user interruption was rebased from simple *return* directive to [error-raising and -handling](https://docs.python.org/3/tutorial/errors.html?highlight=raising%20exceptions)
 
 In both module, function *main* was automatically invoked if module was run directly as [*__ main __*](https://docs.python.org/3/library/__main__.html?highlight=__main__#module-__main__).
 
-Unfortunatelly, the difference between the point of view of the two modules still remained, demolishing the elegance of our code.
+In this state You can also find a file named [*user_input.py*](https://github.com/KoicsD/CharliesAngels/blob/Week4B/user_input.py).
+It contains a general input function which repeats invoking *input* function untill the string given by user passes both the checker(parser) and the validator(processor) function. It also supports [exception](https://docs.python.org/3/tutorial/errors.html?highlight=raising%20exceptions)-based user-interruption.
+My goal was to let it be the only function in our code that invokes [*input*](https://docs.python.org/3/library/functions.html?highlight=input#input).
+Ufortunatelly we never get use of it and this file was deleted during later developement.
 
 -----------------------
 
