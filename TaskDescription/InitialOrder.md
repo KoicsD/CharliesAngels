@@ -134,7 +134,7 @@ In both module, function *main* was automatically invoked if module was run dire
 In this state You can also find a file named [*user_input.py*](https://github.com/KoicsD/CharliesAngels/blob/Week4B/user_input.py).
 It contains a general input function which repeats invoking *input* function untill the string given by user passes both the checker(parser) and the validator(processor) function. It also supports [exception](https://docs.python.org/3/tutorial/errors.html?highlight=raising%20exceptions)-based user-interruption.
 My goal was to let it be the only function in our code that invokes [*input*](https://docs.python.org/3/library/functions.html?highlight=input#input).
-(You can find experiments with such refactoring in branch [*refactor_event*](https://github.com/KoicsD/CharliesAngels/tree/refactor_event). You can read further description about it [here](OutsideBranchMain.md).)
+(You can find experiments with such refactoring in branch [*refactor_event*](https://github.com/KoicsD/CharliesAngels/tree/refactor_event). You can read further description about it [here](OutsideMaster.md).)
 Ufortunatelly we never get use of it and this file was deleted during later developement.
 
 -----------------------
