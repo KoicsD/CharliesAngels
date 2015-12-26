@@ -16,7 +16,15 @@ As a user I want to store my saved data in a centralized storage. I have a MySQL
 
 ------------
 
-[app.config](app.config)
+[app.config](app.config)  
+This is a sample about the configuration file.
+
+-------------------------------------------------------
+-------------------------------------------------------
+
+# What we have done
+
+[Week7B](https://github.com/KoicsD/CharliesAngels/tree/Week7B)
 
 -------------------------------------------------------
 -------------------------------------------------------
