@@ -270,7 +270,52 @@ Order: 9
 
 # What we have done
 
-[Week5B](https://github.com/KoicsD/CharliesAngels/tree/Week5B)
+Our work can be fing under tag [Week5B](https://github.com/KoicsD/CharliesAngels/tree/Week5B) with date 16th Nov. We had 7 days for work instead os 5, as there was not enough time for listening to all the SCRUM-groups on Friday that week -- fortunatelly, as we needed this extra time.
+
+-----------------
+
+## What we undertook from tasks and what we implemented
+
+### What we undertook:
+* file reading and writing
+* deleting *Donors* and *Donation* events
+* a basic lister function
+* basic menu for above points
+
+### What we implemented:
+* file handling (using [*csv* module](https://docs.python.org/3/library/csv.html?highlight=csv#module-csv))
+* deleting *Donors* and *Donation* events
+* listing without sorting -- different style in case of *Donors* and *Donation* events
+* searcher function for *Donors*
+* basic menu for all above points (with [OOP](https://en.wikipedia.org/wiki/Object-oriented_programming) point of view)
+
+------------------
+
+## Structure of code
+
+### Handling *Donation* events:
+blabla
+
+### Handling *Donors*:
+blabla
+
+### Module Files:
+Our application consisted of the following files:
+* data_handler.py
+* delete_donor.py
+* donor_csv_writer.py
+* donor_reg.py
+* event_reg.py
+* List_donors.py
+* main.py
+* menu.py
+* search_in_files.py
+
+### Experimental Files:
+The following files are created for making expirements but they are not part of our application:
+* delete_in_files.py
+* donor_writer.py
+* sort_the_list_by_order.py
 
 ----------------------------------------------
 ----------------------------------------------
