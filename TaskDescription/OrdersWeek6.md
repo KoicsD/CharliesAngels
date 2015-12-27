@@ -43,6 +43,12 @@ I'd like to have the opportunity to change any data I want.
 
 [Week6B](https://github.com/KoicsD/CharliesAngels/tree/Week6B)
 
+--------------------------
+
+## What we have learnt
+
+bla
+
 ------------------------------------------------
 ------------------------------------------------
 
