@@ -270,7 +270,9 @@ Order: 9
 
 # What we have done
 
-Our work can be fing under tag [Week5B](https://github.com/KoicsD/CharliesAngels/tree/Week5B) with date 16th Nov. We had 7 days for work instead os 5, as there was not enough time for listening to all the SCRUM-groups on Friday that week -- fortunatelly, as we needed this extra time.
+Our work can be fing under tag [*Week5B*](https://github.com/KoicsD/CharliesAngels/tree/Week5B) with date 16th Nov. We had 7 days for work instead os 5, as there was not enough time for listening to all the SCRUM-groups on Friday that week -- fortunatelly, as we needed this extra time.  
+As I had a lot of idea about arranging and refactoring our code, I created some branches outside [*master*](https://github.com/KoicsD/CharliesAngels/tree/master) for experimental purposes.
+You can read about them [here](https://github.com/KoicsD/CharliesAngels/blob/master/TaskDescription/OutsideMaster.md).
 
 -----------------
 
@@ -295,51 +297,62 @@ Our work can be fing under tag [Week5B](https://github.com/KoicsD/CharliesAngels
 ## Structure of code
 
 ### Handling *Donation* events:
-blabla
+While class-definition of *Donation* objects is in module [*event_reg*], *Donation* objects themselves are stored in a list in a new module named [*data_handler*].
+This module is responsible for storing them into and loading them from [*csv* file], using [*csv* module].
 
 ### Handling *Donors*:
-blabla
+Since our code has no class-definition for *Donor* objects, the above point of view cannot be used.
+Hence, module [*donor_reg*] uses a new module, named [*donor_csv_writer*] to store the data got from user to [*csv* file].
+Listing and searching is done by new, separate modules ([*List_donors*] and [*search_in_files*]), and all of them are imported into [*data_handler*], which forwards control from main menu to them.
+All the file-handler modules use [*csv* module] and there are no global lists of *Donor* data in our code.
 
-### Object-orientecd menu
-blabla
+### Object-oriented menu:
+Menu got a [separate module] of general class-definitions. There are 3 classes to be mentioned:
+* *MenuItem* -- the parent of the two other classes below
+* *Menu* -- this has a list of further *MenuItem*s, this *MenuItem*s are listed on screen when method *load* is called
+* *MenuPoint* -- this has a function delegate of a predefined function and invokes this function when method *load* is invoked
+
+The above classes are instantiated in [*main* module] when application is started up.
+When startup is ready, a while-True loop invokes the method *load* of global variable *main_menu* repeatedly.
+This loop gives the base of our application.
 
 In a phase of developement our menu supported arrow keys as well, but later this feature was reverted as it was unable to cooperate with our [IDE](https://en.wikipedia.org/wiki/Integrated_development_environment), [*PyCharm*](https://www.jetbrains.com/pycharm/).
 (See also delta of [commit "menu reverted to regain platform independence"](https://github.com/KoicsD/CharliesAngels/commit/abcbe272c07948452c9ea5182c75dde8cccf1c27) and browse files of [commit "footnote instructions added to menu"](https://github.com/KoicsD/CharliesAngels/commit/de418fea998d2e4f1381661f8bb39dee4dbe5ff9))
 
 ### Module Files:  
-Our application consisted of (and still contains) the following files:  
-* data_handler.py  
+To summarize, our application consisted of (and still contains) the following files:  
+* [*data_handler.py*]  
   Database module. This module handles *Donation* objects and delegates control to modules handling *Donors*.  
-* delete_donor.py  
+* [*delete_donor.py*]  
   This file is responsible for asking a *Donor* ID and deleting *Donor*.  
-* donor_csv_writer.py  
+* [*donor_csv_writer.py*]  
   Module *donor_reg* use this module to append inputted data to [*csv* file](https://en.wikipedia.org/wiki/Comma-separated_values).  
-* donor_reg.py  
+* [*donor_reg.py*]  
   This module is responsible for inputting new *Donor*'s data.  
-* event_reg.py  
+* [*event_reg.py*]  
   This module contains the class definition of *Donation* objects.  
-* List_donors.py  
+* [*List_donors.py*]  
   This module is responsible for listing *Donors*.  
-* main.py  
+* [*main.py*]  
   This is the entry point.  
   Its function *initialize* instantiates classes of module *menu*
   -- storing the function delegates of module *data_handler* in the new menu-objects.  
   The heart of our application is a while-True loop in *main* function
   which invokes the *load* method of object *main_menu* repeatedly
-  until user hits the quit option and function *shutdown* is invoked.
-* menu.py  
+  until user hits the quit option and function *shutdown* is invoked.  
+* [*menu.py*]  
   This module contains general class-definitions for menu systems.  
-* search_in_files.py  
+* [*search_in_files.py*]  
   This module is responsible for searching in *Donors*.
   It asks user for a search key and searches in *Donor*'s file.
 
 ### Experimental Files:
 The following files were created for making expirements but they are no parts of our application:
-* delete_in_files.py  
+* [*delete_in_files.py*]  
   This was [Zoltán Székely](https://github.com/Szezol)'s expirement on deleting *Donors* using an assistant file.  
-* donor_writer.py  
+* [*donor_writer.py*]  
   [Gergely Viczmándi](https://github.com/viczmandi) created this file but he left it empty.  
-* sort_the_list_by_order.py  
+* [*sort_the_list_by_order.py*]  
   This was an expirement to implement ordered sorting of *Donors*.
 
 --------------------------
