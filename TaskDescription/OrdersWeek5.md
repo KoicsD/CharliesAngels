@@ -306,6 +306,8 @@ You can read about them [here](https://github.com/KoicsD/CharliesAngels/blob/mas
 While class-definition of *Donation* objects is in module [*event_reg*], *Donation* objects themselves are stored in a list in a new module named [*data_handler*].
 This module is responsible for storing them into and loading them from [*csv* file], using [*csv* module].
 
+As mentioned below, the identity numbers of *Donation* events are the list indexes themselves, which turned out to be a mistake.
+
 ### Handling *Donors*:
 Since our code has no class-definition for *Donor* objects, the above point of view cannot be used.
 Hence, module [*donor_reg*] uses a new module, named [*donor_csv_writer*] to store the data got from user to [*csv* file].
