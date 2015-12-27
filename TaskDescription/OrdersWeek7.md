@@ -26,6 +26,12 @@ This is a sample about the configuration file.
 
 [Week7B](https://github.com/KoicsD/CharliesAngels/tree/Week7B)
 
+-------------------------
+
+## What we have learnt
+
+bla
+
 -------------------------------------------------------
 -------------------------------------------------------
 
