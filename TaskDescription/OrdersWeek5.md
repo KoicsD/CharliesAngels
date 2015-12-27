@@ -292,6 +292,12 @@ You can read about them [here](https://github.com/KoicsD/CharliesAngels/blob/mas
 * basic menu for all above points (with [OOP](https://en.wikipedia.org/wiki/Object-oriented_programming) point of view)
 * we made possible to leave the field *"Date of Last Donation"* empty when entering new *Donor*
 
+### Bugs we made:
+* identity number of *Donation* events "slipped" when deleting an event  
+* there were no way to read the unique identifier of *Donor*s when listing  
+* our lister was able to list only one *Donor* or *Donation* at a time, so we did not have to bother about paging  
+  -- we have not implemented page-size watcher and pager since than at all
+
 ------------------
 
 ## Structure of code
@@ -354,6 +360,12 @@ The following files were created for making expirements but they are no parts of
   [Gergely Viczmándi](https://github.com/viczmandi) created this file but he left it empty.  
 * [*sort_the_list_by_order.py*]  
   This was an expirement to implement ordered sorting of *Donors*.
+
+--------------------------
+
+## Bug: "Slip" of *Donation* events in database on deletion
+
+blabla
 
 --------------------------
 
