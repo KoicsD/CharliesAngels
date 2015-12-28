@@ -297,36 +297,36 @@ You can read about them [here](https://github.com/KoicsD/CharliesAngels/blob/mas
 * there were no way to read the unique identifier of *Donor*s when listing  
 * our lister was able to list only one *Donor* or *Donation* at a time, so we did not have to bother about paging  
   -- we have not implemented page-size watcher and pager up till now
-* still no unit-tests -- we have not written any test-code up till now
+* still no [unit-tests] -- we have not written any test-code up till now
 
 ------------------
 
 ## Structure of code
 
 ### Handling *Donation* events:
-While class-definition of *Donation* objects is in module [*event_reg*], *Donation* objects themselves are stored in a list in a new module named [*data_handler*].
-This module is responsible for storing them into and loading them from [*csv* file], using [*csv* module].
+While class-definition of *Donation* objects is in module [*event_reg*](https://github.com/KoicsD/CharliesAngels/blob/Week5B/event_reg.py), *Donation* objects themselves are stored in a list in a new module named [*data_handler*](https://github.com/KoicsD/CharliesAngels/blob/Week5B/data_handler.py).
+This module is responsible for storing them into and loading them from [*csv* file](https://en.wikipedia.org/wiki/Comma-separated_values), using [*csv* module](https://docs.python.org/3/library/csv.html?highlight=csv#module-csv).
 
-As our code use class [*csvReader*] and [*csvWriter*] from [*csv* module], which works with list of strings, we had to make it possible to convert *Donation* data into list of strings, and restore it.
-For this reason, we had to modify module [*event_reg*], and class *Donation* got a new method named *to_lists* and a new [classmethod], *from_lists*.
-Invokation of user-input functions was rearranged into a new [classmethod], called *from_user*.
+As our code use class [*reader*](https://docs.python.org/3/library/csv.html?highlight=reader#csv.reader) and [*writer*](https://docs.python.org/3/library/csv.html?highlight=writer#csv.writer) from [*csv* module](https://docs.python.org/3/library/csv.html?highlight=csv#module-csv), which works with list of strings, we had to make it possible to convert *Donation* data into list of strings, and restore it.
+For this reason, we had to modify module [*event_reg*](https://github.com/KoicsD/CharliesAngels/blob/Week5B/event_reg.py), and class *Donation* got a new method named *to_lists* and a new [classmethod](https://docs.python.org/3/library/functions.html?highlight=classmethod#classmethod), *from_lists*.
+Invokation of user-input functions was rearranged into a new [classmethod](https://docs.python.org/3/library/functions.html?highlight=classmethod#classmethod), called *from_user*.
 Up till this point, there were no possibility to create a *Donation* object without user-input.
 
 As mentioned below, the identity numbers of *Donation* events are the list indexes themselves, which turned out to be a mistake.
 
 ### Handling *Donors*:
 Since our code has no class-definition for *Donor* objects, the above point of view cannot be used.
-Hence, module [*donor_reg*] uses a new module, named [*donor_csv_writer*] to store the data got from user to [*csv* file].
-Listing and searching is done by new, separate modules ([*List_donors*] and [*search_in_files*]), and all of them are imported into [*data_handler*], which forwards control from main menu to them.
+Hence, module [*donor_reg*](https://github.com/KoicsD/CharliesAngels/blob/Week5B/donor_reg.py) uses a new module, named [*donor_csv_writer*](https://github.com/KoicsD/CharliesAngels/blob/Week5B/donor_csv_writer.py) to store the data got from user to [*csv* file](https://en.wikipedia.org/wiki/Comma-separated_values).
+Listing and searching is done by new, separate modules ([*List_donors*](https://github.com/KoicsD/CharliesAngels/blob/Week5B/List_donors.py) and [*search_in_files*](https://github.com/KoicsD/CharliesAngels/blob/Week5B/search_in_files.py)), and all of them are imported into [*data_handler*](https://github.com/KoicsD/CharliesAngels/blob/Week5B/data_handler.py), which forwards control from main menu to them.
 All the file-handler modules use [*csv* module] and there are no global lists of *Donor* data in our code.
 
 ### Object-oriented menu:
-Menu got a [separate module] of general class-definitions. There are 3 classes to be mentioned:
+Menu got a [separate module](https://github.com/KoicsD/CharliesAngels/blob/Week5B/menu.py) of general class-definitions. There are 3 classes to be mentioned:
 * *MenuItem* -- the parent of the two other classes below
 * *Menu* -- this has a list of further *MenuItem*s, this *MenuItem*s are listed on screen when method *load* is called
 * *MenuPoint* -- this has a function delegate of a predefined function and invokes this function when method *load* is invoked
 
-The above classes are instantiated in [*main* module] when application is started up.
+The above classes are instantiated in [*main* module](https://github.com/KoicsD/CharliesAngels/blob/Week5B/main.py) when application is started up.
 When startup is ready, a while-True loop invokes the method *load* of global variable *main_menu* repeatedly.
 This loop gives the base of our application.
 
@@ -335,38 +335,38 @@ In a phase of developement our menu supported arrow keys as well, but later this
 
 ### Module Files:  
 To summarize, our application consisted of (and still contains) the following files:  
-* [*data_handler.py*]  
+* [*data_handler.py*](https://github.com/KoicsD/CharliesAngels/blob/Week5B/data_handler.py)  
   Database module. This module handles *Donation* objects and delegates control to modules handling *Donors*.  
-* [*delete_donor.py*]  
+* [*delete_donor.py*](https://github.com/KoicsD/CharliesAngels/blob/Week5B/delete_donor.py)  
   This file is responsible for asking a *Donor* ID and deleting *Donor*.  
-* [*donor_csv_writer.py*]  
+* [*donor_csv_writer.py*](https://github.com/KoicsD/CharliesAngels/blob/Week5B/donor_csv_writer.py)  
   Module *donor_reg* use this module to append inputted data to [*csv* file](https://en.wikipedia.org/wiki/Comma-separated_values).  
-* [*donor_reg.py*]  
+* [*donor_reg.py*](https://github.com/KoicsD/CharliesAngels/blob/Week5B/donor_reg.py)  
   This module is responsible for inputting new *Donor*'s data.  
-* [*event_reg.py*]  
+* [*event_reg.py*](https://github.com/KoicsD/CharliesAngels/blob/Week5B/event_reg.py)  
   This module contains the class definition of *Donation* objects.  
-* [*List_donors.py*]  
+* [*List_donors.py*](https://github.com/KoicsD/CharliesAngels/blob/Week5B/List_donors.py)  
   This module is responsible for listing *Donors*.  
-* [*main.py*]  
+* [*main.py*](https://github.com/KoicsD/CharliesAngels/blob/Week5B/main.py)  
   This is the entry point.  
-  Its function *initialize* instantiates classes of module *menu*
-  -- storing the function delegates of module *data_handler* in new menu-objects.  
+  Its function *initialize* instantiates classes of module [*menu*](https://github.com/KoicsD/CharliesAngels/blob/Week5B/menu.py)
+  -- storing the function delegates of module [*data_handler*](https://github.com/KoicsD/CharliesAngels/blob/Week5B/data_handler.py) in new menu-objects.  
   The heart of our application is a while-True loop in *main* function
   which invokes the *load* method of object *main_menu* repeatedly
   until user hits the quit option and function *shutdown* is invoked.  
-* [*menu.py*]  
+* [*menu.py*](https://github.com/KoicsD/CharliesAngels/blob/Week5B/menu.py)  
   This module contains general class-definitions for menu systems.  
-* [*search_in_files.py*]  
+* [*search_in_files.py*](https://github.com/KoicsD/CharliesAngels/blob/Week5B/search_in_files.py)  
   This module is responsible for searching in *Donors*.
   It asks user for a search key and searches in *Donor*'s file.
 
 ### Experimental Files:
 The following files were created for making expirements but they are no parts of our application:
-* [*delete_in_files.py*]  
+* [*delete_in_files.py*](https://github.com/KoicsD/CharliesAngels/blob/Week5B/delete_in_files.py)  
   This was [Zoltán Székely](https://github.com/Szezol)'s expirement on deleting *Donors* using an assistant file.  
-* [*donor_writer.py*]  
+* [*donor_writer.py*](https://github.com/KoicsD/CharliesAngels/blob/Week5B/donor_writer.py)  
   [Gergely Viczmándi](https://github.com/viczmandi) created this file but he left it empty.  
-* [*sort_the_list_by_order.py*]  
+* [*sort_the_list_by_order.py*](https://github.com/KoicsD/CharliesAngels/blob/Week5B/sort_the_list_by_order)  
   This was an expirement to implement ordered sorting of *Donors*.
 
 --------------------------
@@ -374,12 +374,12 @@ The following files were created for making expirements but they are no parts of
 ## Bug: "Slip" of *Donation* events in database on deletion
 
 As mentioned above, there was a mistake in our application.
-The *Donation* objects are stored in a global dictionary in module [*data_hanler*].
+The *Donation* objects are stored in a global dictionary in module [*data_hanler*](https://github.com/KoicsD/CharliesAngels/blob/Week5B/data_handler.py).
 List indexes were used as identity keys, which caused a bug when deleting an object:
 the index of *Donation* objects after the deleted object were decreased.
 This is unacceptable in a database manager.  
-(If you want to try it, just clone our repository, check out tag [*Week5B*],
-download sample data into folder *DATA/* (this folder is not cloned automatically, as it is added to file [*.gitignore*])
+(If you want to try it, just clone our repository, check out tag [*Week5B*](https://github.com/KoicsD/CharliesAngels/tree/Week5B),
+download sample data into folder *DATA/* (this folder is not cloned automatically, as it is added to file [*.gitignore*](https://git-scm.com/docs/gitignore))
 and start the app.)
 
 --------------------------
@@ -388,16 +388,16 @@ and start the app.)
 
 Our code still had (and has) no unit-tests, although, mentors showed us how to write unit-tests and how to think in a [test-driven way].
 The reason was planning. We did not developed in a test-driven way, and we had not enough time at the and to write some test-code.
-This problem was present on the [previous sprint] as well, and up till now, we have not managed to solve it.
+This problem was present on the [previous sprint](OrdersWeek6.md) as well, and up till now, we have not managed to solve it.
 So we can say, though our code worked (and still works), we cannot be sure we did not make some little bugs we are not aware of.
 (Once uppon a time I had to check and fix date format codes in file-handler modules...)
 
-Modules that really needs testing are [*donor_reg*] and [*event_reg*], as they contain string-parser (checker) and validator logic.
-In case of [*donor_reg*], this test-code could be easily added, as checker and validator logic is arranged into separate functions.  
-But in [*event_reg*], parsing and validating is integrated into user-input functions, which makes troubles.
-(It made troubles expecially before [classmethods] *from_user* and *from_lists* were added, because up till that point, there were no possibility to create *Donation* objects without user-input.)
+Modules that really needs testing are [*donor_reg*](https://github.com/KoicsD/CharliesAngels/blob/Week5B/donor_reg.py) and [*event_reg*](https://github.com/KoicsD/CharliesAngels/blob/Week5B/event_reg.py), as they contain string-parser (checker) and validator logic.
+In case of [*donor_reg*](https://github.com/KoicsD/CharliesAngels/blob/Week5B/donor_reg.py), this test-code could be easily added, as checker and validator logic is arranged into separate functions.  
+But in [*event_reg*](https://github.com/KoicsD/CharliesAngels/blob/Week5B/event_reg.py), parsing and validating is integrated into user-input functions, which makes troubles.
+(It made troubles expecially before [classmethods](https://docs.python.org/3/library/functions.html?highlight=classmethod#classmethod) *from_user* and *from_lists* were added, because up till that point, there were no possibility to create *Donation* objects without user-input.)
 
-We could have used [mock input] but it would have been in conflict with the main principle "the more logic your test-code has, the more reliable it is".
+We could have used [mocking](https://docs.python.org/3/library/unittest.mock.html?highlight=mock#module-unittest.mock) *input* but it would have been in conflict with the main principle "the more logic your test-code has, the more reliable it is".
 
 ----------------------------------------------
 ----------------------------------------------
@@ -405,7 +405,7 @@ We could have used [mock input] but it would have been in conflict with the main
 # What we have learnt
 
 The main conclusion is that it is essential to separate user-input from checker and validator logic carefully, as user-input can be hardly tested programmatically.
-In case of such modules like [*donor_reg*] or [*event_reg*], logic should be developed with a [test-driven point of view].
+In case of such modules like [*donor_reg*](https://github.com/KoicsD/CharliesAngels/blob/Week5B/donor_reg.py) or [*event_reg*](event_reg.py), logic should be developed with a [test-driven point of view].
 
 It is not appropriate to store data in a list and use list-indexes as primary keys in a database.
 Dictionary seems to be better as its keys does not "slip" when you remove an item.
