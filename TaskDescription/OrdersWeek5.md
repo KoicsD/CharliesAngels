@@ -367,7 +367,13 @@ The following files were created for making expirements but they are no parts of
 
 ## Bug: "Slip" of *Donation* events in database on deletion
 
-blabla
+As mentioned above, there was a mistake in our application.
+The *Donation* objects are stored in a global dictionary in module [*data_hanler*].
+List indexes were used as identity keys, which caused a bug when deleting an object:
+the index of *Donation* objects after the deleted object were decreased.  
+(If you want to try it, just clone our repository, check out tag [*Week5B*],
+download sample data into folder DATA/ (this folder is not cloned automatically, as it is added to [*.gitignore*])
+and start the app.)
 
 --------------------------
 
