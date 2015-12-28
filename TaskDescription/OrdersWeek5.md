@@ -378,9 +378,9 @@ The *Donation* objects are stored in a global dictionary in module [*data_hanler
 List indexes were used as identity keys, which caused a bug when deleting an object:
 the index of *Donation* objects after the deleted object were decreased.
 This is unacceptable in a database manager.  
-(If you want to try it, just clone our repository, check out tag [*Week5B*](https://github.com/KoicsD/CharliesAngels/tree/Week5B),
+(If you want to try it, just [clone](https://git-scm.com/docs/git-clone) our repository, [check out](https://git-scm.com/docs/git-checkout) tag [*Week5B*](https://github.com/KoicsD/CharliesAngels/tree/Week5B),
 download sample data into folder *DATA/* (this folder is not cloned automatically, as it is added to file [*.gitignore*](https://git-scm.com/docs/gitignore))
-and start the app.)
+and run [*main.py*](https://github.com/KoicsD/CharliesAngels/blob/Week5B/main.py) with [*python*](https://www.python.org/downloads/) 3.x.)
 
 --------------------------
 
