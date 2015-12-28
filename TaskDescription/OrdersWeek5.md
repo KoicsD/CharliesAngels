@@ -270,7 +270,7 @@ Order: 9
 
 # What we have done
 
-Our work can be fing under tag [*Week5B*](https://github.com/KoicsD/CharliesAngels/tree/Week5B) with date 16th Nov. We had 7 days for work instead os 5, as there was not enough time for listening to all the SCRUM-groups on Friday that week -- fortunatelly, as we needed this extra time.  
+Our work can be find under tag [*Week5B*](https://github.com/KoicsD/CharliesAngels/tree/Week5B) with date 16th Nov. We had 7 days for work instead of 5, as there was not enough time for listening to all the SCRUM-groups on Friday that week -- fortunatelly, as we needed this extra time.  
 As I had a lot of idea about arranging and refactoring our code, I created some branches outside [*master*](https://github.com/KoicsD/CharliesAngels/tree/master) for experimental purposes.
 You can read about them [here](https://github.com/KoicsD/CharliesAngels/blob/master/TaskDescription/OutsideMaster.md).
 
@@ -289,14 +289,15 @@ You can read about them [here](https://github.com/KoicsD/CharliesAngels/blob/mas
 * deleting *Donors* and *Donation* events
 * listing without sorting -- different style in case of *Donors* and *Donation* events
 * searcher function for *Donors*
-* basic menu for all above points (with [OOP](https://en.wikipedia.org/wiki/Object-oriented_programming) point of view)
+* basic menu for all above points (with [object-oriented point of view](https://en.wikipedia.org/wiki/Object-oriented_programming))
 * we made possible to leave the field *"Date of Last Donation"* empty when entering new *Donor*
 
-### Bugs we made:
+### Bugs and incompletions:
 * identity number of *Donation* events "slipped" when deleting an event  
 * there were no way to read the unique identifier of *Donor*s when listing  
 * our lister was able to list only one *Donor* or *Donation* at a time, so we did not have to bother about paging  
-  -- we have not implemented page-size watcher and pager since than at all
+  -- we have not implemented page-size watcher and pager up till now
+* still no unit-tests -- we have not written any test-code up till now
 
 ------------------
 
@@ -305,6 +306,11 @@ You can read about them [here](https://github.com/KoicsD/CharliesAngels/blob/mas
 ### Handling *Donation* events:
 While class-definition of *Donation* objects is in module [*event_reg*], *Donation* objects themselves are stored in a list in a new module named [*data_handler*].
 This module is responsible for storing them into and loading them from [*csv* file], using [*csv* module].
+
+As our code use class [*csvReader*] and [*csvWriter*] from [*csv* module], which works with list of strings, we had to make it possible to convert *Donation* data into list of strings, and restore it.
+For this reason, we had to modify module [*event_reg*], and class *Donation* got a new method named *to_lists* and a new [classmethod], *from_lists*.
+Invokation of user-input functions was rearranged into a new [classmethod], called *from_user*.
+Up till this point, there were no possibility to create a *Donation* object without user-input.
 
 As mentioned below, the identity numbers of *Donation* events are the list indexes themselves, which turned out to be a mistake.
 
@@ -344,7 +350,7 @@ To summarize, our application consisted of (and still contains) the following fi
 * [*main.py*]  
   This is the entry point.  
   Its function *initialize* instantiates classes of module *menu*
-  -- storing the function delegates of module *data_handler* in the new menu-objects.  
+  -- storing the function delegates of module *data_handler* in new menu-objects.  
   The heart of our application is a while-True loop in *main* function
   which invokes the *load* method of object *main_menu* repeatedly
   until user hits the quit option and function *shutdown* is invoked.  
@@ -370,23 +376,46 @@ The following files were created for making expirements but they are no parts of
 As mentioned above, there was a mistake in our application.
 The *Donation* objects are stored in a global dictionary in module [*data_hanler*].
 List indexes were used as identity keys, which caused a bug when deleting an object:
-the index of *Donation* objects after the deleted object were decreased.  
+the index of *Donation* objects after the deleted object were decreased.
+This is unacceptable in a database manager.  
 (If you want to try it, just clone our repository, check out tag [*Week5B*],
-download sample data into folder DATA/ (this folder is not cloned automatically, as it is added to [*.gitignore*])
+download sample data into folder *DATA/* (this folder is not cloned automatically, as it is added to file [*.gitignore*])
 and start the app.)
 
 --------------------------
 
 ## Lack of [unit-tests](https://docs.python.org/3/library/unittest.html?highlight=unittest#module-unittest)
 
-blabla
+Our code still had (and has) no unit-tests, although, mentors showed us how to write unit-tests and how to think in a [test-driven way].
+The reason was planning. We did not developed in a test-driven way, and we had not enough time at the and to write some test-code.
+This problem was present on the [previous sprint] as well, and up till now, we have not managed to solve it.
+So we can say, though our code worked (and still works), we cannot be sure we did not make some little bugs we are not aware of.
+(Once uppon a time I had to check and fix date format codes in file-handler modules...)
+
+Modules that really needs testing are [*donor_reg*] and [*event_reg*], as they contain string-parser (checker) and validator logic.
+In case of [*donor_reg*], this test-code could be easily added, as checker and validator logic is arranged into separate functions.  
+But in [*event_reg*], parsing and validating is integrated into user-input functions, which makes troubles.
+(It made troubles expecially before [classmethods] *from_user* and *from_lists* were added, because up till that point, there were no possibility to create *Donation* objects without user-input.)
+
+We could have used [mock input] but it would have been in conflict with the main principle "the more logic your test-code has, the more reliable it is".
 
 ----------------------------------------------
 ----------------------------------------------
 
 # What we have learnt
 
-blabla
+The main conclusion is that it is essential to separate user-input from checker and validator logic carefully, as user-input can be hardly tested programmatically.
+In case of such modules like [*donor_reg*] or [*event_reg*], logic should be developed with a [test-driven point of view].
+
+It is not appropriate to store data in a list and use list-indexes as primary keys in a database.
+Dictionary seems to be better as its keys does not "slip" when you remove an item.
+We can consider storing primary key inside the objects.
+
+I myself have realised, that not all of my ideas can be implemented in a group, as some of the members have less experience and hard-skills than me.
+This can lead to make me go on my own ways separate from other memebers.
+It is not enough to make plans togather, but you always have to be ready to compromise.  
+One of our mentors has said: The goal is not "excellent" but "good enough".  
+-- That's what is going to be the most dificult to me.
 
 ----------------------------------------------
 ----------------------------------------------
