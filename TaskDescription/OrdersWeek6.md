@@ -57,7 +57,7 @@ We have to mention, that mentors gave fewer new requirements, as they were aware
 * new "user-requirements":
   * making possible to change *Donor* and *Donation* data field-by-field
   * extending possibility of user-interruption from [*event-reg*](https://github.com/KoicsD/CharliesAngels/blob/Week6B/event_reg.py) to [*donor_reg*](https://github.com/KoicsD/CharliesAngels/blob/Week6B/event_reg.py),  
-    and rebasing it from string "\quit" to key 'Esc'
+    and rebasing it from string *"\quit"* to key *'Esc'*
 
 ### What we implemented:
 * what we had not undertaken during the [previous sprint](OrdersWeek5.md):
@@ -67,7 +67,7 @@ We have to mention, that mentors gave fewer new requirements, as they were aware
 * new "user-requirements":
   * making possible to change *Donor* and *Donation* data field-by-field
   * extending possibility of user-interruption from [*event-reg*](https://github.com/KoicsD/CharliesAngels/blob/Week6B/event_reg.py) to [*donor_reg*](https://github.com/KoicsD/CharliesAngels/blob/Week6B/donor_reg.py),  
-    (but not: rebasing it from string "\quit" to key 'Esc'
+    (but not: rebasing it from string *"\quit"* to key *'Esc'*
     -- at this point we managed to come to a compromise with mentors)
 * bugfix:
   * there turned out to be a bug in checking the unity of new *Donor*'s *unique id*  
@@ -81,20 +81,19 @@ We have to mention, that mentors gave fewer new requirements, as they were aware
 ### Listing and sorting
 Module [*List_donors*](https://github.com/KoicsD/CharliesAngels/blob/Week6B/List_donors.py) was replaced by [*sort_by_order*](https://github.com/KoicsD/CharliesAngels/blob/Week6B/sort_by_order.py), in order to make possible sorted listing.
 The new lister module can list not only *Donor*s but *Donation* events as well.
-(*Donation*-lister was implemented in the [original module](https://github.com/KoicsD/CharliesAngels/blob/Week6B/List_donors.py) as well, before disposing it)
 
 ### *Donation*-searcher
 Module [*search_in_files*](https://github.com/KoicsD/CharliesAngels/blob/Week6B/search_in_files.py) got a new function, so it can search not only in *Donor*s but *Donation* events as well.
 
 ### Modifyable data
-Field-by-field modification of *Donation* events is done by a new function in module [data_handler].  
+Field-by-field modification of *Donation* events is done by a new function in module [*data_handler*](https://github.com/KoicsD/CharliesAngels/blob/Week6B/data_handler.py).  
 In case of *Donor*s, function in [*data_handler*](https://github.com/KoicsD/CharliesAngels/blob/Week6B/data_handler.py) is just for forwarding controll to a new module, named [*modify_donor_data*](https://github.com/KoicsD/CharliesAngels/blob/Week6B/modify_donor_data.py).
-The new module asks user which field to modify and use module [donor_reg](https://github.com/KoicsD/CharliesAngels/blob/Week6B/donor_reg.py) to input and store new data.
+The new module asks user which field to modify and use module [*donor_reg*](https://github.com/KoicsD/CharliesAngels/blob/Week6B/donor_reg.py) to input and store new data.
 
 ### User-interruption
-The possibility of exception-based user-interruption was spread from [event_reg](https://github.com/KoicsD/CharliesAngels/blob/Week6B/event_reg.py) to [donor_reg](https://github.com/KoicsD/CharliesAngels/blob/Week6B/donor_reg.py).
-It is still based on the string "\quit" rather than key 'Esc'.
-Using key 'Esc' would have required overdefining built-in *input* function, which would have been quite a difficult task.
+The possibility of exception-based user-interruption was spread from [*event_reg*](https://github.com/KoicsD/CharliesAngels/blob/Week6B/event_reg.py) to [*donor_reg*](https://github.com/KoicsD/CharliesAngels/blob/Week6B/donor_reg.py).
+It is still based on the string *"\quit"* rather than key *'Esc'*.
+Using key *'Esc'* would have required overdefining built-in *input* function, which would have been quite a difficult task.
 (However, [one of my friends] outside our group has managed to create a similar input-function within a class called 'MagicInput'...)
 Fortunally, we managed to aggree with mentors that our interrupter is acceptable.
 
