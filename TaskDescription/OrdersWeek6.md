@@ -154,7 +154,8 @@ His work is based on my outside-master branch named [*classize_donor*]. (see als
 
 ## What we have learnt
 
-bla
+As our code is relatively well-structured, we could see that it is very easy to add new features to a well-arranged application, even though, our code was based on two contradictory (an [object oriented] and a [procedure-oriented]) principle.
+On the other hand, [Zoltán Székely]'s experience on unifying these points of view showed us: Having the right plan at the beginning of coding is much easier than refactoring after hundreds of lines of codes.
 
 ------------------------------------------------
 ------------------------------------------------
