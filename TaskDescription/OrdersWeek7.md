@@ -51,15 +51,27 @@ Note: To run this version of our application, you need to install [*MySQL connec
 
 bla
 
-### Handling *Donor*s:
+### Handling *Donor*s
 
 bla
 
-### Reading config file:
+### Reading config file
 
 bla
 
-### Summary of module files:
+-------------------------
+
+## Summary of files and directories
+
+### Directories and module-files:
+* bla
+
+### Unused files:
+* bla
+
+-------------------------
+
+## SQL script-files
 
 bla
 
