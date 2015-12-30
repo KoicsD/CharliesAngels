@@ -35,13 +35,33 @@ Note: To run this version of our application, you need to install [*MySQL connec
 
 -------------------------
 
-## What we undertook implemented
+## What we undertook and implemented
 * we can tell the software which mode to work in via the .config file,  
-  and our application can connect to the database server the parameters of which are given in the file
+  and our application can connect to the database server the parameters of which are given in the file  
   -- though, our .config file has a different syntax from the given example
-* we can add new *Donor* or *Donation* event into [SQL] database
-* we can remove *Donor*s and *Donation* events from [SQL] database
-* we can list *Donor*s and *Donation* events present in [SQL] database
+* our application can add new *Donor* or *Donation* event into [SQL] database
+* our application can remove *Donor*s and *Donation* events from [SQL] database
+* our application can list *Donor*s and *Donation* events present in [SQL] database
+
+-------------------------
+
+## Structural change of code
+
+### Handling *Donation* events:
+
+bla
+
+### Handling *Donor*s:
+
+bla
+
+### Reading config file:
+
+bla
+
+### Summary of module files:
+
+bla
 
 -------------------------
 
