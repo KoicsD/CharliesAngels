@@ -47,7 +47,7 @@ Note: To run this version of our application, you need to install [*MySQL connec
 
 ## Structural change of code
 
-### Handling *Donation* events:
+### Handling *Donation* events
 
 bla
 
