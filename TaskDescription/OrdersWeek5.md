@@ -363,9 +363,11 @@ To summarize, our application consisted of (and still contains) the following fi
 ### Experimental Files:
 The following files were created for making expirements but they are no parts of our application:
 * [*delete_in_files.py*](https://github.com/KoicsD/CharliesAngels/blob/Week5B/delete_in_files.py)  
-  This was [Zoltán Székely](https://github.com/Szezol)'s expirement on deleting *Donors* using an assistant file.  
+  This was [Zoltán Székely](https://github.com/Szezol)'s expirement on deleting *Donors* using an assistant file.
+  This file was deleted during the next sprint.  
 * [*donor_writer.py*](https://github.com/KoicsD/CharliesAngels/blob/Week5B/donor_writer.py)  
-  [Gergely Viczmándi](https://github.com/viczmandi) created this file but he left it empty.  
+  [Gergely Viczmándi](https://github.com/viczmandi) created this file but he left it empty.
+  This file was also deleted during the next sprint.  
 * [*sort_the_list_by_order.py*](https://github.com/KoicsD/CharliesAngels/blob/Week5B/sort_the_list_by_order)  
   This was an expirement to implement ordered sorting of *Donors*.
 
