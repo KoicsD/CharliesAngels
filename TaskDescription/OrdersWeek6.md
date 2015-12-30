@@ -128,8 +128,15 @@ To summarize, here are our files and directories under tag [Week6B]:
 --------------------------
 
 ## [UML diagrams]
-
-bla
+Before this sprint, we got acquainted with [UML]. For this reason, I created some diagrams, and stored them in a new directory, named [UML/]:
+* [all_components.dia]  
+  bla  
+* [inner_components.dia]  
+  bla  
+* [components_as_it_could_be.dia]  
+  bla  
+* [class_donor_reg_components.dia]  
+  bla
 
 --------------------------
 
