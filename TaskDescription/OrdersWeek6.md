@@ -144,9 +144,11 @@ Before this sprint, we got acquainted with [UML]. For this reason, I created som
 
 --------------------------
 
-## Branch [classizing]
+## Branch [*classizing*]
 
-bla
+[Zoltán Székely] undertook to make an expirement on classizing *Donor* data-handling, but he did not manage to do this refactoring during the time of our sprint.
+You can find his results on branch [*classizing*].
+His work is based on my outside-master branch named [*classize_donor*]. (see also [*OutsideMaster.md*])
 
 --------------------------
 
