@@ -148,7 +148,7 @@ Before this sprint, we got acquainted with [UML]. For this reason, I created som
 
 [Zoltán Székely](https://github.com/Szezol) undertook to make an expirement on classizing *Donor* data-handling, but he did not manage to do this refactoring during the time of our [sprint](https://en.wikipedia.org/wiki/Sprint_(software_development)).
 You can find his results on branch [*classizing*](https://github.com/KoicsD/CharliesAngels/tree/classizing).
-His work is based on my outside-master branch named [*classize_donor*](https://github.com/KoicsD/CharliesAngels/tree/classize_donor). (see also [*OutsideMaster.md*](OutsideMaster.md))
+His work is based on my outside-master branch named [*classize_donor*](https://github.com/KoicsD/CharliesAngels/tree/classize_donor) (see also [*OutsideMaster.md*](OutsideMaster.md)).
 
 --------------------------
 
