@@ -76,10 +76,67 @@ We have to mention, that mentors gave fewer new requirements, as they were aware
 
 --------------------------
 
-## Structure of code
+## Changes of code
+
+### Listing and sorting
+Module [List_donors] was replaced by [sortsort_by_order], in order to make possible sorted listing.
+The new lister module can list not only *Donor*s but *Donation* events as well.
+(*Donation*-lister was implemented in the [original module] as well, before disposing it)
+
+### *Donation*-searcher
+Module [search_in_files] got a new function, so it can search not only in *Donor*s but *Donation* events as well.
+
+### Modifyable data
+Field-by-field modification of *Donation* events is done by a new function in module [data_handler].  
+In case of *Donor*s, function in [data_handler] is just for forwarding controll to a new module, named [modify_donor_data].
+The new module asks user which field to modify and use module [donor_reg] to input and store new data.
+
+### User-interruption
+The possibility of exception-based user-interruption was spread from [event_reg] to [donor_reg].
+It is still based on the string "\quit" rather than key 'Esc'.
+Using key 'Esc' would have required overdefining built-in function *input*, which would have been quite a difficult task.
+(However, [one of my friends] outside our group has managed to create a similar input-function within a class called 'MagicInput'...)
+Fortunally, we managed to aggree with mentors that our interrupter is acceptable.
+
+--------------------------
+
+## Summary of files and directories
+
+To summarize, here are our files and directories under tag [Week6B]:
+
+### Directories and module-files:
+* [data_handler.py]  
+* [delete_donor.py]  
+* [donor_csv_writer.py]  
+* [donor_reg.py]  
+* [event_reg.py]  
+* [main.py]  
+  This is the entry-point.  
+* [menu.py]  
+* [modify_donor_data.py]  
+* [search_in_files.py]  
+* [sort_by_order.py]  
+* [UML/]  
+  This is a directory containing UML diagrams for our projects. See details below.
+
+### Unused files:
+* [List_donors.py]  
+  Functionally replaced by [sort_by_order.py] but physically not deleted.  
+* [sort_the_list_by_order.py]  
+  Inherited from tag [Week5B].
+
+--------------------------
+
+## [UML diagrams]
 
 bla
- 
+
+--------------------------
+
+## Branch [classizing]
+
+bla
+
 --------------------------
 
 ## What we have learnt
