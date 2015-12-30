@@ -102,41 +102,45 @@ Fortunally, we managed to aggree with mentors that our interrupter is acceptable
 
 ## Summary of files and directories
 
-To summarize, here are our files and directories under tag [Week6B]:
+To summarize, here are our files and directories under tag [*Week6B*]:
 
 ### Directories and module-files:
-* [data_handler.py]  
-* [delete_donor.py]  
-* [donor_csv_writer.py]  
-* [donor_reg.py]  
-* [event_reg.py]  
-* [main.py]  
+* [*data_handler.py*]  
+* [*delete_donor.py*]  
+* [*donor_csv_writer.py*]  
+* [*donor_reg.py*]  
+* [*event_reg.py*]  
+* [*main.py*]  
   This is the entry-point.  
-* [menu.py]  
-* [modify_donor_data.py]  
-* [search_in_files.py]  
-* [sort_by_order.py]  
-* [UML/]  
+* [*menu.py*]  
+* [*modify_donor_data.py*]  
+* [*search_in_files.py*] 
+* [*sort_by_order.py*]  
+* [*UML/*]  
   This is a directory containing UML diagrams for our projects. See details below.
 
 ### Unused files:
-* [List_donors.py]  
-  Functionally replaced by [sort_by_order.py] but physically not deleted.  
-* [sort_the_list_by_order.py]  
-  Inherited from tag [Week5B].
+* [*List_donors.py*]  
+  Functionally replaced by [*sort_by_order.py*] but physically not deleted.  
+* [*sort_the_list_by_order.py*]  
+  Inherited from tag [*Week5B*].
 
 --------------------------
 
 ## [UML diagrams]
-Before this sprint, we got acquainted with [UML]. For this reason, I created some diagrams, and stored them in a new directory, named [UML/]:
-* [all_components.dia]  
-  bla  
-* [inner_components.dia]  
-  bla  
-* [components_as_it_could_be.dia]  
-  bla  
-* [class_donor_reg_components.dia]  
-  bla
+Before this sprint, we got acquainted with [UML]. For this reason, I created some diagrams, and stored them in a new directory, named [*UML/*]:
+* [*all_components.dia*]:  
+  This is a diagram about our files and their dependencies (import) on each other and built-in python modules.  
+* [*inner_components.dia*]:  
+  This diagram is similar to the former one, but it contains only our own files.  
+* [*components_as_it_could_be.dia*]:  
+  This diagram is also similar to the above two ones, but it shows my idea of general user-input function.
+  -- The function that would ask user for a string repeatedly, until the user-given string is accepted by a given checker and validator function.
+  This function is planned into a new module, named *user_input*.  
+* [*class_donor_reg_components.dia*]:  
+  This diagram shows my first (and quite silly) idea about methods of a *Donor* class in module [*donor_reg*].
+  As you can see there are too many methods in one class, which is hardly readable and brings up code-arrangement questions.
+  ([One of the mentors] called this phenomenon "god-object".)
 
 --------------------------
 
