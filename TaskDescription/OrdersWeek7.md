@@ -86,8 +86,8 @@ The syntax of [our config file](my_app.config) reminds us of [dictionaries] in [
 This syntax is used in [*.json*] files, and [*json* module] can parse it as a [dictionary].
 Our application exploits this phenomenon.  
 (What is more, parameters of connection is a *dictionary inside dictionary*.
-In case of our syntax, the keys of it are equal to the names of arguments of function *connect*.
-Because of it, if we pass it to function *connect* with [double-asterisk operator], we do not have to explicitely deal with its items in our code.
+In case of our syntax, the keys of it are equal to the names of arguments of function [*connect*].
+Because of it, if we pass it to function [*connect*] with [double-asterisk operator], we do not have to explicitely deal with its items in our code.
 That's how our code works, and that is the reason why we changed syntax.)
 
 -------------------------
