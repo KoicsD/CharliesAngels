@@ -25,7 +25,7 @@ This is a sample about the configuration file.
 # What we have done
 
 You can find our work under tag [Week7B](https://github.com/KoicsD/CharliesAngels/tree/Week7B) with date 12th Dec.
-Eventually, we had to rebase our database from [*CSV*] to [*MySQL*] - (keeping the existing [*CSV*] functionallity as well).
+Eventually, we had to rebase our database from [*CSV*](https://en.wikipedia.org/wiki/Comma-separated_values) to [*MySQL*](https://www.mysql.com/) (keeping the existing [*CSV*](https://en.wikipedia.org/wiki/Comma-separated_values) functionallity as well).
 It has turned out to be a difficult task for our course, and a lot of groups have not managed to deal with it.
 Because of it, we have never presented our solution to mentors.  
 However, we managed to implement what we undertook.
@@ -33,11 +33,13 @@ To tell the truth, we managed to implement the basic functions and you can see s
 
 Note:  
 * To run this version of our application, you need to install [*MySQL connector for python*](https://dev.mysql.com/downloads/connector/python/).
-* Our config file is named [*my_app.config*].
+* Our config file is named [*my_app.config*](my_app.config).
   * You have to copy it into directory *DATA/*, otherwise our application cannot run.
   * You also have to edit it and give correct parameters in it.
-  * You can use the [SQL script-files] of [directory *SQL/*] to create database on server and to fill it with sample data. (see below)
-  * If you want to use [*csv* files] instead of [*MySQL* server], please replace word *"db"* to *"csv"* in line *'"mode": "db"'*.
+  * You can use the [SQL script-files] of [directory *SQL*](https://github.com/KoicsD/CharliesAngels/tree/Week7B/SQL) to create database on server and to fill it with sample data. (see below)
+  * If you want to use [*csv* files](https://en.wikipedia.org/wiki/Comma-separated_values) instead of [*MySQL*](https://www.mysql.com/) server, please replace word *"db"* to *"csv"* in line *'"mode": "db"'*.
+
+Tip: To easily install [MySQL](https://www.mysql.com/) software on Windows, please [download this](https://dev.mysql.com/downloads/windows/installer/5.7.html).
 
 -------------------------
 
@@ -45,28 +47,28 @@ Note:
 * we can tell the software which mode to work in via *.config* file,  
   and our application can connect to the database server the parameters of which are given in the file  
   -- though, [our *.config* file](my_app.config) has a different syntax from [the given example](app.config)
-* our application can add new *Donor* or *Donation* event into [*MySQL*] database
-* our application can remove *Donor*s and *Donation* events from [*MySQL*] database
-* our application can list (and even sort) *Donor*s and *Donation* events present in [*MySQL* database]
+* our application can add new *Donor* or *Donation* event into [*MySQL*](https://www.mysql.com/) database
+* our application can remove *Donor*s and *Donation* events from [*MySQL*](https://www.mysql.com/) database
+* our application can list (and even sort) *Donor*s and *Donation* events present in [*MySQL*](https://www.mysql.com/) database
 
 ### What is missing:
-* field-by-field modification in [*MySQL*] mode
-* searching in [*MySQL*] mode
+* field-by-field modification in [*MySQL*](https://www.mysql.com/) mode
+* searching in [*MySQL*](https://www.mysql.com/) mode
 
 -------------------------
 
 ## Structural change of code
 
-### New module for working with [*MySQL*]
+### New module for working with [*MySQL*](https://www.mysql.com/)
 
-Since module [*data_handler*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/data_handler.py) was quite huge, we chose to add a new module, namely [*sql_handler*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/sql_handler.py) to allow our code to send [*MySQL*] codes to a given database server.
+Since module [*data_handler*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/data_handler.py) was quite huge, we chose to add a new module, namely [*sql_handler*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/sql_handler.py) to allow our code to send [*MySQL*](https://www.mysql.com/) codes to a given database server.
 The new module uses almost the same modules as [*data_handler*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/data_handler.py), but there are exceptions:
 * instead of [*CSV* module], module [*mysql.connector*] is used,
 * module [*donor_csv_writer*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/donor_csv_writer.py) and [*delete_donor*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/delete_donor.py) is not used at all in this mode
 
-Module [*sort_by_order*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/sort_by_order.py) was refactored in order to make possible listing data in [*MySQL*] mode as well.
-It got new functions that receive a [*cursor*] object, and prerform listing *Donor*s or *Donation* events from [*MySQL*] server.
-The old functions, working on [*CSV*] files, became [staticmethods] of a class, and new functions was implemented as [staticmethods] of another class.
+Module [*sort_by_order*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/sort_by_order.py) was refactored in order to make possible listing data in [*MySQL*](https://www.mysql.com/) mode as well.
+It got new functions that receive a [*cursor*] object, and prerform listing *Donor*s or *Donation* events from [*MySQL*](https://www.mysql.com/) server.
+The old functions, working on [*CSV*](https://en.wikipedia.org/wiki/Comma-separated_values) files, became [staticmethods] of a class, and new functions was implemented as [staticmethods] of another class.
 
 Both storing new data on server and deleting record from server is performed by [*sql_handler*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/sql_handler.py), that is why module [*donor_csv_writer*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/donor_csv_writer.py) and [*delete_donor*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/delete_donor.py) is not necessary.
 (We modifyed [*donor_reg*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/donor_reg.py) to make it possible not to use [*donor_csv_writer*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/donor_csv_writer.py).)
@@ -108,8 +110,8 @@ That's how our code works, and that is the reason why we changed syntax.)
 * [*UML/*](https://github.com/KoicsD/CharliesAngels/tree/Week7B/UML) -- directory of [UML] diagrams, inherited from [*Week6B*], see also [Description of Week6](OrdersWeek6.md)
 
 ### Unused files:
-* [*List_donors*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/List_donors.py) -- inherited from [*Week5B*], see also [Description of Week5](OrdersWeek5.md)
-* [*sort_the_list_by_order*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/sort_the_list_by_order) -- inherited from [*Week5B*], see also [Description of Week5](OrdersWeek5.md)
+* [*List_donors*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/List_donors.py) -- inherited from [*Week5B*](https://github.com/KoicsD/CharliesAngels/tree/Week5B), see also [Description of Week5](OrdersWeek5.md)
+* [*sort_the_list_by_order*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/sort_the_list_by_order) -- inherited from [*Week5B*](https://github.com/KoicsD/CharliesAngels/tree/Week5B), see also [Description of Week5](OrdersWeek5.md)
 
 -------------------------
 
@@ -129,9 +131,10 @@ But note that these FILES CONTAIN NO INFORMATION ABOUT CONNECTION!
 
 ## What we have learnt
 
-We have learnt that sometimes you only need to change a little thing and you can use preconstructed tools to reach your goals.
-On the other hand, I think you should be careful when doing so: sometimes understanding someone else's thoughts takes longer than eg. creating your own parser.  
-We managed to connect python and MySQL, which was useful to develop our hard-skills as well.
+We have learnt that sometimes you only need to change a little thing (eg. the syntax of a file) and you can use preconstructed tools to reach your goals.
+On the other hand, I think you should be careful when doing so: sometimes understanding someone else's thoughts takes longer than eg. creating your own parser.
+(In addition, such a change like the syntax of a config file may require the complience of customer.)  
+Anyway, we managed to connect [*python*](https://www.python.org/) and [*MySQL*](https://www.mysql.com/), which was useful to develop our hard-skills as well.
 
 -------------------------------------------------------
 -------------------------------------------------------
