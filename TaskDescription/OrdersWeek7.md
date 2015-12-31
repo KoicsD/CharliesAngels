@@ -83,8 +83,8 @@ As mentioned above, we use different syntax from [sample] in config file.
 The syntax of [our config file] reminds us of [dictionaries] in [*python*].
 This syntax is used in [*.json*] files, and [*json* module] can parse it as a [dictionary].
 Our application exploits this phenomenon.  
-(What is more, parameters of connection is a dictionary inside dictionary.
-The keys of it are equal to the names of arguments of function *connect*.
+(What is more, parameters of connection is a *dictionary inside dictionary*.
+In case of our syntax, the keys of it are equal to the names of arguments of function *connect*.
 Because of it, if we pass it to function *connect* with [double-asterisk operator], we do not have to explicitely deal with its items in our code.
 That's how our code works, and that is the reason why we changed syntax.)
 
@@ -93,16 +93,36 @@ That's how our code works, and that is the reason why we changed syntax.)
 ## Summary of files and directories
 
 ### Directories and module-files:
-* bla
+* [*data_handler.py*]
+* [*delete_donor.py*]
+* [*donor_csv_writer.py*]
+* [*donor_reg.py*]
+* [*event_reg.py*]
+* [*main.py*] -- This is the entry point.
+* [*menu.py*]
+* [*modify_donor_data.py*]
+* [*search_in_files.py*]
+* [*sort_by_order.py*]
+* [*SQL/*] -- directory of [SQL script-files], see below
+* [*sql_handler.py*] -- new module
+* [*UML/*] -- directory of [UML] diagrams, inherited from [*Week6B*], see also [Orders of Week6]
 
 ### Unused files:
-* bla
+* [*List_donors*] -- inherited from [*Week6B*], see also [Orders of Week6]
+* [*sort_the_list_by_order*] -- inherited from [*Week5B*], see also [Orders of Week6]
 
 -------------------------
 
-## SQL script-files
+## [SQL script-files]
 
-bla
+We created some [SQL script-files].
+
+* [*create.sql*]  
+  This file creates the databese, named *BloodDonations*.
+  It also creates the tables and constraints in database.  
+  But note that this file contains no information about connection!
+* [*insert.sql*]  
+  Use this file to insert some sample data into database *BloodDonations*.
 
 -------------------------
 
