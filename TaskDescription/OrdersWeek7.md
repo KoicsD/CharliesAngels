@@ -44,7 +44,7 @@ Note:
 ## What we undertook and implemented
 * we can tell the software which mode to work in via *.config* file,  
   and our application can connect to the database server the parameters of which are given in the file  
-  -- though, [our *.config* file] has a different syntax from [the given example]
+  -- though, [our *.config* file](my_app.config) has a different syntax from [the given example](app.config)
 * our application can add new *Donor* or *Donation* event into [*MySQL*] database
 * our application can remove *Donor*s and *Donation* events from [*MySQL*] database
 * our application can list (and even sort) *Donor*s and *Donation* events present in [*MySQL* database]
@@ -59,28 +59,28 @@ Note:
 
 ### New module for working with [*MySQL*]
 
-Since module [*data_handler*] was quite huge, we chose to add a new module, namely [*sql_handler*] to allow our code to send [*MySQL*] codes to a given database server.
-The new module uses almost the same modules as [*data_handler*], but there are exceptions:
+Since module [*data_handler*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/data_handler.py) was quite huge, we chose to add a new module, namely [*sql_handler*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/sql_handler.py) to allow our code to send [*MySQL*] codes to a given database server.
+The new module uses almost the same modules as [*data_handler*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/data_handler.py), but there are exceptions:
 * instead of [*CSV* module], module [*mysql.connector*] is used,
-* module [*donor_csv_writer*] and [*delete_donor*] is not used at all in this mode
+* module [*donor_csv_writer*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/donor_csv_writer.py) and [*delete_donor*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/delete_donor.py) is not used at all in this mode
 
-Module [*sort_by_order*] was refactored in order to make possible listing data in [*MySQL*] mode as well.
+Module [*sort_by_order*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/sort_by_order.py) was refactored in order to make possible listing data in [*MySQL*] mode as well.
 It got new functions that receive a [*cursor*] object, and prerform listing *Donor*s or *Donation* events from [*MySQL*] server.
 The old functions, working on [*CSV*] files, became [staticmethods] of a class, and new functions was implemented as [staticmethods] of another class.
 
-Both storing new data on server and deleting record from server is performed by [*sql_handler*], that is why module [*donor_csv_writer*] and [*delete_donor*] is not used.
-(We modifyed [*donor_reg*] to make it possible not to use [*donor_csv_writer*].)
+Both storing new data on server and deleting record from server is performed by [*sql_handler*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/sql_handler.py), that is why module [*donor_csv_writer*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/donor_csv_writer.py) and [*delete_donor*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/delete_donor.py) is not necessary.
+(We modifyed [*donor_reg*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/donor_reg.py) to make it possible not to use [*donor_csv_writer*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/donor_csv_writer.py).)
 
 ### Reading config file -- using [*json* module]
 
 Reading config file is performed by *main* module when starting up the application.
 Function *initialize* reads *DATA/[my_app.config]* and parses it using [*python*]'s built-in [*json* module].
 It decides which mode to work in, and gives the appropriate module the alias *working_module* and invokes its own *initialize* function.
-If *working_module* is [*sql_handler*], *main.initialize* passes connection parameters to *sql_handler.initialize*, which invokes function [*connect*] from module [*mysql.connector*].
-Finally, *main.initialize* constructs main_menu using the alias *working_module*.
+If *working_module* is [*sql_handler*], *[main](https://github.com/KoicsD/CharliesAngels/blob/Week7B/main.py).initialize* passes connection parameters to *[sql_handler](https://github.com/KoicsD/CharliesAngels/blob/Week7B/sql_handler.py).initialize*, which invokes function [*connect*] from module [*mysql.connector*].
+Finally, *[main](https://github.com/KoicsD/CharliesAngels/blob/Week7B/main.py).initialize* constructs the global variable *main_menu* using the alias *working_module*.
 
-As mentioned above, we use different syntax from [sample] in config file.
-The syntax of [our config file] reminds us of [dictionaries] in [*python*].
+As mentioned above, we use different syntax from [sample](app.config) in config file.
+The syntax of [our config file](my_app.config) reminds us of [dictionaries] in [*python*].
 This syntax is used in [*.json*] files, and [*json* module] can parse it as a [dictionary].
 Our application exploits this phenomenon.  
 (What is more, parameters of connection is a *dictionary inside dictionary*.
@@ -93,34 +93,34 @@ That's how our code works, and that is the reason why we changed syntax.)
 ## Summary of files and directories
 
 ### Directories and module-files:
-* [*data_handler.py*]
-* [*delete_donor.py*]
-* [*donor_csv_writer.py*]
-* [*donor_reg.py*]
-* [*event_reg.py*]
-* [*main.py*] -- This is the entry point.
-* [*menu.py*]
-* [*modify_donor_data.py*]
-* [*search_in_files.py*]
-* [*sort_by_order.py*]
-* [*SQL/*] -- directory of [SQL script-files], see below
-* [*sql_handler.py*] -- new module
-* [*UML/*] -- directory of [UML] diagrams, inherited from [*Week6B*], see also [Description of Week6]
+* [*data_handler.py*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/data_handler.py)
+* [*delete_donor.py*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/delete_donor.py)
+* [*donor_csv_writer.py*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/donor_csv_writer.py)
+* [*donor_reg.py*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/donor_reg.py)
+* [*event_reg.py*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/event_reg.py)
+* [*main.py*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/main.py) -- This is the entry point.
+* [*menu.py*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/menu.py)
+* [*modify_donor_data.py*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/modify_donor_data.py)
+* [*search_in_files.py*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/search_in_files.py)
+* [*sort_by_order.py*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/sort_by_order.py)
+* [*SQL/*](https://github.com/KoicsD/CharliesAngels/tree/Week7B/SQL) -- directory of [SQL script-files], see below
+* [*sql_handler.py*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/sql_handler.py) -- new module
+* [*UML/*](https://github.com/KoicsD/CharliesAngels/tree/Week7B/UML) -- directory of [UML] diagrams, inherited from [*Week6B*], see also [Description of Week6](OrdersWeek6.md)
 
 ### Unused files:
-* [*List_donors*] -- inherited from [*Week6B*], see also [Description of Week6]
-* [*sort_the_list_by_order*] -- inherited from [*Week5B*], see also [Description of Week6]
+* [*List_donors*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/List_donors.py) -- inherited from [*Week5B*], see also [Description of Week5](OrdersWeek5.md)
+* [*sort_the_list_by_order*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/sort_the_list_by_order) -- inherited from [*Week5B*], see also [Description of Week5](OrdersWeek5.md)
 
 -------------------------
 
-## [SQL script-files]
+## [SQL script-files](https://github.com/KoicsD/CharliesAngels/tree/Week7B/SQL)
 
-We created some [SQL script-files].
+We created two [SQL script-files], that you can find in [directory *SQL*](https://github.com/KoicsD/CharliesAngels/tree/Week7B/SQL):
 
-* [*create.sql*]  
+* [*create.sql*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/SQL/create.sql)  
   This file creates the databese, named *BloodDonations*.
   It also creates the tables and constraints in database.  
-* [*insert.sql*]  
+* [*insert.sql*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/SQL/insert.sql)  
   Use this file to insert some sample data into database *BloodDonations*.
 
 But note that these FILES CONTAIN NO INFORMATION ABOUT CONNECTION!
