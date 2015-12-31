@@ -32,12 +32,12 @@ However, we managed to implement what we undertook.
 To tell the truth, we managed to implement the basic functions and you can see spectacular results in our repository.
 
 Note:  
-To run this version of our application, you need to install [*MySQL connector for python*](https://dev.mysql.com/downloads/connector/python/).  
-Our config file is named [*my_app.config*].
-You have to copy it into directory *DATA/*, otherwise our application cannot run.
-You also have to edit it and give correct parameters in it.
-You can use the [SQL script-files] of [directory *SQL/*] to create database on server and to fill it with sample data.
-If you want to use [*csv* files] instead of [*MySQL* server], please replace word *"db"* to *"csv"* in line *'"mode": "db"'*.
+* To run this version of our application, you need to install [*MySQL connector for python*](https://dev.mysql.com/downloads/connector/python/).
+* Our config file is named [*my_app.config*].
+  * You have to copy it into directory *DATA/*, otherwise our application cannot run.
+  * You also have to edit it and give correct parameters in it.
+  * You can use the [SQL script-files] of [directory *SQL/*] to create database on server and to fill it with sample data.
+  * If you want to use [*csv* files] instead of [*MySQL* server], please replace word *"db"* to *"csv"* in line *'"mode": "db"'*.
 
 -------------------------
 
@@ -73,12 +73,18 @@ Both storing new data on server and deleting record from server is performed by 
 
 ### Reading config file -- using [*json* module]
 
-We use different syntax from sample in config file.
+Reading config file is performed by *main* module when starting up the application.
+Function *initialize* reads *DATA/[my_app.config]* and parses it using [*python*]'s built-in [*json* module].
+It decides which mode to work in, and gives the appropriate module the alias *working_module* and invokes its own *initialize* function.
+If *working_module* is [*sql_handler*], *main.initialize* passes connection params to *sql_handler.initialize*, which invokes function [*connect*] from module [*mysql.connector*].
+Finally, *main.initialize* constructs main_menu using the alias *working_module*.
+
+As mentioned above, we use different syntax from [sample] in config file.
 The syntax of [our config file] reminds us of [dictionaries] in [*python*].
-This syntax is used in [*.json*] files, and [*python*]'s built-in [*json* module] can parse it as a [dictionary].
+This syntax is used in [*.json*] files, and [*json* module] can parse it as a [dictionary].
 Our application exploits this phenomenon.  
 (What is more, parameters of connection is a dictionary inside dictionary.
-The keys of it are equal to the names of arguments of function *connect* from module [*mysql.connector*].
+The keys of it are equal to the names of arguments of function *connect*.
 Because of it, if we pass it to function *connect* with [double-asterisk operator], we do not have to explicitely deal with its items in our code.
 That's how our code works, and that is the reason why we changed syntax.)
 
