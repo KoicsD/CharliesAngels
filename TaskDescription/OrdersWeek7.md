@@ -128,7 +128,9 @@ We created some [SQL script-files].
 
 ## What we have learnt
 
-bla
+We have learnt that sometimes you only need to change a little thing and you can use preconstructed tools to reach your goals.
+On the other hand, I think you should be careful when doing so: sometimes understanding someone else's thoughts takes longer than eg. creating your own parser.  
+We managed to connect python and MySQL, which was useful to develop our hard-skills as well.
 
 -------------------------------------------------------
 -------------------------------------------------------
