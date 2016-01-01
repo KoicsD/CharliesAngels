@@ -87,8 +87,13 @@ This syntax is used in [*.json* files](https://en.wikipedia.org/wiki/JSON), and 
 Our application exploits this phenomenon.  
 (What is more, parameters of connection is a *dictionary inside dictionary*.
 In case of our syntax, the keys of it are equal to the names of arguments of function [*connect*].
-Because of it, if we pass it to function [*connect*] with [double-asterisk operator], we do not have to explicitely deal with its items in our code.
+Because of it, if we pass it to function [*connect*] with [double-asterisk operator](http://pythontips.com/2013/08/04/args-and-kwargs-in-python-explained/), we do not have to explicitely deal with its items in our code.
 That's how our code works, and that is the reason why we changed syntax.)
+
+Note:  
+In real life, [*.config* files]() have their own syntax, which is different from the syntax of [*.json* files](https://en.wikipedia.org/wiki/JSON).
+(What's more, [python](https://www.python.org) has a built-in module named [*configparser*](https://docs.python.org/3/library/configparser.html?highlight=config%20parser#module-configparser) for parsing [configuration files (eg. *.ini*)](https://en.wikipedia.org/wiki/Configuration_file).)
+What we did is a *.json*-syntaxed file with extension *.config*.
 
 -------------------------
 
@@ -105,9 +110,9 @@ That's how our code works, and that is the reason why we changed syntax.)
 * [*modify_donor_data.py*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/modify_donor_data.py)
 * [*search_in_files.py*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/search_in_files.py)
 * [*sort_by_order.py*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/sort_by_order.py)
-* [*SQL/*](https://github.com/KoicsD/CharliesAngels/tree/Week7B/SQL) -- directory of [SQL script-files], see below
+* [*SQL/*](https://github.com/KoicsD/CharliesAngels/tree/Week7B/SQL) -- directory of [*SQL* script-files](https://www3.ntu.edu.sg/home/ehchua/programming/sql/MySQL_Intermediate.html), see below
 * [*sql_handler.py*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/sql_handler.py) -- new module
-* [*UML/*](https://github.com/KoicsD/CharliesAngels/tree/Week7B/UML) -- directory of [UML] diagrams, inherited from [*Week6B*], see also [Description of Week6](OrdersWeek6.md)
+* [*UML/*](https://github.com/KoicsD/CharliesAngels/tree/Week7B/UML) -- directory of [UML] diagrams, inherited from [*Week6B*](https://github.com/KoicsD/CharliesAngels/tree/Week6B), see also [Description of Week6](OrdersWeek6.md)
 
 ### Unused files:
 * [*List_donors*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/List_donors.py) -- inherited from [*Week5B*](https://github.com/KoicsD/CharliesAngels/tree/Week5B), see also [Description of Week5](OrdersWeek5.md)
@@ -115,9 +120,9 @@ That's how our code works, and that is the reason why we changed syntax.)
 
 -------------------------
 
-## [SQL script-files](https://github.com/KoicsD/CharliesAngels/tree/Week7B/SQL)
+## *SQL* script-files
 
-We created two [SQL script-files], that you can find in [directory *SQL*](https://github.com/KoicsD/CharliesAngels/tree/Week7B/SQL):
+We created two [SQL script-files](https://www3.ntu.edu.sg/home/ehchua/programming/sql/MySQL_Intermediate.html), that you can find in [directory *SQL*](https://github.com/KoicsD/CharliesAngels/tree/Week7B/SQL):
 
 * [*create.sql*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/SQL/create.sql)  
   This file creates the databese, named *BloodDonations*.
