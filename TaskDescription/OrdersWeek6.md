@@ -94,7 +94,7 @@ The new module asks user which field to modify and use module [*donor_reg*](http
 The possibility of exception-based user-interruption was spread from [*event_reg*](https://github.com/KoicsD/CharliesAngels/blob/Week6B/event_reg.py) to [*donor_reg*](https://github.com/KoicsD/CharliesAngels/blob/Week6B/donor_reg.py).
 It is still based on the string *"\quit"* rather than key *'Esc'*.
 Using key *'Esc'* would have required overdefining built-in *input* function, which would have been quite a difficult task.
-(However, [one of my friends] outside our group has managed to create a similar input-function within a class called 'MagicInput'...)
+(However, [one of my friends](https://github.com/AdamVegh) outside our group has managed to create a similar input-function within a class called 'MagicInput'...)
 Fortunally, we managed to aggree with mentors that our interrupter is acceptable.
 
 --------------------------
