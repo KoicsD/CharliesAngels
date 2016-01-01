@@ -112,7 +112,7 @@ What we did is a *.json*-syntaxed file with extension *.config*.
 * [*sort_by_order.py*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/sort_by_order.py)
 * [*SQL/*](https://github.com/KoicsD/CharliesAngels/tree/Week7B/SQL) -- directory of [*SQL* script-files](https://www3.ntu.edu.sg/home/ehchua/programming/sql/MySQL_Intermediate.html), see below
 * [*sql_handler.py*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/sql_handler.py) -- new module
-* [*UML/*](https://github.com/KoicsD/CharliesAngels/tree/Week7B/UML) -- directory of [UML] diagrams, inherited from [*Week6B*](https://github.com/KoicsD/CharliesAngels/tree/Week6B), see also [Description of Week6](OrdersWeek6.md)
+* [*UML/*](https://github.com/KoicsD/CharliesAngels/tree/Week7B/UML) -- directory of [UML](https://en.wikipedia.org/wiki/Unified_Modeling_Language#Diagrams) diagrams, inherited from [*Week6B*](https://github.com/KoicsD/CharliesAngels/tree/Week6B), see also [Description of Week6](OrdersWeek6.md)
 
 ### Unused files:
 * [*List_donors*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/List_donors.py) -- inherited from [*Week5B*](https://github.com/KoicsD/CharliesAngels/tree/Week5B), see also [Description of Week5](OrdersWeek5.md)
