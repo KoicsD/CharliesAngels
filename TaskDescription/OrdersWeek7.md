@@ -29,17 +29,17 @@ Eventually, we had to rebase our database from [*CSV*](https://en.wikipedia.org/
 It has turned out to be a difficult task for our course, and a lot of groups have not managed to deal with it.
 Because of it, we have never presented our solution to mentors.  
 However, we managed to implement what we undertook.
-To tell the truth, we managed to implement the basic functions and you can see spectacular results in our repository.
+To tell the truth, we managed to implement all the basic functions and you can see spectacular results in our repository.
 
 Note:  
 * To run this version of our application, you need to install [*MySQL connector for python*](https://dev.mysql.com/downloads/connector/python/).
 * Our config file is named [*my_app.config*](my_app.config).
   * You have to copy it into directory *DATA/*, otherwise our application cannot run.
   * You also have to edit it and give correct parameters in it.
-  * You can use the [SQL script-files] of [directory *SQL*](https://github.com/KoicsD/CharliesAngels/tree/Week7B/SQL) to create database on server and to fill it with sample data. (see below)
+  * You can use the [*SQL* script-files](https://www3.ntu.edu.sg/home/ehchua/programming/sql/MySQL_Intermediate.html) of [directory *SQL*](https://github.com/KoicsD/CharliesAngels/tree/Week7B/SQL) to create database on server and to fill it with sample data. (see below)
   * If you want to use [*csv* files](https://en.wikipedia.org/wiki/Comma-separated_values) instead of [*MySQL*](https://www.mysql.com/) server, please replace word *"db"* to *"csv"* in line *'"mode": "db"'*.
 
-Tip: To easily install [MySQL](https://www.mysql.com/) software on Windows, please [download this](https://dev.mysql.com/downloads/windows/installer/5.7.html).
+Tip: To easily install [*MySQL*](https://www.mysql.com/) software on Windows, please [download this](https://dev.mysql.com/downloads/windows/installer/5.7.html).
 
 -------------------------
 
@@ -63,27 +63,27 @@ Tip: To easily install [MySQL](https://www.mysql.com/) software on Windows, plea
 
 Since module [*data_handler*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/data_handler.py) was quite huge, we chose to add a new module, namely [*sql_handler*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/sql_handler.py) to allow our code to send [*MySQL*](https://www.mysql.com/) codes to a given database server.
 The new module uses almost the same modules as [*data_handler*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/data_handler.py), but there are exceptions:
-* instead of [*CSV* module], module [*mysql.connector*] is used,
+* instead of [*CSV* module](https://docs.python.org/3/library/csv.html?highlight=csv#module-csv), module [*mysql.connector*] is used,
 * module [*donor_csv_writer*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/donor_csv_writer.py) and [*delete_donor*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/delete_donor.py) is not used at all in this mode
 
 Module [*sort_by_order*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/sort_by_order.py) was refactored in order to make possible listing data in [*MySQL*](https://www.mysql.com/) mode as well.
 It got new functions that receive a [*cursor*] object, and prerform listing *Donor*s or *Donation* events from [*MySQL*](https://www.mysql.com/) server.
-The old functions, working on [*CSV*](https://en.wikipedia.org/wiki/Comma-separated_values) files, became [staticmethods] of a class, and new functions was implemented as [staticmethods] of another class.
+The old functions, working on [*CSV*](https://en.wikipedia.org/wiki/Comma-separated_values) files, became [staticmethods](https://docs.python.org/3/library/functions.html?highlight=staticmethod#staticmethod) of a class, and new functions was implemented as [staticmethods](https://docs.python.org/3/library/functions.html?highlight=staticmethod#staticmethod) of another class.
 
 Both storing new data on server and deleting record from server is performed by [*sql_handler*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/sql_handler.py), that is why module [*donor_csv_writer*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/donor_csv_writer.py) and [*delete_donor*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/delete_donor.py) is not necessary.
 (We modifyed [*donor_reg*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/donor_reg.py) to make it possible not to use [*donor_csv_writer*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/donor_csv_writer.py).)
 
-### Reading config file -- using [*json* module]
+### Reading config file -- using [*json* module](https://docs.python.org/3/library/json.html?highlight=json#module-json)
 
 Reading config file is performed by *main* module when starting up the application.
-Function *initialize* reads *DATA/[my_app.config]* and parses it using [*python*]'s built-in [*json* module].
+Function *initialize* reads *DATA/[my_app.config](my_app.config)* and parses it using [*python*](https://www.python.org)'s built-in [*json* module](https://docs.python.org/3/library/json.html?highlight=json#module-json).
 It decides which mode to work in, and gives the appropriate module the alias *working_module* and invokes its own *initialize* function.
-If *working_module* is [*sql_handler*], *[main](https://github.com/KoicsD/CharliesAngels/blob/Week7B/main.py).initialize* passes connection parameters to *[sql_handler](https://github.com/KoicsD/CharliesAngels/blob/Week7B/sql_handler.py).initialize*, which invokes function [*connect*] from module [*mysql.connector*].
+If *working_module* is [*sql_handler*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/main.py), *[main](https://github.com/KoicsD/CharliesAngels/blob/Week7B/main.py).initialize* passes connection parameters to *[sql_handler](https://github.com/KoicsD/CharliesAngels/blob/Week7B/sql_handler.py).initialize*, which invokes function [*connect*] from module [*mysql.connector*].
 Finally, *[main](https://github.com/KoicsD/CharliesAngels/blob/Week7B/main.py).initialize* constructs the global variable *main_menu* using the alias *working_module*.
 
 As mentioned above, we use different syntax from [sample](app.config) in config file.
-The syntax of [our config file](my_app.config) reminds us of [dictionaries] in [*python*].
-This syntax is used in [*.json*] files, and [*json* module] can parse it as a [dictionary].
+The syntax of [our config file](my_app.config) reminds us of [dictionaries](https://docs.python.org/3/library/stdtypes.html?highlight=dict#dict) in [*python*](https://www.python.org).
+This syntax is used in [*.json* files](https://en.wikipedia.org/wiki/JSON), and [*json* module](https://docs.python.org/3/library/json.html?highlight=json#module-json) can parse it as a [dictionary](https://docs.python.org/3/library/stdtypes.html?highlight=dict#dict).
 Our application exploits this phenomenon.  
 (What is more, parameters of connection is a *dictionary inside dictionary*.
 In case of our syntax, the keys of it are equal to the names of arguments of function [*connect*].
