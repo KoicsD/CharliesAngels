@@ -63,11 +63,13 @@ Tip: To easily install [*MySQL*](https://www.mysql.com/) software on Windows, pl
 
 Since module [*data_handler*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/data_handler.py) was quite huge, we chose to add a new module, namely [*sql_handler*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/sql_handler.py) to allow our code to send [*MySQL*](https://www.mysql.com/) codes to a given database server.
 The new module uses almost the same modules as [*data_handler*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/data_handler.py), but there are exceptions:
-* instead of [*CSV* module](https://docs.python.org/3/library/csv.html?highlight=csv#module-csv), module [*mysql.connector*] is used,
-* module [*donor_csv_writer*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/donor_csv_writer.py) and [*delete_donor*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/delete_donor.py) is not used at all in this mode
+* instead of [*CSV* module](https://docs.python.org/3/library/csv.html?highlight=csv#module-csv),
+  [module *mysql.connector*](https://dev.mysql.com/doc/connector-python/en/https://dev.mysql.com/doc/connector-python/en/) is used,
+* module [*donor_csv_writer*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/donor_csv_writer.py) and
+  [*delete_donor*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/delete_donor.py) is not used at all in this mode
 
 Module [*sort_by_order*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/sort_by_order.py) was refactored in order to make possible listing data in [*MySQL*](https://www.mysql.com/) mode as well.
-It got new functions that receive a [*cursor*] object, and prerform listing *Donor*s or *Donation* events from [*MySQL*](https://www.mysql.com/) server.
+It got new functions that receive a [*cursor* object](https://dev.mysql.com/doc/connector-python/en/connector-python-example-cursor-select.html), and prerform listing *Donor*s or *Donation* events from [*MySQL*](https://www.mysql.com/) server.
 The old functions, working on [*CSV*](https://en.wikipedia.org/wiki/Comma-separated_values) files, became [staticmethods](https://docs.python.org/3/library/functions.html?highlight=staticmethod#staticmethod) of a class, and new functions was implemented as [staticmethods](https://docs.python.org/3/library/functions.html?highlight=staticmethod#staticmethod) of another class.
 
 Both storing new data on server and deleting record from server is performed by [*sql_handler*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/sql_handler.py), that is why module [*donor_csv_writer*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/donor_csv_writer.py) and [*delete_donor*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/delete_donor.py) is not necessary.
@@ -78,7 +80,7 @@ Both storing new data on server and deleting record from server is performed by 
 Reading config file is performed by *main* module when starting up the application.
 Function *initialize* reads *DATA/[my_app.config](my_app.config)* and parses it using [*python*](https://www.python.org)'s built-in [*json* module](https://docs.python.org/3/library/json.html?highlight=json#module-json).
 It decides which mode to work in, and gives the appropriate module the alias *working_module* and invokes its own *initialize* function.
-If *working_module* is [*sql_handler*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/main.py), *[main](https://github.com/KoicsD/CharliesAngels/blob/Week7B/main.py).initialize* passes connection parameters to *[sql_handler](https://github.com/KoicsD/CharliesAngels/blob/Week7B/sql_handler.py).initialize*, which invokes function [*connect*] from module [*mysql.connector*].
+If *working_module* is [*sql_handler*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/main.py), *[main](https://github.com/KoicsD/CharliesAngels/blob/Week7B/main.py).initialize* passes connection parameters to *[sql_handler](https://github.com/KoicsD/CharliesAngels/blob/Week7B/sql_handler.py).initialize*, which invokes [function *connect* from module *mysql.connector*](https://dev.mysql.com/doc/connector-python/en/connector-python-example-connecting.html).
 Finally, *[main](https://github.com/KoicsD/CharliesAngels/blob/Week7B/main.py).initialize* constructs the global variable *main_menu* using the alias *working_module*.
 
 As mentioned above, we use different syntax from [sample](app.config) in config file.
@@ -86,13 +88,13 @@ The syntax of [our config file](my_app.config) reminds us of [dictionaries](http
 This syntax is used in [*.json* files](https://en.wikipedia.org/wiki/JSON), and [*json* module](https://docs.python.org/3/library/json.html?highlight=json#module-json) can parse it as a [dictionary](https://docs.python.org/3/library/stdtypes.html?highlight=dict#dict).
 Our application exploits this phenomenon.  
 (What is more, parameters of connection is a *dictionary inside dictionary*.
-In case of our syntax, the keys of it are equal to the names of arguments of function [*connect*].
-Because of it, if we pass it to function [*connect*] with [double-asterisk operator](http://pythontips.com/2013/08/04/args-and-kwargs-in-python-explained/), we do not have to explicitely deal with its items in our code.
+In case of our syntax, the keys of it are equal to the names of arguments of [function *connect*](https://dev.mysql.com/doc/connector-python/en/connector-python-example-connecting.html).
+Because of it, if we pass it to [function *connect*](https://dev.mysql.com/doc/connector-python/en/connector-python-example-connecting.html) with [double-asterisk operator](http://pythontips.com/2013/08/04/args-and-kwargs-in-python-explained/), we do not have to explicitely deal with its items in our code.
 That's how our code works, and that is the reason why we changed syntax.)
 
 Note:  
 In real life, [*.config* files]() have their own syntax, which is different from the syntax of [*.json* files](https://en.wikipedia.org/wiki/JSON).
-(What's more, [python](https://www.python.org) has a built-in module named [*configparser*](https://docs.python.org/3/library/configparser.html?highlight=config%20parser#module-configparser) for parsing [configuration files (eg. *.ini*)](https://en.wikipedia.org/wiki/Configuration_file).)
+(What's more, [*python*](https://www.python.org) has a built-in module named [*configparser*](https://docs.python.org/3/library/configparser.html?highlight=config%20parser#module-configparser) for parsing [configuration files (eg. *.ini*)](https://en.wikipedia.org/wiki/Configuration_file).)
 What we did is a *.json*-syntaxed file with extension *.config*.
 
 -------------------------
