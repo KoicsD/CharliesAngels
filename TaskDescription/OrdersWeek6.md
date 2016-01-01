@@ -101,7 +101,7 @@ Fortunally, we managed to aggree with mentors that our interrupter is acceptable
 
 ## Summary of files and directories
 
-To summarize, here are our files and directories under tag [*Week6B*]:
+To summarize, here are our files and directories under tag [*Week6B*](https://github.com/KoicsD/CharliesAngels/tree/Week6B):
 
 ### Directories and module-files:
 * [*data_handler.py*](https://github.com/KoicsD/CharliesAngels/blob/Week6B/data_handler.py)  
@@ -126,8 +126,8 @@ To summarize, here are our files and directories under tag [*Week6B*]:
 
 --------------------------
 
-## [UML diagrams]
-Before this sprint, we got acquainted with [UML]. For this reason, I created some diagrams, and stored them in a new directory, named [*UML/*](https://github.com/KoicsD/CharliesAngels/tree/Week6B/UML):
+## [UML](https://en.wikipedia.org/wiki/Unified_Modeling_Language#Diagrams) diagrams
+Before this sprint, we got acquainted with [UML](https://en.wikipedia.org/wiki/Unified_Modeling_Language#Diagrams). For this reason, I created some diagrams, and stored them in a new directory, named [*UML/*](https://github.com/KoicsD/CharliesAngels/tree/Week6B/UML):
 * [*all_components.dia*](https://github.com/KoicsD/CharliesAngels/blob/Week6B/UML/all_components.dia):  
   This is a diagram about our files and their dependencies (import) on each other and built-in python modules.  
 * [*inner_components.dia*](https://github.com/KoicsD/CharliesAngels/blob/Week6B/UML/inner_components.dia):  
@@ -137,13 +137,13 @@ Before this sprint, we got acquainted with [UML]. For this reason, I created som
   -- The function that would ask user for a string repeatedly, until the user-given string is accepted by a given checker and validator function.
   This function is planned into a new module, named *user_input*.  
 * [*class_donor_reg_components.dia*](https://github.com/KoicsD/CharliesAngels/blob/Week6B/UML/class_donor_reg_components.dia):  
-  This diagram shows my first (and quite silly) idea about methods of a *Donor* class in module [*donor_reg*].
+  This diagram shows my first (and quite silly) idea about methods of a *Donor* class in module [*donor_reg*](https://github.com/KoicsD/CharliesAngels/blob/Week6B/donor_reg.py).
   As you can see there are too many methods in one class, which is hardly readable and brings up code-arrangement questions.
   ([One of the mentors](https://github.com/ngAtesz) called this phenomenon "god-object".)
 
 --------------------------
 
-## Branch [*classizing*]
+## Branch [*classizing*](https://github.com/KoicsD/CharliesAngels/tree/classizing)
 
 [Zoltán Székely](https://github.com/Szezol) undertook to make an expirement on classizing *Donor* data-handling, but he did not manage to do this refactoring during the time of our [sprint](https://en.wikipedia.org/wiki/Sprint_(software_development)).
 You can find his results on branch [*classizing*](https://github.com/KoicsD/CharliesAngels/tree/classizing).
