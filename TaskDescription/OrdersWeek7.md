@@ -64,7 +64,7 @@ Tip: To easily install [*MySQL*](https://www.mysql.com/) software on Windows, pl
 Since module [*data_handler*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/data_handler.py) was quite huge, we chose to add a new module, namely [*sql_handler*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/sql_handler.py) to allow our code to send [*MySQL*](https://www.mysql.com/) codes to a given database server.
 The new module uses almost the same modules as [*data_handler*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/data_handler.py), but there are exceptions:
 * instead of [*CSV* module](https://docs.python.org/3/library/csv.html?highlight=csv#module-csv),
-  [module *mysql.connector*](https://dev.mysql.com/doc/connector-python/en/https://dev.mysql.com/doc/connector-python/en/) is used,
+  [module *mysql.connector*](https://dev.mysql.com/doc/connector-python/en/) is used,
 * module [*donor_csv_writer*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/donor_csv_writer.py) and
   [*delete_donor*](https://github.com/KoicsD/CharliesAngels/blob/Week7B/delete_donor.py) is not used at all in this mode
 
