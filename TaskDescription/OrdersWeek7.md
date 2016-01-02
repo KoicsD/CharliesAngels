@@ -93,9 +93,11 @@ Because of it, if we pass it to [function *connect*](https://dev.mysql.com/doc/c
 That's how our code works, and that is the reason why we changed syntax.)
 
 Note:  
-In real life, [*.config* files]() have their own syntax, which is different from the syntax of [*.json* files](https://en.wikipedia.org/wiki/JSON).
-(What's more, [*python*](https://www.python.org) has a built-in module named [*configparser*](https://docs.python.org/3/library/configparser.html?highlight=config%20parser#module-configparser) for parsing [configuration files (eg. *.ini*)](https://en.wikipedia.org/wiki/Configuration_file).)
-What we did is a *.json*-syntaxed file with extension *.config*.
+
+Althogh [*python*](https://www.python.org) has a built-in module named [*configparser*](https://docs.python.org/3/library/configparser.html?highlight=config%20parser#module-configparser) for parsing [configuration files (eg. *.ini*)](https://en.wikipedia.org/wiki/Configuration_file),
+it is not related to our config file.
+Eventually, xtension *.config* is used for many kind of configuration files with non-official syntax.
+What we actually did is a [*.json* file](https://en.wikipedia.org/wiki/JSON) with extension *.config*.
 
 -------------------------
 
